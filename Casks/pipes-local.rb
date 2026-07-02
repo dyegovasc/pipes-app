@@ -1,10 +1,10 @@
 cask "pipes-local" do
   version "0.4.5"
-  sha256 "bd700208a9b1a977c657e77e2ebc5857c6d760471017762cf95e0ff7933257e2"
+  sha256 "cf028a0f6e685fbb7e540c62cdf5b3b149f4c4b0115efc3f1572a3c9441ec14c"
 
   github_token = ENV.fetch("HOMEBREW_GITHUB_API_TOKEN", "")
 
-  url "https://api.github.com/repos/dyegovasc/pipes-local/releases/assets/464166506",
+  url "https://api.github.com/repos/dyegovasc/homebrew-pipes/releases/assets/464341759",
       verified: "api.github.com/",
       header: [
         "Accept: application/octet-stream",
@@ -14,7 +14,7 @@ cask "pipes-local" do
 
   name "Pipes Local"
   desc "Local-first structured markdown workspace application"
-  homepage "https://github.com/dyegovasc/pipes-local"
+  homepage "https://github.com/dyegovasc/homebrew-pipes"
 
   depends_on arch: :arm64
 
