@@ -1,6 +1,8 @@
-# Pipes Homebrew Tap
+# Pipes App
 
-Private Homebrew tap for installing Pipes desktop tools.
+Public distribution repository for the Pipes Local desktop app.
+
+This repository publishes the packaged macOS app and the Homebrew cask used to install it. The application source code lives separately; this repo is only for distribution artifacts, release assets, and installer metadata.
 
 ## Pipes Local
 
@@ -8,34 +10,13 @@ Pipes Local is a local-first desktop workspace for Pipes-organized repositories.
 
 Pipes Local is built for repositories that treat planning, decisions, outcomes, instructions, team roles, and pipeline workflows as versioned project memory.
 
-### Features
-
-- Browse and edit Pipes project records such as goals, roadmap items, plans, decisions, outcomes, and releases.
-- Work with modular AI instruction surfaces, including fragments, pipelines, rules, and generated agent entrypoints.
-- Run terminal and agent-assisted workflows from a local desktop surface.
-- Inspect and manage structured Markdown records while preserving repository-first ownership.
-- Use a local filesystem workflow; project data stays in the workspace you open.
-
-### Distribution Model
-
-This tap installs a packaged `Pipes Local.app` cask from a private GitHub Release asset hosted in this repository.
-
-Installers need access to `dyegovasc/homebrew-pipes` so Homebrew can download the private release asset. They do not need access to the private source repository.
-
 ## Install
 
-Installers need a GitHub token that can read this private tap repository and its release assets.
+The distribution repo is public, so installation does not require a GitHub token.
 
 ```sh
-export HOMEBREW_GITHUB_API_TOKEN=your_github_token
-brew tap dyegovasc/pipes https://github.com/dyegovasc/homebrew-pipes.git
+brew tap dyegovasc/pipes https://github.com/dyegovasc/pipes-app.git
 brew install --cask dyegovasc/pipes/pipes-local
-```
-
-If you use GitHub CLI and it is authenticated with the right account, you can set the token with:
-
-```sh
-export HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)"
 ```
 
 ## Update
@@ -45,11 +26,14 @@ brew update
 brew upgrade --cask dyegovasc/pipes/pipes-local
 ```
 
-If an unmanaged copy already exists in `/Applications`, move it aside before installing:
+When Pipes Local is running during an upgrade, the cask closes it before replacing the app bundle and reopens it after the new version is installed.
+
+## Reinstall
+
+Use reinstall when the cask metadata changed but the app version stayed the same.
 
 ```sh
-mv "/Applications/Pipes Local.app" "/Applications/Pipes Local.app.backup-$(date +%Y%m%d-%H%M%S)"
-brew install --cask dyegovasc/pipes/pipes-local
+brew reinstall --cask dyegovasc/pipes/pipes-local
 ```
 
 ## Uninstall
@@ -57,3 +41,9 @@ brew install --cask dyegovasc/pipes/pipes-local
 ```sh
 brew uninstall --cask pipes-local
 ```
+
+## Distribution Contents
+
+- `Casks/pipes-local.rb` is the Homebrew cask for `Pipes Local.app`.
+- GitHub Releases store versioned zip assets for the app bundle.
+- The app source repository owns builds and release packaging; this repository stores the public installer surface.
