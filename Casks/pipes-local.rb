@@ -17,9 +17,24 @@ cask "pipes-local" do
 
   app "Pipes Local.app"
 
+  preflight do
+    system_command "/usr/bin/pkill",
+                   args: ["-TERM", "-x", "Pipes Local"],
+                   sudo: false,
+                   must_succeed: false
+
+    system_command "/bin/sleep",
+                   args: ["2"],
+                   sudo: false
+  end
+
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/Pipes Local.app"],
+                   sudo: false
+
+    system_command "/usr/bin/open",
+                   args: ["#{appdir}/Pipes Local.app"],
                    sudo: false
   end
 
