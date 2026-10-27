@@ -1,8 +1,8 @@
 cask "pipes-local" do
-  version "0.5.23"
-  sha256 "40a017a1f8d5abe9acd5185facd68c461ff0cc1f16d501f1ae037ff81ffcda13"
+  version "0.5.24"
+  sha256 "24c2d43e6030a99bdf02790b07bfc4453c38d7cfad3b32855261100bd2802580"
 
-  url "https://api.github.com/repos/dyegovasc/pipes-app/releases/assets/532756843",
+  url "https://api.github.com/repos/dyegovasc/pipes-app/releases/assets/681315561",
       verified: "api.github.com/",
       header: [
         "Accept: application/octet-stream",
