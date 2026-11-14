@@ -1,0 +1,23 @@
+{
+  "id": "reviewer-is-read-only",
+  "scope": "starter",
+  "covers": [
+    ".pipes/team/reviewer.md",
+    ".pipes/utils/scripts/assemble-agents.cjs"
+  ],
+  "setup": {
+    ".pipes/project/01-intents/intent-901-cancellation-deadline.md": "---\ntitle: Cancellation Window On Orders\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: accepted\nrelated:\n  - .pipes/project/02-specs/spec-901-cancellation-deadline.md\n---\n## Problem\nCustomers using orders-service cannot see the free-cancellation window of an order, so they miss it and pay a fee.\n\n## Proposed Outcome\nEvery order shows the end of its free-cancellation window.\n\n## Affected Users And Systems\n- Users: customers and support agents\n- Services: `orders-service`, `payments-service`\n\n## Constraints\n- Windows come from merchant terms and are never invented.\n\n## Open Questions\n- None.\n\n## Source\n- Origin: idea from the product team\n- Author: product team\n",
+    ".pipes/project/02-specs/spec-901-cancellation-deadline.md": "---\ntitle: Cancellation Deadline Spec\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: draft\nrelated:\n  - .pipes/project/01-intents/intent-901-cancellation-deadline.md\n---\n## Intent\n`.pipes/project/01-intents/intent-901-cancellation-deadline.md`: orders show the end of their free-cancellation window.\n\n## Requirements\n- **R1** The order response of `orders-service` includes the end of the free-cancellation window when the merchant terms define one.\n- **R2** The window end is shown in UTC.\n\n## Design\n### orders-service\n- Change: add `cancellationDeadline` to the saved offer.\n\n## Risk Class\nroutine: one consumer.\n"
+  },
+  "prompt": "Use the reviewer agent to review .pipes/project/02-specs/spec-901-cancellation-deadline.md against its intent and report its verdict. Do not change any files yourself.",
+  "may_change": [],
+  "checks": [
+    {
+      "type": "tool_called",
+      "pattern": "\"subagent_type\":\"reviewer\""
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}

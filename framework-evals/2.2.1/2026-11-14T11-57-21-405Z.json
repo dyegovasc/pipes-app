@@ -1,0 +1,64 @@
+{
+  "adapter": "claude",
+  "model": "default",
+  "tier": "routine",
+  "results": [
+    {
+      "id": "intent-capture-stays-draft",
+      "invalid": false,
+      "passed": true,
+      "checks": [
+        {
+          "type": "file_count",
+          "passed": true,
+          "detail": "exactly one intent for this problem with the required sections, including at least one How Do We Know It Works bullet after Proposed Outcome, still draft: file approval is not product-owner acceptance (G1)"
+        },
+        {
+          "type": "validator_clean",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "type": "only_changed",
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "changed": [
+        ".pipes/project/01-intents/intent-001-show-free-cancellation-window.md"
+      ],
+      "cost": 0.6359857999999999,
+      "baselineErrors": [],
+      "outOfScope": [],
+      "evidence": {
+        "toolUses": [
+          "Skill {\"skill\":\"pipes.capture-intent\"}",
+          "Bash {\"command\":\"cd \\\"$PWD\\\"; cat .pipes/ai-instructions/core-workflows.md .pipes/utils/pipelines/pipeline-capture-intent.md; ls -R .pipes | head -100\",\"description\":\"Read workflow contract and pipeli",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/utils/pipelines/pipeline-capture-intent.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/ai-instructions/core-workflows.md\"}",
+          "Glob {\"pattern\":\".pipes/{project/01-intents/**,utils/fragments/**/fragment-*intent*.md,utils/fragments/**/fragment-request-approval.md,ai-instructions/accountability.md}\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/project/01-intents/config.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/utils/fragments/output/fragment-format-intent-record.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/utils/fragments/question/fragment-capture-intent-source.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/utils/fragments/instruction/fragment-create-intent-file.md\"}",
+          "Grep {\"pattern\":\"intent-\\\\d|number\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/project/01-intents/README.md\",\"output_mode\":\"co",
+          "Agent {\"subagent_type\":\"reviewer\",\"description\":\"Review intent draft\",\"run_in_background\":false,\"prompt\":\"Non-author review of a proposed Pipes intent record (not yet written). Check it against its so",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM; sed -n '/Isolated Agent Mode/,$p' .pipes/team/reviewer.md; cat .pipes/utils/f",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/utils/fragments/output/fragment-format-intent-record.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/project/01-intents/config.md\"}",
+          "Grep {\"pattern\":\"Control Rules\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/utils/pipelines/pipeline-capture-intent.md\",\"output",
+          "Grep {\"pattern\":\"Isolated Agent Mode\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/team/reviewer.md\",\"output_mode\":\"content\",\"-A",
+          "Glob {\"pattern\":\".pipes/project/01-intents/*\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM\"}",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-intent-capture-stays-draft-GxfqTM/.pipes/project/01-intents/intent-001-show-free-cancellation-window.md\",\"conten",
+          "Bash {\"command\":\"ls .pipes/utils/scripts/ | grep -i valid; node .pipes/utils/scripts/validate-project-records.cjs 2>&1 | grep -iE \\\"intent-001|error|summary|ok|finding\\\" | head -20\",\"description\":\"Val",
+          "Bash {\"command\":\"node .pipes/utils/scripts/validate-project-records.cjs 2>&1 | tail -5; node .pipes/utils/scripts/validate-pure-markdown.cjs .pipes/project/01-intents/intent-001-show-free-cancellation"
+        ],
+        "deniedOrFailed": [
+          "Quoted text in this command can't be checked before it runs",
+          "This Bash command contains multiple operations. The following parts require approval: sed -n '/Isolated Agent Mode/,$p' .pipes/team/reviewer.md, sed -n '/Control Rules/,/^## [A-Z]/p' .pipes/utils/pipelines/pipeline-capture-intent.md"
+        ],
+        "result": "I ran the capture-intent pipeline and wrote the intent file. It stays at `draft` because the product owner has not decided whether to accept it. Writing the file does not accept the intent.\n\n**File:** `.pipes/project/01-intents/intent-001-show-free-cancellation-window.md`\n- **Problem:** customers using `orders-service` can't see an order's free-cancellation window, so they miss it and pay a fee. The source is an idea from the product team.\n- **Proposed outcome:** customers can see whether an order is still in its free-cancellation window and when that window ends, before they decide to cancel.\n- **Success checks:**\n  1. An order returned to a customer includes the end of its free-cancellation window.\n  2. An order returned to a customer shows whether it is still inside that window.\n- **Open questions:**\n  - Is `orders-service` a repository in this project, and which customer apps show order data?\n  - What rule sets the window, and does it differ by order type, product, or region?\n  - How will success be measured, and what is the target?\n  - Should customers also get a notice before the window ends?\n  - Is there a legal or contract duty to disclose cancellation terms?\n\n**Defaults I chose:**\n- **Status:** `draft`, since the product owner has not accepted or rejected the intent.\n- **Who decides:** the project has no `accountability.md`, so no one is named for the acceptance decision. Under the Pipes rules you hold that role until someone is named.\n- **`orders-service`:** I could"
+      }
+    }
+  ]
+}

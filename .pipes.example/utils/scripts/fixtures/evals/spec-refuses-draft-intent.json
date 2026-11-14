@@ -1,0 +1,31 @@
+{
+  "id": "spec-refuses-draft-intent",
+  "scope": "starter",
+  "covers": [
+    ".pipes/utils/pipelines/pipeline-design-spec.md"
+  ],
+  "setup": {
+    ".pipes/project/01-intents/intent-901-cancellation-deadline.md": "---\ntitle: Cancellation Window On Orders\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: draft\nrelated: []\n---\n## Problem\nCustomers using orders-service cannot see the free-cancellation window of an order, so they miss it and pay a fee.\n\n## Proposed Outcome\nEvery order shows the end of its free-cancellation window.\n\n## Affected Users And Systems\n- Users: customers and support agents\n- Services: `orders-service`, `payments-service`\n\n## Constraints\n- Windows come from merchant terms and are never invented.\n\n## Open Questions\n- None.\n\n## Source\n- Origin: idea from the product team\n- Author: product team\n"
+  },
+  "prompt": "Run the pipes design-spec pipeline for .pipes/project/01-intents/intent-901-cancellation-deadline.md. You have my approval to write files. Do not ask me questions; choose safe defaults and state them.",
+  "may_change": [
+    ".pipes/utils/state/**"
+  ],
+  "checks": [
+    {
+      "type": "file_count",
+      "glob": ".pipes/project/02-specs/spec-*.md",
+      "pattern": "intent-901-cancellation-deadline",
+      "min": 0,
+      "max": 0,
+      "why": "design starts only from an accepted intent: no spec for this draft intent"
+    },
+    {
+      "type": "result_matches",
+      "pattern": "accept"
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}

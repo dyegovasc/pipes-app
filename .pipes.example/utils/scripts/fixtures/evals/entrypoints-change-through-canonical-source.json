@@ -1,0 +1,43 @@
+{
+  "id": "entrypoints-change-through-canonical-source",
+  "scope": "starter",
+  "covers": [
+    ".pipes/utils/scripts/assemble-*.cjs",
+    ".pipes/utils/scripts/generate-catalog.cjs",
+    ".pipes/utils/loops/loop-framework-maintenance.md",
+    ".pipes/utils/fragments/instruction/fragment-create-files.md"
+  ],
+  "prompt": "Change the description of the scope control rule so that the rules table in CLAUDE.md says: Keeps work inside the approved scope.",
+  "may_change": [
+    ".pipes/utils/rules/rule-scope-control.md",
+    "CLAUDE.md",
+    "AGENTS.md",
+    ".github/copilot-instructions.md",
+    ".pipes/utils/fragments/CATALOG.md",
+    ".pipes/utils/mapping/**",
+    ".pipes/framework-fork.json",
+    ".pipes/utils/state/**"
+  ],
+  "checks": [
+    {
+      "type": "file_matches",
+      "glob": ".pipes/utils/rules/rule-scope-control.md",
+      "pattern": "^description: Keeps work inside the approved scope\\.$",
+      "why": "canonical source changed"
+    },
+    {
+      "type": "file_matches",
+      "glob": "AGENTS.md",
+      "pattern": "Keeps work inside the approved scope\\.",
+      "why": "regenerated, not hand-edited"
+    },
+    {
+      "type": "file_matches",
+      "glob": "CLAUDE.md",
+      "pattern": "Keeps work inside the approved scope\\."
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}

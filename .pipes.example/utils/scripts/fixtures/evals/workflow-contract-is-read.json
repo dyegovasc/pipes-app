@@ -1,0 +1,26 @@
+{
+  "id": "workflow-contract-is-read",
+  "scope": "starter",
+  "covers": [
+    ".pipes/ai-instructions/core-workflows.md",
+    ".pipes/utils/scripts/assemble-instructions.cjs",
+    ".pipes/utils/scripts/assemble-pipeline-skills.cjs",
+    ".pipes/utils/scripts/assemble-loop-skills.cjs"
+  ],
+  "prompt": "Which sections must a Pipes mission record contain, and which statuses can a mission have? Answer from the canonical Pipes contract in this repository. Do not change any files.",
+  "may_change": [],
+  "checks": [
+    {
+      "type": "tool_called",
+      "pattern": "core-workflows\\.md",
+      "why": "the on-demand workflow contract must be read"
+    },
+    {
+      "type": "result_matches",
+      "pattern": "Journal"
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}

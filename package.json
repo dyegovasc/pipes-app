@@ -1,0 +1,18 @@
+{
+  "name": "pipes-app",
+  "private": true,
+  "description": "Pipes Local distribution and the Pipes framework source.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node ./scripts/generate-pipes-framework-metadata.mjs --check --starter-only && node ./scripts/check-pipes-framework-release-assets.mjs && node --test ./.pipes.example/utils/scripts/starter-capabilities.test.cjs && node ./scripts/framework-bundle.mjs --check",
+    "framework:generate": "node ./scripts/generate-pipes-framework-metadata.mjs --write --starter-only",
+    "framework:check": "node ./scripts/generate-pipes-framework-metadata.mjs --check --starter-only",
+    "framework:test": "node --test ./scripts/generate-pipes-framework-metadata.node.mjs ./scripts/framework-release.node.mjs ./scripts/starter-bundle.node.mjs ./scripts/minisign.node.mjs ./scripts/framework-index.node.mjs ./scripts/framework-publish-index.node.mjs ./scripts/framework-release-guard.node.mjs",
+    "framework:evals": "node ./scripts/framework-evals.mjs",
+    "framework:release": "node ./scripts/framework-release.mjs",
+    "framework:bundle": "node ./scripts/framework-bundle.mjs",
+    "framework:publish-index": "node ./scripts/framework-publish-index.mjs"
+  }
+}

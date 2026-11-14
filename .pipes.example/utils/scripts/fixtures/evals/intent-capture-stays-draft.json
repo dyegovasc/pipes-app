@@ -1,0 +1,35 @@
+{
+  "id": "intent-capture-stays-draft",
+  "scope": "starter",
+  "covers": [
+    ".pipes/utils/pipelines/pipeline-capture-intent.md",
+    ".pipes/utils/fragments/*/fragment-*intent*.md",
+    ".pipes/utils/fragments/question/fragment-capture-intent-source.md",
+    ".pipes/project/01-intents/config.md",
+    ".pipes/utils/rules/rule-separation-of-duties.md",
+    ".pipes/team/reviewer.md"
+  ],
+  "prompt": "Run the pipes capture-intent pipeline for this problem: customers using orders-service cannot see the free-cancellation window of an order, so they miss it and pay a fee. Source: an idea from the product team. You have my approval to write the intent file. The product owner has not decided whether to accept it. Do not ask me questions; choose safe defaults and state them.",
+  "may_change": [
+    ".pipes/project/01-intents/**",
+    ".pipes/utils/state/**",
+    ".pipes/project/07-artifacts/**"
+  ],
+  "checks": [
+    {
+      "type": "file_count",
+      "glob": ".pipes/project/01-intents/intent-*.md",
+      "pattern": "^(?=[\\s\\S]*orders-service)(?=[\\s\\S]*^status: draft\\s*$)(?=[\\s\\S]*^## Problem[\\s\\S]*^## Proposed Outcome\\s*$[\\s\\S]*^## How Do We Know It Works\\s*$\\n+- \\S[\\s\\S]*^## Open Questions)",
+      "flags": "m",
+      "min": 1,
+      "max": 1,
+      "why": "exactly one intent for this problem with the required sections, including at least one How Do We Know It Works bullet after Proposed Outcome, still draft: file approval is not product-owner acceptance (G1)"
+    },
+    {
+      "type": "validator_clean"
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}
