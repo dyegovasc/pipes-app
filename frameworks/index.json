@@ -1,0 +1,21 @@
+{
+  "indexSchemaVersion": 1,
+  "generatedAt": "2026-11-14T17:44:02Z",
+  "revokedKeyIds": [],
+  "versions": [
+    {
+      "frameworkVersion": "2.2.1",
+      "manifestSchemaVersion": 2,
+      "projectLayoutVersion": 3,
+      "minAppVersion": "0.7.3",
+      "releasedAt": "2026-11-14T17:40:12Z",
+      "withdrawn": false,
+      "bundle": {
+        "url": "https://github.com/dyegovasc/pipes-app/releases/download/pipes-framework-v2.2.1/pipes-starter-2.2.1.json.gz",
+        "size": 598603,
+        "sha256": "189a77fceae51daa50d06664760636d203f2749bc57b2837aa59755f12c49fa6"
+      },
+      "manifestSha256": "47b6323c6e73b74e5deffc7961c05ba0ccba58180cfec77d7817f2eb2f0378a7"
+    }
+  ]
+}
