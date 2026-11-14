@@ -7,6 +7,7 @@ import {
   bundleUrl,
   canonicalIndexJson,
   checkGeneratedAt,
+  dropVersion,
   emptyIndex,
   finalizeIndex,
   makeEntry,
@@ -139,4 +140,15 @@ test('versions follow the Rust semver crate and refuse build metadata', () => {
 test('finalizeIndex validates the previous index before it compares generatedAt', () => {
   const previous = finalizeIndex(null, addVersion(emptyIndex(), entry('2.2.1')), T0);
   assert.throws(() => finalizeIndex({ ...previous, generatedAt: 'not a time' }, previous, T1), /generatedAt/);
+});
+
+test('only listed versions can be dropped, and only explicitly', () => {
+  const before = finalizeIndex(null, addVersion(addVersion(emptyIndex(), entry('2.2.1')), entry('2.2.2')), T0);
+  const dropped = dropVersion(before, '2.2.2');
+  assert.deepEqual(dropped.versions.map((e) => e.frameworkVersion), ['2.2.1']);
+  assert.throws(() => dropVersion(before, '9.9.9'), /not in the index/);
+  assert.throws(() => finalizeIndex(before, dropped, T1), /cannot be removed/);
+  assert.equal(finalizeIndex(before, dropped, T1, { allowedRemovals: ['2.2.2'] }).versions.length, 1);
+  const both = dropVersion(dropped, '2.2.1');
+  assert.throws(() => finalizeIndex(before, both, T1, { allowedRemovals: ['2.2.2'] }), /2\.2\.1 cannot be removed/);
 });

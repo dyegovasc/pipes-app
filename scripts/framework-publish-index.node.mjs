@@ -238,3 +238,37 @@ test('the CLI refuses a version or withdrawal that is not strict SemVer', () => 
   assert.throws(() => parseArgs(['--version', '2.2.1;x', '--public-key', 'p', '--dry-run']), /strict SemVer/);
   assert.throws(() => parseArgs(['--withdraw', '2.2.1+b', '--public-key', 'p', '--dry-run']), /strict SemVer/);
 });
+
+test('a revocation run signed by the standby key can drop versions', async (context) => {
+  const env = await fixture(context);
+  const active = createTestSigner();
+  const standby = createTestSigner();
+  await publishIndex(options(env, active, { publicKeyTexts: [active.publicKeyText, standby.publicKeyText] }));
+  const result = await publishIndex(options(env, standby, {
+    version: null,
+    bundleFile: null,
+    revokeKeyId: active.keyId,
+    dropVersions: [VERSION],
+    publicKeyTexts: [standby.publicKeyText, active.publicKeyText],
+    now: later('2026-11-14T17:00:00Z'),
+  }));
+  assert.deepEqual(result.index.revokedKeyIds, [active.keyId]);
+  assert.deepEqual(result.index.versions, []);
+  const verified = verifySignature({ message: readFileSync(path.join(env.root, INDEX_PATH)), signatureText: readFileSync(path.join(env.root, SIGNATURE_PATH), 'utf8'), publicKeys: [parsePublicKey(standby.publicKeyText)] });
+  assert.equal(verified.keyId, standby.keyId);
+});
+
+test('dropping a version needs a revocation in the same run and a listed version', async (context) => {
+  const env = await fixture(context);
+  const active = createTestSigner();
+  const standby = createTestSigner();
+  await publishIndex(options(env, active));
+  await assert.rejects(publishIndex(options(env, active, { version: null, bundleFile: null, withdraw: VERSION, dropVersions: [VERSION], now: later('2026-11-14T17:00:00Z') })), /only in a run that revokes a key/);
+  await assert.rejects(
+    publishIndex(options(env, standby, { version: null, bundleFile: null, revokeKeyId: active.keyId, dropVersions: ['9.9.9'], publicKeyTexts: [standby.publicKeyText, active.publicKeyText], now: later('2026-11-14T17:00:00Z') })),
+    /not in the index/,
+  );
+  assert.throws(() => parseArgs(['--drop-version', '2.2.1', '--public-key', 'p', '--dry-run']), /only together with --revoke-key/);
+  assert.throws(() => parseArgs(['--revoke-key', 'ABCDEF0123456789', '--drop-version', '2.2.1+b', '--public-key', 'p', '--dry-run']), /strict SemVer/);
+  assert.deepEqual(parseArgs(['--revoke-key', 'ABCDEF0123456789', '--drop-version', '2.2.1', '--drop-version', '2.2.2', '--public-key', 'p', '--dry-run']).dropVersions, ['2.2.1', '2.2.2']);
+});

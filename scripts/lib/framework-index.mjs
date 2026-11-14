@@ -167,10 +167,11 @@ export function checkGeneratedAt(previous, next) {
  * Refuses a change that removes history: a removed or changed version (other than a withdrawal), an
  * undone withdrawal, or a removed revoked key id.
  */
-export function assertAppendOnly(previous, next) {
+export function assertAppendOnly(previous, next, allowedRemovals = []) {
   for (const keyId of previous.revokedKeyIds) if (!next.revokedKeyIds.includes(keyId)) fail(`revoked key id ${keyId} cannot be removed`);
   for (const before of previous.versions) {
     const after = next.versions.find((entry) => entry.frameworkVersion === before.frameworkVersion);
+    if (!after && allowedRemovals.includes(before.frameworkVersion)) continue;
     if (!after) fail(`${before.frameworkVersion} cannot be removed; withdraw it instead`);
     if (before.withdrawn && !after.withdrawn) fail(`the withdrawal of ${before.frameworkVersion} cannot be undone`);
     if (JSON.stringify({ ...before, withdrawn: null }) !== JSON.stringify({ ...after, withdrawn: null })) fail(`${before.frameworkVersion} cannot be changed`);
@@ -182,12 +183,23 @@ export function assertSignerNotRevoked(index, keyId) {
 }
 
 /** Returns the new index with its `generatedAt`, after every rule passes. */
-export function finalizeIndex(previous, next, now) {
+export function finalizeIndex(previous, next, now, { allowedRemovals = [] } = {}) {
   if (previous) validateIndex(previous);
   const generatedAt = formatGeneratedAt(now);
   checkGeneratedAt(previous?.generatedAt ?? null, generatedAt);
   const result = { ...clone(next), generatedAt };
   validateIndex(result);
-  if (previous) assertAppendOnly(previous, result);
+  if (previous) assertAppendOnly(previous, result, allowedRemovals);
   return result;
+}
+
+/**
+ * Removes a version from the index. Only a revocation run may do this (R22 recovery): it drops
+ * versions that a compromised key published, so that apps remove their cached bundles.
+ */
+export function dropVersion(index, version) {
+  if (!index.versions.some((entry) => entry.frameworkVersion === version)) fail(`${version} is not in the index`);
+  const next = clone(index);
+  next.versions = next.versions.filter((entry) => entry.frameworkVersion !== version);
+  return next;
 }

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 // Publishes a change to the signed framework index `frameworks/index.json` on the maintainer's machine.
 //
-// One run can revoke a key, withdraw a version, and add a version, in that order:
+// One run can revoke a key, drop versions, withdraw a version, and add a version, in that order:
 //   --revoke-key ID   adds ID to `revokedKeyIds` (it can never be removed)
+//   --drop-version X  removes version X; only in a run that revokes a key (R22 recovery). Repeatable.
+//                     Put the standby key first among --public-key, because the first key must sign.
 //   --withdraw X      marks version X withdrawn (it can never be undone)
 //   --version X       adds the released bundle of version X
 // For --version, the script reads the release asset metadata with `gh api`, downloads the bundle from
@@ -32,6 +34,7 @@ import {
   assertSignerNotRevoked,
   bundleUrl,
   canonicalIndexJson,
+  dropVersion,
   emptyIndex,
   finalizeIndex,
   isRfc3339Utc,
@@ -57,14 +60,15 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..
 const BUNDLE_TIMEOUT_MS = 60_000;
 
 export function parseArgs(argv) {
-  const options = { secretKey: null, publicKeys: [], revokeKey: null, withdraw: null, version: null, bundleFile: null, commit: false, dryRun: false };
+  const options = { secretKey: null, publicKeys: [], revokeKey: null, dropVersions: [], withdraw: null, version: null, bundleFile: null, commit: false, dryRun: false };
   const values = { '--secret-key': 'secretKey', '--revoke-key': 'revokeKey', '--withdraw': 'withdraw', '--version': 'version', '--bundle-file': 'bundleFile' };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
-    if (arg in values || arg === '--public-key') {
+    if (arg in values || arg === '--public-key' || arg === '--drop-version') {
       const value = argv[index + 1];
       if (value === undefined || value.startsWith('--')) throw new Error(`${arg} needs a value`);
       if (arg === '--public-key') options.publicKeys.push(value);
+      else if (arg === '--drop-version') options.dropVersions.push(value);
       else options[values[arg]] = value;
       index += 1;
     } else if (arg === '--commit') {
@@ -75,6 +79,7 @@ export function parseArgs(argv) {
       throw new Error(`Unknown argument: ${arg}`);
     }
   }
+  if (options.dropVersions.length && !options.revokeKey) throw new Error('--drop-version is allowed only together with --revoke-key');
   if (!options.version && !options.withdraw && !options.revokeKey) throw new Error('Give at least one of --version, --withdraw, or --revoke-key');
   if (options.publicKeys.length === 0) throw new Error('--public-key PATH is required');
   if (!options.dryRun && !options.secretKey) throw new Error('--secret-key PATH is required unless --dry-run');
@@ -82,6 +87,9 @@ export function parseArgs(argv) {
   if (options.bundleFile && !options.version) throw new Error('--bundle-file needs --version');
   for (const flag of ['version', 'withdraw']) {
     if (options[flag] && !isStrictSemver(options[flag])) throw new Error(`--${flag} ${options[flag]} is not a strict SemVer version without build metadata`);
+  }
+  for (const version of options.dropVersions) {
+    if (!isStrictSemver(version)) throw new Error(`--drop-version ${version} is not a strict SemVer version without build metadata`);
   }
   return options;
 }
@@ -173,6 +181,7 @@ export async function publishIndex({
   version = null,
   withdraw = null,
   revokeKeyId = null,
+  dropVersions = [],
   bundleFile = null,
   publicKeyTexts,
   signer = null,
@@ -184,6 +193,7 @@ export async function publishIndex({
   dryRun = false,
 }) {
   if (!version && !withdraw && !revokeKeyId) throw new Error('Give at least one of version, withdraw, or revokeKeyId');
+  if (dropVersions.length && !revokeKeyId) throw new Error('Dropping a version is allowed only in a run that revokes a key');
   const publicKeys = publicKeyTexts.map(parsePublicKey);
   if (publicKeys.length === 0) throw new Error('At least one public key is required');
   const activeKey = publicKeys[0];
@@ -191,9 +201,10 @@ export async function publishIndex({
   const previous = readIndexState(root, publicKeys);
   let next = previous ?? emptyIndex();
   if (revokeKeyId) next = revokeKey(next, revokeKeyId);
+  for (const dropped of dropVersions) next = dropVersion(next, dropped);
   if (withdraw) next = withdrawVersion(next, withdraw);
   if (version) next = await addReleasedVersion(next, { root, version, bundleFile, fetchRelease, fetchBundle, checkSource });
-  const finalIndex = finalizeIndex(previous, next, now());
+  const finalIndex = finalizeIndex(previous, next, now(), { allowedRemovals: dropVersions });
   assertSignerNotRevoked(finalIndex, activeKey.keyId);
   const json = canonicalIndexJson(finalIndex);
   if (dryRun) return { index: finalIndex, json, written: false };
@@ -217,7 +228,7 @@ export async function publishIndex({
   }
 
   if (commit) {
-    const summary = [revokeKeyId && `revoke ${revokeKeyId}`, withdraw && `withdraw ${withdraw}`, version && `add ${version}`].filter(Boolean).join(', ');
+    const summary = [revokeKeyId && `revoke ${revokeKeyId}`, ...dropVersions.map((dropped) => `drop ${dropped}`), withdraw && `withdraw ${withdraw}`, version && `add ${version}`].filter(Boolean).join(', ');
     for (const args of [
       ['add', '--', INDEX_PATH, SIGNATURE_PATH],
       ['commit', '-m', `Publish framework index: ${summary}`, '--', INDEX_PATH, SIGNATURE_PATH],
@@ -256,6 +267,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       version: options.version,
       withdraw: options.withdraw,
       revokeKeyId: options.revokeKey,
+      dropVersions: options.dropVersions,
       bundleFile: options.bundleFile,
       publicKeyTexts: options.publicKeys.map((file) => readFileSync(file, 'utf8')),
       signer: options.dryRun ? null : cliSigner({ secretKeyPath: options.secretKey }),

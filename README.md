@@ -76,7 +76,20 @@ Two minisign keys exist at one time: active and standby. Both public keys are co
 
 - The active secret key stays on the maintainer's machine, with its password in the macOS Keychain. The standby secret key is only in the password manager and on one encrypted offline copy. Neither key is ever stored on GitHub.
 - Rotate at least every 24 months, on a machine change, or on a suspected exposure: sign with the standby key, and compile a new standby key into the next app release.
-- After a compromise, publish an index signed by the standby key with `--revoke-key ID`, release a new app with a new key pair, and post a notice here.
+- After a compromise, publish an index signed by the standby key with `--revoke-key ID` (put the standby public key first among `--public-key`, and add `--drop-version X` for each version that the compromised key published), release a new app with a new key pair, and post a notice here.
+
+Create the keys in a separate Terminal window at the repository root, never through an automated session:
+
+```sh
+brew install minisign            # 0.11 or later
+mkdir -p ~/.minisign frameworks/keys && chmod 700 ~/.minisign
+minisign -G -p frameworks/keys/active.pub -s ~/.minisign/pipes-framework-active.key
+minisign -G -p frameworks/keys/standby.pub -s ~/.minisign/pipes-framework-standby.key
+chmod 600 ~/.minisign/pipes-framework-*.key
+security add-generic-password -s pipes-framework-active -a "$USER" -w
+```
+
+Keep the standby secret key and its password only in the password manager and one encrypted offline copy, then delete `~/.minisign/pipes-framework-standby.key`. Commit only the two `.pub` files.
 
 ### Fix Forward
 
