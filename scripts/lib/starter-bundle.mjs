@@ -51,10 +51,15 @@ export function compareUtf8(left, right) {
   return Buffer.compare(Buffer.from(left, 'utf8'), Buffer.from(right, 'utf8'));
 }
 
+/**
+ * True for a safe relative path of printable ASCII (0x20 to 0x7E). Pipes Local applies the same rule
+ * in Rust; ASCII-only paths avoid case and Unicode-normalization ambiguity on macOS file systems.
+ */
 export function isSafeRelativePath(value) {
   return (
     typeof value === 'string' &&
     value.length > 0 &&
+    /^[\x20-\x7e]+$/.test(value) &&
     !value.startsWith('/') &&
     !value.includes('\\') &&
     !value.includes('\0') &&
@@ -148,9 +153,9 @@ function firstGzipMemberEnd(bytes) {
   return offset + engine.bytesWritten + 8;
 }
 
-/** Key for collisions on a case-insensitive, normalizing file system such as APFS. */
+/** Key for collisions on a case-insensitive file system such as APFS; paths are ASCII only. */
 function collisionKey(value) {
-  return value.normalize('NFC').toLowerCase();
+  return value.toLowerCase();
 }
 
 function decodeContent(file) {

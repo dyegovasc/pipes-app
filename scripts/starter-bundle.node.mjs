@@ -147,7 +147,7 @@ test('verification rejects trailing gzip data and non-canonical or duplicate-key
   assert.throws(() => verifyStarterBundle(regzip(duplicate)), /not canonical/);
 });
 
-test('verification rejects case and Unicode-normalization collisions and lone surrogates', async (context) => {
+test('verification rejects case collisions, non-ASCII paths, and lone surrogates', async (context) => {
   const root = await fixtureRepository(context);
   const { compressed } = buildStarterBundle({ root, version: '1.0.1' });
   const fileEntry = (filePath, content) => ({ path: filePath, encoding: 'utf8', sha256: sha256(Buffer.from(content, 'utf8')), content });
@@ -156,7 +156,8 @@ test('verification rejects case and Unicode-normalization collisions and lone su
     bundle.files.sort((a, b) => Buffer.compare(Buffer.from(a.path), Buffer.from(b.path)));
   };
   assert.throws(() => verifyStarterBundle(repack(compressed, (b) => insert(b, [fileEntry('zz/README.md', 'a'), fileEntry('zz/readme.md', 'b')]))), /collides/);
-  assert.throws(() => verifyStarterBundle(repack(compressed, (b) => insert(b, [fileEntry('zz/caf\u00e9.md', 'a'), fileEntry('zz/cafe\u0301.md', 'b')]))), /collides/);
+  assert.throws(() => verifyStarterBundle(repack(compressed, (b) => insert(b, [fileEntry('zz/caf\u00e9.md', 'a')]))), /unsafe path/);
+  assert.throws(() => verifyStarterBundle(repack(compressed, (b) => insert(b, [fileEntry('zz/tab\there.md', 'a')]))), /unsafe path/);
   assert.throws(() => verifyStarterBundle(repack(compressed, (b) => insert(b, [fileEntry('zz/lone.md', 'x\ud800')]))), /well-formed/);
 });
 
@@ -164,4 +165,10 @@ test('a symlinked starter file is refused', async (context) => {
   const root = await fixtureRepository(context);
   symlinkSync('README.md', path.join(root, '.pipes.example', 'linked.md'));
   assert.throws(() => listStarterFiles(root), /not a regular file/);
+});
+
+test('a non-ASCII starter path is refused when the bundle is built', async (context) => {
+  const root = await fixtureRepository(context);
+  writeFileSync(path.join(root, '.pipes.example', 'project', '00-notes', 'caf\u00e9.md'), 'x\n');
+  assert.throws(() => listStarterFiles(root), /Unsafe starter path/);
 });
