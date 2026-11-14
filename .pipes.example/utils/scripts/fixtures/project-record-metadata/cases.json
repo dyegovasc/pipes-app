@@ -1,0 +1,42 @@
+[
+  {
+    "name": "complete-unicode-bom-crlf",
+    "html": "﻿<!doctype html>\r\n<head><META content=\"1\" name=\"pipes:schema-version\"><META content=\"9\" name=\"pipes:sequence\"><META content=\"true\" name=\"pipes:starred\"><META content=\"Café &amp; &lt;test&gt;\" name=\"pipes:title\"><META content=\"Example\" name=\"pipes:description\"><META content=\"3.2\" name=\"pipes:version\"><META content=\"[&quot;.pipes/project/04-plans/plan-001-a.md&quot;]\" name=\"pipes:related\"></head><body>é</body>",
+    "state": "complete",
+    "relatedPresent": true,
+    "related": [
+      ".pipes/project/04-plans/plan-001-a.md"
+    ]
+  },
+  {
+    "name": "absent-ignored-fakes",
+    "html": "<head><!-- <meta name=\"pipes:sequence\" content=\"2\"> --><script>\"<meta name='pipes:related' content='[]'>\"</script><template><meta name=\"pipes:title\" content=\"Fake\"></template></head><body><svg><meta name=\"pipes:related\" content=\"[]\"></svg></body>",
+    "state": "absent",
+    "relatedPresent": false,
+    "related": []
+  },
+  {
+    "name": "partial-explicit-empty",
+    "html": "<head><meta name=pipes:related content=\"[]\"></head>",
+    "state": "partial",
+    "relatedPresent": true,
+    "related": []
+  },
+  {
+    "name": "partial-no-related",
+    "html": "<head><meta name=\"pipes:sequence\" content=8></head>",
+    "state": "partial",
+    "relatedPresent": false,
+    "related": []
+  },
+  {
+    "name": "duplicate-related",
+    "html": "<head><meta name=\"pipes:related\" content=\"[]\"><meta name=\"pipes:related\" content=\"[]\"></head>",
+    "state": "invalid"
+  },
+  {
+    "name": "malformed-related",
+    "html": "<head><meta name=\"pipes:related\" content=\"{}\"></head>",
+    "state": "invalid"
+  }
+]

@@ -1,0 +1,790 @@
+{
+  "manifestSchemaVersion": 1,
+  "framework": "pipes",
+  "frameworkVersion": "1.0.1",
+  "baselineDigest": "7d1e6e2ee9b6b210c1bfeaadbbabc9c287ec7b6fd83480b529a3a135c3dea18a",
+  "baselineArchive": {
+    "path": "framework-baseline.json.gz",
+    "format": "gzip-json-v1",
+    "size": 96767,
+    "uncompressedSize": 377059,
+    "sha256": "1488eb95250d552565a2e7c78f95b653fb2d04c67a0c72d8b0b84920c04ef9dd"
+  },
+  "forkControlPath": "framework-fork.json",
+  "ownership": {
+    "trackedRoots": [
+      "ai-instructions",
+      "team",
+      "utils/fragments",
+      "utils/pipelines",
+      "utils/rules",
+      "utils/scripts"
+    ],
+    "trackedFiles": [
+      "README.md",
+      "utils/issues/.gitkeep",
+      "utils/issues/README.md"
+    ],
+    "opaqueRoots": [
+      "project",
+      "utils/configs",
+      "utils/state",
+      "utils/issues"
+    ],
+    "ignoredNames": [
+      ".DS_Store",
+      "manifest.json",
+      "framework-baseline.json.gz",
+      "framework-fork.json"
+    ]
+  },
+  "projectAreas": [
+    "00-notes",
+    "01-goals",
+    "02-roadmap",
+    "03-plans",
+    "04-decisions",
+    "05-outcomes",
+    "06-artifacts"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "encoding": "utf-8",
+      "size": 4393,
+      "sha256": "44bf8dd5c29cb44747dd4344184f030242c69e0b62ca31289ff31b6de51f51b0"
+    },
+    {
+      "path": "ai-instructions/.gitkeep",
+      "encoding": "utf-8",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ai-instructions/architecture.md",
+      "encoding": "utf-8",
+      "size": 1300,
+      "sha256": "08c03c99363d06a8d5e75ddf281b14529d13f7a06765588580fd414f119709d9"
+    },
+    {
+      "path": "ai-instructions/core.md",
+      "encoding": "utf-8",
+      "size": 8292,
+      "sha256": "0a63f0dfdf80e601d54f8bede1db022572e75f8624cb70e0af4441e1cd9e5ae3"
+    },
+    {
+      "path": "ai-instructions/project.md",
+      "encoding": "utf-8",
+      "size": 877,
+      "sha256": "64ab38b3774752f053df00042cc3e991dc447efdf9c507560082583f99305222"
+    },
+    {
+      "path": "team/README.md",
+      "encoding": "utf-8",
+      "size": 11930,
+      "sha256": "64a9f4bb82e4fe0b6e2e2c6606aee734714e751e08ec2a9f40ee03dfe1383986"
+    },
+    {
+      "path": "team/be-architect.md",
+      "encoding": "utf-8",
+      "size": 5610,
+      "sha256": "e32da4a50859cdf2f3ccbbd1cb7eb57a647ce22359ee373d6128b9f9ffe266e5"
+    },
+    {
+      "path": "team/be-coder.md",
+      "encoding": "utf-8",
+      "size": 5797,
+      "sha256": "a4fa2bd6a1f89967304e7df377b169afbb356960aa833f9bd3afd87d59687381"
+    },
+    {
+      "path": "team/e2e-tester.md",
+      "encoding": "utf-8",
+      "size": 5603,
+      "sha256": "394a2555115a7c3ca0ea51b03b17d672968ebdb3bbede3e612c0146c5751be87"
+    },
+    {
+      "path": "team/fe-architect.md",
+      "encoding": "utf-8",
+      "size": 5639,
+      "sha256": "2e0e5a3052493df7ad263f31c72e3f9720abaae2056d4bb8ecba9dc0d46915ee"
+    },
+    {
+      "path": "team/fe-coder.md",
+      "encoding": "utf-8",
+      "size": 5485,
+      "sha256": "bc2f589c979bf0320fc0cdcf854b2190dce92a03f0f8c70b125ab684348971ae"
+    },
+    {
+      "path": "team/full-stack-tech-lead.md",
+      "encoding": "utf-8",
+      "size": 5670,
+      "sha256": "8751ef1aa28b9009a9155b0d96c780ce6a353905dc58aca755b0ac83a99327e7"
+    },
+    {
+      "path": "team/roadmapper.md",
+      "encoding": "utf-8",
+      "size": 6452,
+      "sha256": "b8b86f5c2552984105ae48a5f87d3c6fdb0dbba81a0cdb546d91dbe534eb13fa"
+    },
+    {
+      "path": "team/visionaire.md",
+      "encoding": "utf-8",
+      "size": 4907,
+      "sha256": "f97ad115081d4cac1803a5e4c1a7f76df834a3c482f37db75246e4eda4f4e0b8"
+    },
+    {
+      "path": "utils/fragments/CATALOG.md",
+      "encoding": "utf-8",
+      "size": 15599,
+      "sha256": "471144f61b40bdca47951959dfa101c292212990367b7af79418134251d7a6d3"
+    },
+    {
+      "path": "utils/fragments/TEMPLATE-context.md",
+      "encoding": "utf-8",
+      "size": 777,
+      "sha256": "59ccf4f3f385aa0eb6fa777fe80030a106bc0c5fb96b3eb7a4a548799fa54071"
+    },
+    {
+      "path": "utils/fragments/TEMPLATE-instruction.md",
+      "encoding": "utf-8",
+      "size": 784,
+      "sha256": "f2377f2704f6ae8131101a5db88c698be7aa89a1a94f328b0f8d1b77938a10f3"
+    },
+    {
+      "path": "utils/fragments/TEMPLATE-output.md",
+      "encoding": "utf-8",
+      "size": 1053,
+      "sha256": "9964047ef731b3ae3770e5f57f39b46c3855e7a3c47e816d398365f72fb80549"
+    },
+    {
+      "path": "utils/fragments/TEMPLATE-question.md",
+      "encoding": "utf-8",
+      "size": 1029,
+      "sha256": "3e0ba4ec66fd5969099fc5cc3c91efce7961302e5069d550446cc4d6b61df274"
+    },
+    {
+      "path": "utils/fragments/TEMPLATE-validation.md",
+      "encoding": "utf-8",
+      "size": 772,
+      "sha256": "13ed7e27de89e2d7fa94e6eb00b4d73da34e0ced02aed4d598b6066069624daf"
+    },
+    {
+      "path": "utils/fragments/context/.gitkeep",
+      "encoding": "utf-8",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-analyze-codebase-context.md",
+      "encoding": "utf-8",
+      "size": 1894,
+      "sha256": "ff95f3b376d68d7babf112469c5e1c3121619b66697d9458cdff1156c2da66b4"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-apply-status-updates.md",
+      "encoding": "utf-8",
+      "size": 1316,
+      "sha256": "49bf04a39631017b533b9aac5e8008e2082657f10cabcf55cfcae7d8fea0bcd9"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-assess-blast-radius.md",
+      "encoding": "utf-8",
+      "size": 1393,
+      "sha256": "0bfd8d440238470b018846a27d580fe284782553666caf4e6b0dd4b580b87eb5"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-assess-decision-durability.md",
+      "encoding": "utf-8",
+      "size": 1203,
+      "sha256": "746d991e5482891ea35867d294292a04fd118eb0186eab1428b5d9ff1d0f740d"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-assess-goal-roadmap-readiness.md",
+      "encoding": "utf-8",
+      "size": 1034,
+      "sha256": "bbf0d9fa2beb03c04750b325d1cbc86885c3269143bbd15bd139f5e3deb171f3"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-assess-implementation-risks.md",
+      "encoding": "utf-8",
+      "size": 1437,
+      "sha256": "34fb73aadd6f075d2719ab8c99d40d1cc32f7345fe6d438039adaefc516263e3"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-assess-plan-execution-readiness.md",
+      "encoding": "utf-8",
+      "size": 1289,
+      "sha256": "2f452586fe7e33965b59e492ef11278f1d84dbd63bd3b82c4683829847808573"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-assess-roadmap-overlap.md",
+      "encoding": "utf-8",
+      "size": 1556,
+      "sha256": "568b094ba9972cd9259fc386dd0a9bb198331522dfab8cfb65e7fa2c748c8b80"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-capture-execution-outcome.md",
+      "encoding": "utf-8",
+      "size": 1605,
+      "sha256": "67b267790d0078f4910c40977dd76e5ea5c2c8f4aeb3016a188b80246152460e"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-check-entrypoint-state.md",
+      "encoding": "utf-8",
+      "size": 1431,
+      "sha256": "767a5dabc43ac52a1bcdc007c0a024e178d327d3691373118022a3abf78fac22"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-check-existing-codebase-files.md",
+      "encoding": "utf-8",
+      "size": 2221,
+      "sha256": "d6bedb1e42695d9b574c4f984ff82a83d820937f6613df4a0e0f85da10e50bda"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-check-existing-guardrails-rule.md",
+      "encoding": "utf-8",
+      "size": 1004,
+      "sha256": "2ce63cb2011904026b8bb214eebaaa8b65347e3700eccdb047fe8a37afe35b35"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-classify-feature-unknowns.md",
+      "encoding": "utf-8",
+      "size": 1729,
+      "sha256": "51b3fab4df5914e57dde2bc15fbfa2448f8de79e36fe2be8f3c4c637135f49e9"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-confirm-catalog-update.md",
+      "encoding": "utf-8",
+      "size": 853,
+      "sha256": "a9de3c736c8cb1c7a17ec41276582c81a8554eb4a0861e295572ac5bed70a098"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-create-decision-file.md",
+      "encoding": "utf-8",
+      "size": 1042,
+      "sha256": "297872f92cd1c227f398a946cd1f6bdcecb24558a9dcbf55a3658b24f0aa4aae"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-create-files.md",
+      "encoding": "utf-8",
+      "size": 1545,
+      "sha256": "d56d30f2f7e383bca79595aec8e801354fb293b59a21c4653f024f246cd09371"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-create-goal-file.md",
+      "encoding": "utf-8",
+      "size": 865,
+      "sha256": "52ee5aeb66b9920cee476f91516547c7c5db899444e1a65ba8c3fa8c0a135b67"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-create-outcome-file.md",
+      "encoding": "utf-8",
+      "size": 1578,
+      "sha256": "9443ab32aae1a8af1699beaed7060303c9608f80657983b99baae0286b6f4ffd"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-create-plan-file.md",
+      "encoding": "utf-8",
+      "size": 1785,
+      "sha256": "f129214e616c061780760cad0afa4b72779e24cad52f0dacb2e036c464430917"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-create-roadmap-files.md",
+      "encoding": "utf-8",
+      "size": 1103,
+      "sha256": "409bc30fc0660c0b1ecc65bde4392e3a5b4f7c4abd54e1a32795e22e5254b2d4"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-create-team-member-file.md",
+      "encoding": "utf-8",
+      "size": 1012,
+      "sha256": "a3b2490bccdd73b8a8f80dedc7348d27809ba80bafbbd15f9434cac525b3218e"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-define-implementation-steps.md",
+      "encoding": "utf-8",
+      "size": 994,
+      "sha256": "354ecf0311176bf6e88fd13404aa0ee03ad52b7cb15f78fcc6d3e85da1696880"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-define-phases.md",
+      "encoding": "utf-8",
+      "size": 1846,
+      "sha256": "6dd112745aaabab62e38362c0eef35371db050b7ffaa9e7b9ba9dcd5d0e71184"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-define-solution-architecture.md",
+      "encoding": "utf-8",
+      "size": 1582,
+      "sha256": "56aa2f0e23070bbc49b56c007e9a376fc0add02aeba2fb545a7b6540fadc5cb3"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-derive-roadmap-slices.md",
+      "encoding": "utf-8",
+      "size": 1482,
+      "sha256": "5e2abc78fb6b4949317eab382b5d15384a9eb9dca5235058b0da5aa266567700"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-draft-codebase-conventions-rule.md",
+      "encoding": "utf-8",
+      "size": 1251,
+      "sha256": "56920d4d5dd36a5d038a3d5ebfe37a3c694db94c4346128652664484635ac083"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-draft-commit-guardrails-rule.md",
+      "encoding": "utf-8",
+      "size": 1416,
+      "sha256": "7b0a2be39b3e62238df7ba535f863a1c9b9d8c52712f6a36514ad1351dd61ae3"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-draft-project-instruction.md",
+      "encoding": "utf-8",
+      "size": 1653,
+      "sha256": "0233d2fc839e5d1c3781f383f1b6ea1c489b2ca2ea1c8f9529aae9324894038d"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-draft-test-strategy.md",
+      "encoding": "utf-8",
+      "size": 1179,
+      "sha256": "061b440a98f83f500f44e7cf2d6545cff1a6fb1193770cf1650cfeb58e38001a"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-establish-scope-guardrails.md",
+      "encoding": "utf-8",
+      "size": 1635,
+      "sha256": "b0f6eb3186eb11998f43c477baddb67b6d9437da0a746bdd3111896cf4afe784"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-execute-approved-plan.md",
+      "encoding": "utf-8",
+      "size": 1106,
+      "sha256": "7619663355e77cd0e20f9f71f0d4aa64ffa1eb8774dbc03a59f876bf93fff977"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-generate-catalog.md",
+      "encoding": "utf-8",
+      "size": 1524,
+      "sha256": "3924f47951bb0edcc2a68e55e0a131be11274a03e84103515d762c88606504d2"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-generate-solution-hypotheses.md",
+      "encoding": "utf-8",
+      "size": 1241,
+      "sha256": "8fc1278fc82eca19fe834d7f552e9420356da24b83d390e10de390b8dacf8e27"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-identify-fragments.md",
+      "encoding": "utf-8",
+      "size": 1273,
+      "sha256": "8721d8244cf776d223145ecfef119c0ff66fc76fae20b9919b2cfab685d96066"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-map-system-boundaries.md",
+      "encoding": "utf-8",
+      "size": 1205,
+      "sha256": "7bf96d106f9ff00d68a92dba9856528259a95af1fc19b775d75ca509dcfc2224"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-read-plan-record.md",
+      "encoding": "utf-8",
+      "size": 1115,
+      "sha256": "259ed50c55a9bc5e4e1079c981f840f637d01ef951c21d6c22abf223aae2b2c7"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-read-project-instruction.md",
+      "encoding": "utf-8",
+      "size": 1391,
+      "sha256": "0654d9da44b010e6a09c9ec1041e7c799a34fb7d0b1082c9bfce3d0d2c70524b"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-route-supporting-artifacts.md",
+      "encoding": "utf-8",
+      "size": 1059,
+      "sha256": "256a6b532722ff07aa79a5d75b1c103c3eabd589216606397efcbe84625d4726"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-run-assembly-script.md",
+      "encoding": "utf-8",
+      "size": 699,
+      "sha256": "481d2729ef315f437773d678564939c12cd26a664dafaea8bbffd5865c5dea25"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-scan-fragments-for-catalog.md",
+      "encoding": "utf-8",
+      "size": 1179,
+      "sha256": "093b78a5d798db874f43dadfdcd6f1b913808aa470e3fe8f91460755c50e2f51"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-scan-pipelines.md",
+      "encoding": "utf-8",
+      "size": 936,
+      "sha256": "9ee1bd741411165e7491c6e0a9dd3c9c8fb89c889b3e28f1f74bba1eae5c4ae3"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-select-solution.md",
+      "encoding": "utf-8",
+      "size": 1845,
+      "sha256": "acfe2fd215d79b0fb3ce1467f5d342f539010e36c0239f825ad6948e6b9e01f7"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-select-source-goal.md",
+      "encoding": "utf-8",
+      "size": 1519,
+      "sha256": "859825b6618e6c580749d22fa86d22dc005d97f8f97277aa3b3d497112b94bd0"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-sync-record-statuses.md",
+      "encoding": "utf-8",
+      "size": 1493,
+      "sha256": "d1125a1e9c69a7aa6f7639a8247655f9a31cbba7667d16c7396fe2861bd8ead3"
+    },
+    {
+      "path": "utils/fragments/output/fragment-consolidate-structure.md",
+      "encoding": "utf-8",
+      "size": 1771,
+      "sha256": "c8b330e900636cd7fca402d285b47b5dd9b9296789ab4ad31050f090d98ef19b"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-codebase-conventions-rule.md",
+      "encoding": "utf-8",
+      "size": 1314,
+      "sha256": "5a4b5cf15f2cb307d4bbdac6d8b8205c61e720d99cde3337378eec81fe4b3056"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-commit-guardrails-rule.md",
+      "encoding": "utf-8",
+      "size": 1606,
+      "sha256": "e6e24d654b6c3e31ae1cfb75696a25fca6aa175bc9829099ac2723baa915b43b"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-decision-record.md",
+      "encoding": "utf-8",
+      "size": 1088,
+      "sha256": "83a75accc793f8b4ac78b0ae8f468c96167597cdbe95c545cdd0baadac463ad4"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-goal-record.md",
+      "encoding": "utf-8",
+      "size": 884,
+      "sha256": "2b31d702dc711e9eb2226838fd53839a7383a2543ac2c01b42490fe6ed6c8a5e"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-implementation-plan.md",
+      "encoding": "utf-8",
+      "size": 3271,
+      "sha256": "3162f40db7c2b7085abc288f65c46f3486bc94538b7f472b7b60c56bea35a175"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-outcome-record.md",
+      "encoding": "utf-8",
+      "size": 2290,
+      "sha256": "7f5409d25c6435441d7a4067e17665cadb332a05cdd66db174d2e65f4b0f745f"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-project-instruction.md",
+      "encoding": "utf-8",
+      "size": 2841,
+      "sha256": "1e9b0c7f274075dd3ec13d5c067f2acb3bdbf32f9d089a0d5204c65683c8e9c4"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-roadmap-record.md",
+      "encoding": "utf-8",
+      "size": 1929,
+      "sha256": "1b5fb46e4898b3c65bbb7fbb1a9f1be7a961684e0ab24b4c050e54a690ad30f2"
+    },
+    {
+      "path": "utils/fragments/output/fragment-format-team-member-record.md",
+      "encoding": "utf-8",
+      "size": 2003,
+      "sha256": "60b159f3d052a2094fde26e0ddf74f936ed33d513618c840469565b5569b7e99"
+    },
+    {
+      "path": "utils/fragments/output/fragment-report-entrypoint-results.md",
+      "encoding": "utf-8",
+      "size": 1087,
+      "sha256": "8887bdef19a376b5c71fae90f85f757b3f3c69e0958646d38e14e8ca8a0d1a7b"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-commit-preferences.md",
+      "encoding": "utf-8",
+      "size": 2421,
+      "sha256": "40b4194d518c4d1cbd89096ade9700ecab96396eddfc6467194d97ef7d5dcdcf"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-feature-requirements.md",
+      "encoding": "utf-8",
+      "size": 1333,
+      "sha256": "3835e4f0a2bf745b1efdf977d2876c3fddd91c01c2f2ed837931a2fdce9e3df1"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-goal-definition.md",
+      "encoding": "utf-8",
+      "size": 974,
+      "sha256": "986ddfb4a4a53a8b69b0e85b78d4b398c944dd838e6b1bcda3f85212e99f4914"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-pipeline-intent.md",
+      "encoding": "utf-8",
+      "size": 1072,
+      "sha256": "257d67f125fbd9044c00e00b6734ec845fc6c5ce63aaa4cc16d93e71f02aa382"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-project-context.md",
+      "encoding": "utf-8",
+      "size": 1681,
+      "sha256": "a14088b7ff61f311013c353ba8f9732db595d1048b37cdeb437f13edfaf6f8de"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-stack-details.md",
+      "encoding": "utf-8",
+      "size": 2666,
+      "sha256": "0eb0ec6075de0f3f1adbd48652da8d239dfd94c8d2e93178aab424b43fa0f706"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-team-member-definition.md",
+      "encoding": "utf-8",
+      "size": 1081,
+      "sha256": "21ac02b0c95b5821501db6a2a246eda5bb4de843a3e0b0acd82123546d8ca647"
+    },
+    {
+      "path": "utils/fragments/question/fragment-capture-decision-candidate.md",
+      "encoding": "utf-8",
+      "size": 1077,
+      "sha256": "80fed12281c6fed23f53f2e6a3a65a20197192fbc11e2f1fb847397df2b782c3"
+    },
+    {
+      "path": "utils/fragments/question/fragment-clarify-shared-decisions.md",
+      "encoding": "utf-8",
+      "size": 1218,
+      "sha256": "d9ad79135c9bb5af351d0866801670ca8df667358f39b4af6ee58eaa540cdaeb"
+    },
+    {
+      "path": "utils/fragments/question/fragment-confirm-acceptance-criteria.md",
+      "encoding": "utf-8",
+      "size": 1158,
+      "sha256": "b1ae316bb840b3dce337061d5c3249fca13bdc90da472bbe6c9e73b88b0bbd60"
+    },
+    {
+      "path": "utils/fragments/question/fragment-reframe-intent.md",
+      "encoding": "utf-8",
+      "size": 602,
+      "sha256": "c5032211a656b6049c6318f175ce66cc0687e0da61093a588edc9082f7224648"
+    },
+    {
+      "path": "utils/fragments/question/fragment-request-approval.md",
+      "encoding": "utf-8",
+      "size": 963,
+      "sha256": "04841c0ad6296bba8295f65daae22aa00350dd5f34d39eb3b483dc00c9fb3111"
+    },
+    {
+      "path": "utils/fragments/question/fragment-request-phase-approval.md",
+      "encoding": "utf-8",
+      "size": 775,
+      "sha256": "7077eecbcf5037fc8eb5bee9330c135f8011f082f1df780fca4cd1642bae7798"
+    },
+    {
+      "path": "utils/fragments/validation/fragment-assess-team-role-overlap.md",
+      "encoding": "utf-8",
+      "size": 1743,
+      "sha256": "6017035d36370b3e42741857a863e758803a72523742d7abce2f1ec09a23e19a"
+    },
+    {
+      "path": "utils/fragments/validation/fragment-audit-plan-ambiguity.md",
+      "encoding": "utf-8",
+      "size": 2566,
+      "sha256": "f6c071b6ec66bfb23f0fc24164ece5ff799afc16aa08225f588acb1159368d4e"
+    },
+    {
+      "path": "utils/fragments/validation/fragment-lint-feature-questions.md",
+      "encoding": "utf-8",
+      "size": 1573,
+      "sha256": "10740164e1922ceeaec7d1ea495e90e029852b4b0441b8ff3febe977525ad8e2"
+    },
+    {
+      "path": "utils/fragments/validation/fragment-validate-pipes-sources.md",
+      "encoding": "utf-8",
+      "size": 823,
+      "sha256": "7b8521f3e5ff066990635c73620ce59f3afbf13de1006e2014e2aa16d59aa889"
+    },
+    {
+      "path": "utils/fragments/validation/fragment-validate-plan-consistency.md",
+      "encoding": "utf-8",
+      "size": 2527,
+      "sha256": "45d5942984da701ad490b61130df8bc56b21b3f37b296893f59914af8be54157"
+    },
+    {
+      "path": "utils/fragments/validation/fragment-validate-reuse-opportunities.md",
+      "encoding": "utf-8",
+      "size": 2520,
+      "sha256": "b4f25938b2fa8830f15c39c393eba1ed21a2f49b9d520de6bfa7943d1d26e005"
+    },
+    {
+      "path": "utils/issues/.gitkeep",
+      "encoding": "utf-8",
+      "size": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "utils/issues/README.md",
+      "encoding": "utf-8",
+      "size": 1726,
+      "sha256": "9cb69a929bb643f0cd4761514f0a18baa81eb17a6a375463cc0a70a41916570c"
+    },
+    {
+      "path": "utils/pipelines/pipeline-create-pipeline.md",
+      "encoding": "utf-8",
+      "size": 5061,
+      "sha256": "8245c6a6d0d1f191515788d480422e0ac668b2712ebb494b6463701860dfa4a7"
+    },
+    {
+      "path": "utils/pipelines/pipeline-create-team-member.md",
+      "encoding": "utf-8",
+      "size": 3854,
+      "sha256": "59adff3d5c1346d8fbc07bf35696c8b6f0b5830b67427ebf443e67de06ecfc2c"
+    },
+    {
+      "path": "utils/pipelines/pipeline-define-codebase-stack.md",
+      "encoding": "utf-8",
+      "size": 6976,
+      "sha256": "ce18b128f887b7079ab62f7368916040522a9cb9d518ea2d26e1865085dcf9fd"
+    },
+    {
+      "path": "utils/pipelines/pipeline-define-commit-guardrails.md",
+      "encoding": "utf-8",
+      "size": 5382,
+      "sha256": "df878e2e42ac0f3ba726643600c25b25c76e10b8a80aab416fdb11c9edc89135"
+    },
+    {
+      "path": "utils/pipelines/pipeline-derive-roadmap-from-goal.md",
+      "encoding": "utf-8",
+      "size": 6514,
+      "sha256": "e84f9977d9a625c58936dc1ed1cc08690e0c6fddc72e7a89cdcc819123419830"
+    },
+    {
+      "path": "utils/pipelines/pipeline-execute-plan.md",
+      "encoding": "utf-8",
+      "size": 7160,
+      "sha256": "a6996d50c0b623e2e6ba94e42c275c5007be37634cf74ebe7a1cded817fc5701"
+    },
+    {
+      "path": "utils/pipelines/pipeline-plan-new-feature.md",
+      "encoding": "utf-8",
+      "size": 13002,
+      "sha256": "15c6ecec29717b6755af8c0e68c9ef0c4b2defac7b42879ec494dbdd58cfa680"
+    },
+    {
+      "path": "utils/pipelines/pipeline-record-decision.md",
+      "encoding": "utf-8",
+      "size": 4550,
+      "sha256": "0d74c7a07826172b28a5568b527e7117ddc5c446968e49e738fc185c0c646442"
+    },
+    {
+      "path": "utils/pipelines/pipeline-regenerate-agent-entry-points.md",
+      "encoding": "utf-8",
+      "size": 2400,
+      "sha256": "18f96e515a5ded543636572b14266e66013e9a08fe550a719df3b1749624d8d6"
+    },
+    {
+      "path": "utils/pipelines/pipeline-set-new-goal.md",
+      "encoding": "utf-8",
+      "size": 4238,
+      "sha256": "c0573460f68c51706318ccb220c37d15adcccb34d5b176a80895a152b8c8d079"
+    },
+    {
+      "path": "utils/pipelines/pipeline-update-catalog.md",
+      "encoding": "utf-8",
+      "size": 2118,
+      "sha256": "2341fad6a3741a13d1634da2024aef598821f8e8f1cc80a94ec78c341d375adf"
+    },
+    {
+      "path": "utils/rules/.gitkeep",
+      "encoding": "utf-8",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "utils/rules/rule-auto-update-catalog.md",
+      "encoding": "utf-8",
+      "size": 1618,
+      "sha256": "bc2aa288e706a01f54655f3477d8f6d7b62ef070d4923857d09f70ff0f00db47"
+    },
+    {
+      "path": "utils/rules/rule-capture-decision-candidates.md",
+      "encoding": "utf-8",
+      "size": 3809,
+      "sha256": "8939afdc1331b2afc1f2825de547a57e678e1838c17bcdcf4495ee0b6c015055"
+    },
+    {
+      "path": "utils/rules/rule-capture-pipeline-incidents.md",
+      "encoding": "utf-8",
+      "size": 3048,
+      "sha256": "5864bb833ddb2d03bb795f3cd24b168fd4fab0a04430d2a0ce5baf1ae3bf3c45"
+    },
+    {
+      "path": "utils/rules/rule-codebase-conventions.md",
+      "encoding": "utf-8",
+      "size": 741,
+      "sha256": "0f8fba253fcbad5c8b1edbb02aa1ba3f6abe1fe1af9eb9bad2ccd195686ad0f7"
+    },
+    {
+      "path": "utils/rules/rule-commit-guardrails.md",
+      "encoding": "utf-8",
+      "size": 811,
+      "sha256": "a2d0c38f6c6d5b42381cce0a4aacbd9c2637486808a9e4121888f1f7ed23bcf4"
+    },
+    {
+      "path": "utils/rules/rule-local-pipeline-invocation.md",
+      "encoding": "utf-8",
+      "size": 3460,
+      "sha256": "b980a27582eca7236ae83a32bd42dec19936e2d7d67a4762099178a55d0f5b0a"
+    },
+    {
+      "path": "utils/rules/rule-question-options-format.md",
+      "encoding": "utf-8",
+      "size": 2116,
+      "sha256": "465a6c4fb3dd12bfc3761312a409f4464e7496f073e847b723106525da9ec6f1"
+    },
+    {
+      "path": "utils/rules/rule-record-versioning.md",
+      "encoding": "utf-8",
+      "size": 2147,
+      "sha256": "c9c3b85b12f091e6b3ff59f21033ae5c8d63c4e44f8b8232f80e874a136780c7"
+    },
+    {
+      "path": "utils/rules/rule-validate-fragment-types.md",
+      "encoding": "utf-8",
+      "size": 2368,
+      "sha256": "5173b99754abaec60a237625e44d6a5e9991c230be2dbe627eecffa2fd8ee928"
+    },
+    {
+      "path": "utils/scripts/assemble-instructions.cjs",
+      "encoding": "utf-8",
+      "size": 17051,
+      "sha256": "d807c57562a04a0998161d618571d37f41b25c13364251c02d4ff9c83b9ffb58"
+    },
+    {
+      "path": "utils/scripts/assemble-instructions.test.cjs",
+      "encoding": "utf-8",
+      "size": 9622,
+      "sha256": "11518ceda225b797605806371fae9bcc09d5a95d0c1832ff5d1bf80367d459e8"
+    },
+    {
+      "path": "utils/scripts/assemble-pipeline-skills.cjs",
+      "encoding": "utf-8",
+      "size": 8272,
+      "sha256": "3d81ad630535c5f67ea2fd019ce810161427af073d58eed36f28e5f2b6c30692"
+    },
+    {
+      "path": "utils/scripts/assemble-pipeline-skills.test.cjs",
+      "encoding": "utf-8",
+      "size": 6902,
+      "sha256": "c6aa6bca594fe17c4de515cb9928da59846b55faf05bb4427cbed41da1eba2cf"
+    },
+    {
+      "path": "utils/scripts/import.js",
+      "encoding": "utf-8",
+      "size": 13380,
+      "sha256": "3a9be548032e6f5a7f95efd008ff717031b4e6dd475522c6c20ca245aa27c230"
+    }
+  ]
+}

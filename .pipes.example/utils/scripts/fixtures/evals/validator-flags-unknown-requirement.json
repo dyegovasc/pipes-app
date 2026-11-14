@@ -1,0 +1,24 @@
+{
+  "id": "validator-flags-unknown-requirement",
+  "scope": "starter",
+  "covers": [
+    ".pipes/utils/scripts/validate-project-records.cjs",
+    ".pipes/utils/fragments/output/fragment-format-implementation-plan.md"
+  ],
+  "setup": {
+    ".pipes/project/01-intents/intent-901-cancellation-deadline.md": "---\ntitle: Cancellation Window On Orders\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: accepted\nrelated:\n  - .pipes/project/02-specs/spec-901-cancellation-deadline.md\n---\n## Problem\nCustomers using orders-service cannot see the free-cancellation window of an order, so they miss it and pay a fee.\n\n## Proposed Outcome\nEvery order shows the end of its free-cancellation window.\n\n## Affected Users And Systems\n- Users: customers and support agents\n- Services: `orders-service`, `payments-service`\n\n## Constraints\n- Windows come from merchant terms and are never invented.\n\n## Open Questions\n- None.\n\n## Source\n- Origin: idea from the product team\n- Author: product team\n",
+    ".pipes/project/02-specs/spec-901-cancellation-deadline.md": "---\ntitle: Cancellation Deadline Spec\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: accepted\nrelated:\n  - .pipes/project/01-intents/intent-901-cancellation-deadline.md\n  - .pipes/project/04-plans/plan-901-cancellation-deadline.md\n---\n## Intent\n`.pipes/project/01-intents/intent-901-cancellation-deadline.md`: orders show the end of their free-cancellation window.\n\n## Requirements\n- **R1** The order response of `orders-service` includes the end of the free-cancellation window when the merchant terms define one.\n- **R2** The window end is shown in UTC.\n\n## Design\n### orders-service\n- Change: add `cancellationDeadline` to the saved offer.\n\n## Risk Class\nroutine: one consumer.\n",
+    ".pipes/project/04-plans/plan-901-cancellation-deadline.md": "---\ntitle: Cancellation Deadline Plan\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: draft\nrelated:\n  - .pipes/project/02-specs/spec-901-cancellation-deadline.md\n---\n## Outcome\nOrders show the window end.\n\n## Spec Traceability\n\n| Requirement | Implementing steps | Proof |\n| --- | --- | --- |\n| R1 | 1 | contract test |\n| R9 | 2 | none |\n\n## Implementation\n1. Add the field.\n"
+  },
+  "prompt": "Check the Pipes project records in this repository for problems and tell me exactly what is wrong. Do not change any files.",
+  "may_change": [],
+  "checks": [
+    {
+      "type": "result_matches",
+      "pattern": "R9"
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}

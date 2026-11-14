@@ -1,0 +1,59 @@
+name: Framework release
+
+on:
+  push:
+    tags:
+      - 'pipes-framework-v*'
+
+concurrency:
+  group: framework-release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release a framework version
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ github.ref_name }}
+    steps:
+      - name: Check out the tag
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Install the pinned Node version
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Check that the tag commit is on main
+        run: git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+
+      - name: Check that the tag matches the manifest version
+        run: node scripts/framework-release-guard.mjs tag-matches-manifest "$TAG"
+
+      - name: Run the integrity checks
+        run: npm run check && npm run framework:test
+
+      - name: Check that the latest release is an app release
+        run: node scripts/framework-release-guard.mjs latest-is-app-release
+
+      - name: Refuse a release that already exists
+        run: node scripts/framework-release-guard.mjs release-absent "$TAG"
+
+      - name: Build and verify the starter bundle
+        run: npm run framework:bundle -- --version "${TAG#pipes-framework-v}" --check
+
+      - name: Create the release without making it latest
+        run: >-
+          gh release create "$TAG" "dist/pipes-starter-${TAG#pipes-framework-v}.json.gz"
+          --title "Pipes framework ${TAG#pipes-framework-v}"
+          --notes "Pipes framework starter bundle ${TAG#pipes-framework-v}."
+          --latest=false --verify-tag
+
+      - name: Check again that the latest release is an app release
+        run: node scripts/framework-release-guard.mjs latest-is-app-release

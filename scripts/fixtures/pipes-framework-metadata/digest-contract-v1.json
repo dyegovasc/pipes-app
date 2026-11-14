@@ -1,0 +1,20 @@
+{
+  "domain": "pipes-framework-baseline-v1",
+  "files": [
+    {
+      "path": "team/z.md",
+      "size": 1,
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "README.md",
+      "size": 2,
+      "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  ],
+  "projectAreas": [
+    "07-releases",
+    "00-notes"
+  ],
+  "digest": "fe8a0a6833792051cc0fe2fbe8f23d2b20694960f6bf36fabb0482301c2a42a1"
+}
