@@ -13,6 +13,7 @@
     "framework:evals": "node ./scripts/framework-evals.mjs",
     "framework:release": "node ./scripts/framework-release.mjs",
     "framework:bundle": "node ./scripts/framework-bundle.mjs",
-    "framework:publish-index": "node ./scripts/framework-publish-index.mjs"
+    "framework:publish-index": "node ./scripts/framework-publish-index.mjs",
+    "framework:verify-index": "node ./scripts/framework-verify-index.mjs"
   }
 }

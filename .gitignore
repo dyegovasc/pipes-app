@@ -1,3 +1,5 @@
 .DS_Store
+# Never commit a minisign secret key.
+*.key
 dist/
 node_modules/

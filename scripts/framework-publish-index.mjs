@@ -22,7 +22,7 @@
 //        [--revoke-key ID] [--withdraw X] [--version X] [--bundle-file PATH] [--commit] [--dry-run]
 
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -114,6 +114,20 @@ export function compatibilityAtTag(root, tag) {
   return JSON.parse(result.output);
 }
 
+/**
+ * When `frameworks/keys/` holds public keys, every given key must be one of them, so that a signed
+ * index never names a key that CI and the app do not know.
+ */
+export function assertCommittedKeys(root, publicKeys) {
+  const keysDir = path.join(root, 'frameworks/keys');
+  const files = existsSync(keysDir) ? readdirSync(keysDir).filter((name) => name.endsWith('.pub')) : [];
+  if (files.length === 0) return;
+  const committed = new Set(files.map((name) => parsePublicKey(readFileSync(path.join(keysDir, name), 'utf8')).keyId));
+  for (const key of publicKeys) {
+    if (!committed.has(key.keyId)) throw new Error(`Public key ${key.keyId} is not in frameworks/keys/; pass the committed .pub files`);
+  }
+}
+
 function releaseAsset(release, version) {
   const name = bundleFileName(version);
   const asset = release?.assets?.find((candidate) => candidate.name === name);
@@ -196,6 +210,7 @@ export async function publishIndex({
   if (dropVersions.length && !revokeKeyId) throw new Error('Dropping a version is allowed only in a run that revokes a key');
   const publicKeys = publicKeyTexts.map(parsePublicKey);
   if (publicKeys.length === 0) throw new Error('At least one public key is required');
+  assertCommittedKeys(root, publicKeys);
   const activeKey = publicKeys[0];
 
   const previous = readIndexState(root, publicKeys);

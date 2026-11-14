@@ -272,3 +272,15 @@ test('dropping a version needs a revocation in the same run and a listed version
   assert.throws(() => parseArgs(['--revoke-key', 'ABCDEF0123456789', '--drop-version', '2.2.1+b', '--public-key', 'p', '--dry-run']), /strict SemVer/);
   assert.deepEqual(parseArgs(['--revoke-key', 'ABCDEF0123456789', '--drop-version', '2.2.1', '--drop-version', '2.2.2', '--public-key', 'p', '--dry-run']).dropVersions, ['2.2.1', '2.2.2']);
 });
+
+test('public keys must match frameworks/keys when that folder holds keys', async (context) => {
+  const env = await fixture(context);
+  const committed = createTestSigner();
+  const other = createTestSigner();
+  mkdirSync(path.join(env.root, 'frameworks/keys'), { recursive: true });
+  writeFileSync(path.join(env.root, 'frameworks/keys/active.pub'), committed.publicKeyText);
+  await assert.rejects(publishIndex(options(env, other)), /is not in frameworks\/keys/);
+  assert.equal(existsSync(path.join(env.root, INDEX_PATH)), false);
+  const result = await publishIndex(options(env, committed, { signer: null, dryRun: true }));
+  assert.equal(result.index.versions.length, 1);
+});
