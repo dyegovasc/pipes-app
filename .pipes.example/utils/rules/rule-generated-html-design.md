@@ -1,7 +1,7 @@
 ---
 title: Generated HTML Design
 description: Requires generated HTML artifacts to follow the app design tokens, typography, shadcn component patterns, and light and dark themes.
-version: 1.4
+version: 1.5
 rule_type: validation
 applies_to:
   - html_artifacts
@@ -19,9 +19,7 @@ Generate HTML artifacts that visually belong to Pipes Local. Match the applicati
 - Apply `rule-artifact-record-contract` for structural metadata, naming, source relationships, creation checks, and regeneration. This rule owns presentation.
 
 - This framework rule governs generated HTML documents. It does not require a rewrite of existing artifacts during unrelated edits.
-- Use `src/index.css` as the canonical source for semantic colors, light and dark values, radii, and theme mappings.
-- Use `src/components/ui/` as the source for shadcn component appearance, sizes, variants, and interaction states.
-- Check `src/main.tsx`, `src/components/theme-provider.tsx`, and `src/components/theme-toggle.tsx` for application theme behavior.
+- The baseline below comes from the Pipes Local app: its `src/index.css` (semantic colors, light and dark values, radii, and theme mappings), its `src/components/ui/` shadcn components, and its theme components. These are app source paths, not workspace paths.
 - Use the explicit token baseline below. This rule must be sufficient to generate HTML without access to the application repository.
 - Source paths document provenance and support maintenance. They are not prerequisites for artifact generation.
 - When the app changes its design tokens, update this baseline as part of that design change. Do not guess missing values.
@@ -38,7 +36,7 @@ Generate HTML artifacts that visually belong to Pipes Local. Match the applicati
 - Define extra semantic tokens only when the app has no suitable equivalent. Supply legible light and dark values and explain the purpose in a short source comment.
 - Use the app's sans-serif stack for prose and controls. Use its monospace stack for code and technical identifiers. Match common UI sizes and weights; allow larger headings when the document needs them.
 - Make controls inherit typography. Use relative units, readable line heights, and a clear heading hierarchy. Keep document text selectable.
-- Do not copy all of `src/index.css` into an artifact. Extract the required tokens and patterns without app-specific editor or shell behavior.
+- Do not copy the app's whole stylesheet into an artifact. Extract the required tokens and patterns without app-specific editor or shell behavior.
 
 ## Embedded Token Baseline
 

@@ -1,7 +1,7 @@
 ---
 title: Investigation And Recovery Loop
 description: Diagnose failures, test hypotheses, recover safely, and prove the result.
-version: 2.8
+version: 2.9
 domain: all
 loop_type: recovery
 status: active
@@ -44,7 +44,7 @@ rules:
 
 ## Use When
 
-Use this loop for defects, failed workflows, regressions, uncertain effects, incidents, or a control-band breach or monitoring finding, where evidence must drive diagnosis and recovery.
+Use this loop for defects, failed workflows, regressions, uncertain effects, incidents, or a monitoring finding, where evidence must drive diagnosis and recovery.
 
 ## Operating Envelope
 
@@ -107,7 +107,7 @@ After interruption or an uncertain effect, inspect the real surface before repea
 - Root-cause claims match the evidence.
 - The fix removes the symptom without known regression.
 - Unverified impact and residual risk are stated plainly.
-- Gate G7 in `.pipes/ai-instructions/accountability.md`: the service owner or on-call triages a production finding as fix now, schedule, or dismiss. At a service's 2σ band the loop diagnoses and reports; at 3σ it may propose a fix or runbook action, never apply one past the gates.
+- Gate G7: the holder of gate G7 (core.md Gates) triages a production finding as fix now, schedule, or dismiss. When the project defines alert thresholds, the loop diagnoses and reports below the action threshold and may propose a fix or runbook action above it, never apply one past the gates.
 - A confirmed cause that is not dismissed ends in an intent through `pipeline-capture-intent` and an eval case through `pipeline-add-eval`. An emergency fix made first still gets both afterwards.
 
 ## Stop Conditions

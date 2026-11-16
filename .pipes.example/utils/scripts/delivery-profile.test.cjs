@@ -18,7 +18,7 @@ test('tables are read by section heading and backticks are removed', () => {
   assert.deepEqual(profile.layout, { mode: 'multi-repo', servicesRoot: 'services' });
   assert.deepEqual(profile.environments, [{ name: 'qa', autonomy: 'ask', dispatch: 'gh workflow run x.yml' }]);
   assert.equal(environmentRule(profile, 'qa').autonomy, 'ask');
-  assert.equal(environmentRule(profile, 'prod').autonomy, 'ticket', 'unknown environments need a ticket');
+  assert.equal(environmentRule(profile, 'prod').autonomy, 'ask', 'an environment that the profile does not list asks the G5 holder');
 });
 
 test('validation reports bad values', () => {
@@ -31,7 +31,7 @@ test('validation reports bad values', () => {
 
 test('the default profile is safe and valid in shape', () => {
   assert.deepEqual(DEFAULT_PROFILE.protectedBranches, ['main', 'master']);
-  assert.equal(environmentRule(DEFAULT_PROFILE, 'anything').autonomy, 'ticket');
+  assert.equal(environmentRule(DEFAULT_PROFILE, 'anything').autonomy, 'ask');
 });
 
 test('an Evals table makes eval results required at gate G6; without it they are recommended', () => {
@@ -42,3 +42,10 @@ test('an Evals table makes eval results required at gate G6; without it they are
   assert.equal(parseProfile('## Evals\n\nThis project runs no evals yet.\n').evals.required, false, 'a heading without a table is not a requirement');
   assert.equal(parseProfile('## Evals\n\n| Key | Value |\n| --- | --- |\n').evals.required, false, 'a table without rows is not a requirement');
 });
+
+test('an unlisted environment needs a ticket only when the profile uses tickets', () => {
+  const withTicket = parseProfile('## Environments\n\n| Environment | Autonomy | Dispatch |\n| --- | --- | --- |\n| `qa` | `ask` | x |\n| `live` | `ticket` | y |\n');
+  assert.equal(environmentRule(withTicket, 'staging').autonomy, 'ticket');
+  assert.equal(environmentRule(withTicket, 'qa').autonomy, 'ask');
+});
+

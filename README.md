@@ -58,8 +58,6 @@ This repository is also the source of the Pipes framework, which Pipes Local ins
 - `frameworks/index.json` and `frameworks/index.json.minisig` are the signed index that Pipes Local reads to find framework versions.
 - Each framework version is a GitHub release with the tag `pipes-framework-v{version}` and one asset, `pipes-starter-{version}.json.gz`. A framework release is never the latest release, so the app update check keeps reporting the latest app release.
 
-The framework is frozen until Pipes Local reads framework versions from this repository: do not change `.pipes.example/` until then.
-
 ### Release A Framework Version
 
 The scripts use Node 22 (`.nvmrc`) and have no npm dependencies.

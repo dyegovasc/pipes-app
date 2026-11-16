@@ -256,7 +256,6 @@ const TEAM_MEMBER_IDS = new Set(
 const EXPECTED_PHASE_MEMBERS = {
   'pipeline-define-policies.md': [[['full-stack-tech-lead'], ['be-architect'], ['be-architect']], [['be-architect'], [], ['roadmapper']], [['roadmapper'], ['reviewer'], ['roadmapper']], [['roadmapper'], ['e2e-tester'], []]],
   'pipeline-bootstrap-workspace.md': [[['roadmapper'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['e2e-tester']], [['e2e-tester'], [], []]],
-  'pipeline-onboard-service-repo.md': [[['full-stack-tech-lead'], ['be-architect'], ['be-architect']], [['be-architect'], [], ['reviewer']], [['reviewer'], [], ['roadmapper']], [['roadmapper'], ['e2e-tester'], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], []]],
   'pipeline-review-change.md': [[['full-stack-tech-lead'], [], ['e2e-tester']], [['e2e-tester'], [], ['reviewer']], [['reviewer'], [], ['roadmapper']], [['roadmapper'], ['e2e-tester'], ['roadmapper']], [['roadmapper'], [], []]],
   'pipeline-release-change.md': [[['roadmapper'], ['e2e-tester'], ['roadmapper']], [['roadmapper'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['roadmapper']], [['roadmapper'], ['e2e-tester'], []]],
   'pipeline-add-eval.md': [[['e2e-tester'], ['roadmapper'], ['e2e-tester']], [['e2e-tester'], ['reviewer'], ['e2e-tester']], [['e2e-tester'], [], []]],
@@ -308,7 +307,7 @@ test('required starter pipelines preserve accountable actors, support, and membe
   assertPhaseMembers(EXPECTED_PHASE_MEMBERS);
 });
 
-const SDLC_PIPELINES = ['pipeline-define-policies.md', 'pipeline-bootstrap-workspace.md', 'pipeline-onboard-service-repo.md', 'pipeline-review-change.md', 'pipeline-release-change.md', 'pipeline-add-eval.md', 'pipeline-capture-intent.md', 'pipeline-design-spec.md'];
+const SDLC_PIPELINES = ['pipeline-define-policies.md', 'pipeline-bootstrap-workspace.md', 'pipeline-review-change.md', 'pipeline-release-change.md', 'pipeline-add-eval.md', 'pipeline-capture-intent.md', 'pipeline-design-spec.md'];
 
 test('SDLC delivery pipelines have complete phase contracts', () => {
   for (const name of SDLC_PIPELINES) assertDetailedPipelineContract(name, EXPECTED_PHASE_MEMBERS[name].length);
@@ -323,7 +322,7 @@ test('starter capabilities remain present while installed workspaces may extend 
   for (const name of Object.keys(EXPECTED_PHASE_MEMBERS)) {
     assert.ok(pipelineFiles.includes(name), name + ' remains available');
   }
-  if (path.basename(ROOT) === '.pipes.example') assert.equal(pipelineFiles.length, 18);
+  if (path.basename(ROOT) === '.pipes.example') assert.equal(pipelineFiles.length, 17);
   assert.deepEqual(
     files(
       path.join(ROOT, 'utils/scripts'),
@@ -631,7 +630,6 @@ test('creation pipelines have complete phase contracts and compatible foundation
     'pipeline-define-policies.md',
     'pipeline-define-system-architecture.md',
     'pipeline-design-spec.md',
-    'pipeline-onboard-service-repo.md',
     'pipeline-record-decision.md',
     'pipeline-release-change.md',
     'pipeline-review-change.md',
@@ -647,11 +645,11 @@ test('creation pipelines have complete phase contracts and compatible foundation
     for (const expected of [
       'installed_project',
       'starter_maintenance',
-      '.pipes-v2/team/{role-id}.md',
+      'team/{role-id}.md` in the starter source tree',
       '.pipes/team/{role-id}.md',
     ]) assert.match(content, new RegExp(escapeRegExp(expected)), expected);
   }
-  assert.match(teamPipeline, /writes? and validates? `\.pipes-v2\/` first/i);
+  assert.match(teamPipeline, /writes? and validates? the starter source tree first/i);
   assert.match(teamPipeline, /execution context, ordered target set/i);
   assert.match(teamWriter, /different content as a blocking conflict/i);
   assert.match(teamWriter, /already_matches/);
@@ -685,7 +683,7 @@ test('definition and decision pipelines are evidence-led, context-aware, and com
     path.join(ROOT, 'utils/fragments/instruction/fragment-check-existing-codebase-files.md'),
     'utf8',
   );
-  for (const value of ['installed_project', 'starter_maintenance', '.pipes-v2/', '.pipes/']) {
+  for (const value of ['installed_project', 'starter_maintenance', 'the starter source tree', '.pipes/']) {
     assert.match(codebaseDiscovery, new RegExp(escapeRegExp(value)));
   }
 
@@ -738,7 +736,7 @@ test('definition and decision pipelines are evidence-led, context-aware, and com
     const content = fs.readFileSync(path.join(ROOT, 'utils/fragments', relative), 'utf8');
     assert.match(content, /installed_project/);
     assert.match(content, /starter_maintenance/);
-    assert.match(content, /\.pipes-v2/);
+    assert.match(content, /starter source tree/);
     assert.match(content, /\.pipes\//);
   }
   const architectureWriter = fs.readFileSync(

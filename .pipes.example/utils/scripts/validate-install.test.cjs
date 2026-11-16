@@ -249,10 +249,10 @@ test('clean install regenerates one skill per discovered pipeline and loop', (t)
   for (const content of [teamPipeline, teamWriter]) {
     assert.match(content, /installed_project/);
     assert.match(content, /starter_maintenance/);
-    assert.match(content, /\.pipes-v2\/team\/\{role-id\}\.md/);
+    assert.match(content, /team\/\{role-id\}\.md` in the starter source tree/);
     assert.match(content, /\.pipes\/team\/\{role-id\}\.md/);
   }
-  assert.match(teamWriter, /staged `\.pipes-v2\/` target, validate it, then create or reuse the exact installed `\.pipes\/` mirror/i);
+  assert.match(teamWriter, /staged target in the starter source tree, validate it, then create or reuse the exact installed `\.pipes\/` mirror/i);
   assert.match(fs.readFileSync(path.join(temp, '.pipes/utils/loops/loop-framework-maintenance.md'), 'utf8'), /append the compact gate receipt and continue the mission directly/i);
 
   const generated = [

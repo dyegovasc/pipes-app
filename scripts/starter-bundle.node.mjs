@@ -125,11 +125,11 @@ test('content comparison ignores the zlib compression level', async (context) =>
   assert.ok(!bundleContentEquals(compressed, repack(compressed, (b) => { b.frameworkVersion = '1.0.2'; })));
 });
 
-test('the 2.2.1 bundle of this repository keeps the published manifest and archive bytes', () => {
-  const { compressed } = buildStarterBundle({ root: REPO_ROOT, version: '2.2.1' });
-  const verified = verifyStarterBundle(compressed, { version: '2.2.1', manifestSha256: '47b6323c6e73b74e5deffc7961c05ba0ccba58180cfec77d7817f2eb2f0378a7' });
-  assert.equal(sha256(verified.files.get('framework-baseline.json.gz')), '63d1c7cbb9e1139879610707295f3296188852122c7df9ee0604cbb427466793');
-  assert.equal(verified.files.size, 270);
+test('the 2.3.0 bundle of this repository keeps the released manifest and archive bytes', () => {
+  const { compressed } = buildStarterBundle({ root: REPO_ROOT, version: '2.3.0' });
+  const verified = verifyStarterBundle(compressed, { version: '2.3.0', manifestSha256: '98c131f1da44d29e21dbc9f0e93bbb701e210466929f007eb8949da26ff3d375' });
+  assert.equal(sha256(verified.files.get('framework-baseline.json.gz')), 'f804585ea63bcf5e7165cdc4465963cdff809ae997c158d05d9b9e00b047a966');
+  assert.equal(verified.files.size, 261);
   assert.deepEqual(compareWithStarterTree(verified, REPO_ROOT), []);
 });
 

@@ -1,7 +1,7 @@
 ---
 title: Format Policy Rule
 description: Formats a project policy rule that agents load as a skill and that cites the repositories it comes from.
-version: 1.0
+version: 1.1
 fragment_type: output
 domain: codebase
 ---
@@ -27,7 +27,7 @@ applies_to:
 enforcement: binding
 enforced_by: [model]
 skill: true
-skill_description: {Policy name} for {project} services. Use when a spec, plan, or change {touches the topics this policy covers}.
+skill_description: {Policy name} for {project}. Use when a spec, plan, or change {touches the topics this policy covers}.
 gate_relevance:
   evaluates_gates: true
   required_for_gate_types:

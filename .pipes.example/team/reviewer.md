@@ -1,7 +1,7 @@
 ---
 title: Reviewer
 description: Role contract for a fresh-context, non-author reviewer of intents, specs, plans, and diffs.
-version: 1.0
+version: 1.1
 role: reviewer
 role_type: validation
 default_loop_authority: gate_recommender
@@ -25,7 +25,7 @@ Give a non-author, fresh-context review of authored work before a human gate dec
 ## Does Not Own
 
 - Edits, fixes, or rewrites of the reviewed work. The reviewer reports and does not fix.
-- Approval or acceptance of any intent, spec, plan, or pull request. Human-mandatory approvals stay with the roles in the Accountability Matrix.
+- Approval or acceptance of any intent, spec, plan, or pull request. Human-mandatory approvals stay with the gate holders (core.md Gates).
 - Review of work it authored in the same session or context.
 - Work outside the active operating envelope.
 
@@ -88,5 +88,5 @@ When an agent tool can run this role as an isolated agent, the role runs in a fr
 
 - The reviewer would review its own authored work.
 - The upstream record is missing, so traceability cannot be checked.
-- A blocking finding touches security, personal data, money, or a shared contract.
+- A blocking finding touches security, personal data, financial data, or a shared contract.
 - Required context is missing.

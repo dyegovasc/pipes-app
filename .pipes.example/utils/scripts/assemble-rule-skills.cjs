@@ -71,7 +71,7 @@ function renderSkill(rule) {
     '',
     '1. Read ' + BT + rule.canonicalPath + BT + ' completely before acting. It is the policy; this skill only points to it.',
     '2. Apply every check in its ' + BT + '## Checks' + BT + ' section to the work in front of you: a spec, plan, diff, or review.',
-    '3. When the target service repository states a stricter or more specific rule, follow both; report a contradiction instead of choosing silently.',
+    '3. When the target repository or a nested instruction file states a stricter or more specific rule, follow both; report a contradiction instead of choosing silently.',
     '4. Cite each violation with the file path and line, the rule check it breaks, and a concrete correction.',
     '',
   ].join('\n');

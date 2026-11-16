@@ -1,7 +1,7 @@
 ---
 title: Add Eval
 description: Turns an incident, a repeated agent mistake, or a new contract into a behavioral eval case for this repository's agent configuration.
-version: 1.0
+version: 1.1
 domain: framework
 category: record
 fragments:
@@ -16,7 +16,7 @@ Turn one observed or required agent behavior into one eval case under `.pipes/ut
 
 ## Entry Points
 
-Use when an incident is closed, when `rule-capture-pipeline-incidents` finds a repeated mistake, when a correction is added to `corrections.md`, or when a new contract needs proof that the agent follows it. Do not use for unit tests of scripts, which belong in `*.test.cjs` files, or for tests of service code, which belong in the service repository.
+Use when an incident is closed, when `rule-capture-pipeline-incidents` finds a repeated mistake, when a correction is added to `corrections.md`, or when a new contract needs proof that the agent follows it. Do not use for unit tests of scripts, which belong in `*.test.cjs` files, or for tests of application code, which belong in the code repository.
 
 ## Loop Use
 
@@ -27,7 +27,7 @@ Use when an incident is closed, when `rule-capture-pipeline-incidents` finds a r
 - One case proves one behavior that a check can observe.
 - A case never depends on the agent's private reasoning, only on files, records, git state, tool calls, and tool results.
 - A new case may fail on its first run when it reproduces a mistake; record that state instead of weakening the checks.
-- Adding a case is an agent-configuration change under gate G6 in `.pipes/ai-instructions/accountability.md`.
+- Adding a case is an agent-configuration change under gate G6 (core.md Gates).
 - Running a case calls a real agent and costs money; run only the new case in this pipeline.
 
 ## Output
@@ -105,7 +105,7 @@ Use when an incident is closed, when `rule-capture-pipeline-incidents` finds a r
 
 **Handoff To:** `e2e-tester`
 
-**Approval Gate:** Human-mandatory. Gate G6 in `.pipes/ai-instructions/accountability.md`: the code owner of the agent configuration approves the exact case content and path.
+**Approval Gate:** Human-mandatory. Gate G6: the holder of gate G6 (core.md Gates) approves the exact case content and path.
 
 **Exit Conditions:**
 - The approved case content and path are exact and current.

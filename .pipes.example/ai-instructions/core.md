@@ -1,7 +1,7 @@
 ---
 title: Pipes Orchestration
 description: Always-on kernel of the Pipes operating contract; the workflow contract lives in core-workflows.md.
-version: 3.1
+version: 3.2
 assembly: inline
 ---
 # Core: Pipes Orchestration
@@ -60,7 +60,19 @@ The user must decide when work would:
 
 A pending gate names its subject, gate type, deciding authority, status, invalidation conditions, and exact resume action. An approved gate leaves a compact receipt with the same facts. A human-mandatory gate always belongs to the user, regardless of the selected intervention level.
 
-When `.pipes/ai-instructions/accountability.md` exists, it names the human role that decides each gate and where its holder is resolved; until a holder is resolved, the user holds the role. The author of the work under a gate never records its approval. Environment autonomy narrows authority further: each environment in `.pipes/ai-instructions/delivery.md` is `auto`, `ask`, or `ticket`, and a `ticket` environment needs an approved change ticket and its approver. Without a delivery profile, every release or promotion needs a human decision.
+Gates G1 to G7 below name the default deciding role of each gate. The user holds every role until `.pipes/ai-instructions/accountability.md` names another holder. The author of the work under a gate never records its approval. When `.pipes/ai-instructions/delivery.md` exists, environment autonomy narrows authority further: each environment is `auto`, `ask`, or `ticket`, and a `ticket` environment needs an approved change ticket and its approver. Without a delivery profile in `.pipes/ai-instructions/delivery.md`, every release or promotion asks the holder of G5.
+
+## Gates
+
+| Gate | Decision | Default deciding role |
+| --- | --- | --- |
+| G1 Intent | Accept or reject an intent | Product owner |
+| G2 Spec | Accept a spec; a `higher` risk class adds the tech lead | Product owner, tech lead |
+| G3 Plan | Approve a plan and its execution | Engineer; tech lead or architect for `higher` risk |
+| G4 Pull request | Approve and merge a change | Code owner |
+| G5 Release | Release or promote a change | Release approver |
+| G6 Agent configuration | Change `.pipes/` outside the project records, the generated instructions, skills, hooks, or evals | Code owner of the agent configuration; policy owner for policy rules |
+| G7 Triage | Fix now, schedule, or dismiss an incident or monitoring finding | Operations owner |
 
 ## Completion Standard
 
@@ -70,7 +82,7 @@ Work is complete when the objective or acceptance criteria are met, scope is sti
 
 When Pipes instructions conflict, apply this order:
 
-1. project identity instructions, including the accountability matrix;
+1. project identity instructions, including the accountability matrix when it exists;
 2. the core contract: this file and `.pipes/ai-instructions/core-workflows.md` together;
 3. other AI instructions;
 4. active rules, loops, pipelines, fragments, and roles;

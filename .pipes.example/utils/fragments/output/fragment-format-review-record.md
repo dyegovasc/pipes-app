@@ -1,7 +1,7 @@
 ---
 title: Format Review Record
-description: Formats a review of one service change as a durable artifact record linked to its plan.
-version: 1.0
+description: Formats a review of one change as a durable artifact record linked to its plan.
+version: 1.1
 fragment_type: output
 domain: codebase
 ---
@@ -9,7 +9,7 @@ domain: codebase
 
 ## Format
 
-Produce a complete preview for `.pipes/project/07-artifacts/reviews/artifact-{number}-review-{repo}-{change}.md` under `rule-artifact-record-contract`. `{change}` is `pr-{number}` for a pull request or the branch name for a branch. Write the record in English.
+Produce a complete preview for `.pipes/project/07-artifacts/reviews/artifact-{number}-review-{repo}-{change}.md` under `rule-artifact-record-contract`. `{change}` is `pr-{number}` for a pull request or the branch name for a branch. Write the record in the project's documentation language.
 
 Keep the title in frontmatter only; begin the body with `## Summary`. List the related plan in `related`, and add the record to the plan's `related` list as a reciprocal effect.
 
@@ -28,7 +28,7 @@ related:
 ## Summary
 
 - Repository and change: `{repo}` {change}, base `{base commit}`, head `{head commit}`
-- Verdict: {ready, ready with findings, or not ready}. This is a recommendation; the code owner decides gate G4.
+- Verdict: {ready, ready with findings, or not ready}. This is a recommendation; the holder of gate G4 decides it.
 - Tally: {blocking} blocking, {major} major, {minor} minor
 
 ## Verification

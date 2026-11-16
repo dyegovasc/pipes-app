@@ -1,7 +1,7 @@
 ---
 title: Define Codebase Stack
-description: Establishes evidence-backed project identity, repository boundaries, working stack, delivery profile, gate accountability, and binding local conventions.
-version: 2.5
+description: Establishes evidence-backed project identity, repository boundaries, working stack, binding local conventions, and, when the user opts in, a delivery profile and gate accountability.
+version: 2.6
 domain: codebase
 category: definition
 fragments:
@@ -28,17 +28,17 @@ Replace missing, placeholder, or stale project setup contracts with repository- 
 
 ## Entry Points
 
-Use during installed-project onboarding or framework starter maintenance when `project.md`, `delivery.md`, `accountability.md`, or `rule-codebase-conventions.md` is missing, placeholder, or materially contradicted by current repository evidence.
+Use during installed-project onboarding or framework starter maintenance when `project.md` or `rule-codebase-conventions.md` is missing, placeholder, or materially contradicted by current repository evidence.
 
 ## Loop Use
 
-A framework-maintenance or feature-delivery loop may invoke this pipeline with the project root, execution context, known intent, current instructions, and relevant evidence. It returns exact project-instruction and conventions-rule proposals, their targets, approval state, wrapper effects, and validation. Installed projects write only canonical `.pipes/` targets. Starter maintenance writes `.pipes-v2/` first and reconciles `.pipes/` second. After a pause, inspect actual targets and resume from the first incomplete phase without repeating an approved write.
+A framework-maintenance or feature-delivery loop may invoke this pipeline with the project root, execution context, known intent, current instructions, and relevant evidence. It returns exact project-instruction and conventions-rule proposals, their targets, approval state, wrapper effects, and validation. Installed projects write only canonical `.pipes/` targets. Starter maintenance writes the starter source tree first and reconciles `.pipes/` second. After a pause, inspect actual targets and resume from the first incomplete phase without repeating an approved write.
 
 ## Control Rules
 
 - Inspect manifests, commands, code, tests, documentation, and current contracts before asking the user for information.
 - Ask only for user-owned intent or a material convention that evidence cannot establish; recommend an answer when evidence supports one.
-- `project.md` owns identity, stack summary, repository boundaries, and working commands. `delivery.md` owns delivery facts: layout, protected branches, environments, change tickets, release workflows, and commands. `accountability.md` owns the human role and holder source for each gate. The conventions rule owns binding implementation behavior.
+- `project.md` owns identity, stack summary, repository boundaries, and working commands. The optional `delivery.md` owns delivery facts: layout, protected branches, environments, release workflows, commands, and, when an environment needs one, change tickets. The optional `accountability.md` owns the human role and holder source for each gate; without it, core.md Gates apply with the user as holder. The conventions rule owns binding implementation behavior.
 - Never invent a delivery fact or a gate holder: mark each value as detected with evidence or asked of the user.
 - Keep deep workflows, components, state, and integrations in `architecture.md`.
 - Preserve established commitments unless their exact change is approved.
@@ -46,8 +46,8 @@ A framework-maintenance or feature-delivery loop may invoke this pipeline with t
 
 ## Output
 
-- Installed-project mode: `.pipes/ai-instructions/project.md`, `.pipes/ai-instructions/delivery.md`, `.pipes/ai-instructions/accountability.md`, and `.pipes/utils/rules/rule-codebase-conventions.md`
-- Starter-maintenance mode: equivalent staged `.pipes-v2/` sources followed by their canonical installed `.pipes/` mirrors
+- Installed-project mode: `.pipes/ai-instructions/project.md` and `.pipes/utils/rules/rule-codebase-conventions.md`, and, when the user opts in, `.pipes/ai-instructions/delivery.md` and `.pipes/ai-instructions/accountability.md`
+- Starter-maintenance mode: equivalent sources in the starter source tree followed by their canonical installed `.pipes/` mirrors
 - Refreshed configured instruction wrappers and validation evidence
 
 ## Phases
@@ -78,7 +78,7 @@ A framework-maintenance or feature-delivery loop may invoke this pipeline with t
 2. Use `fragment-analyze-codebase-context` for its structure, entrypoint, pattern, and evidence scan; interpret relevance repository-wide in this pipeline rather than as a feature-only search.
 3. Inspect manifests, executable commands, tests, configuration, imports, documentation, and current contracts before naming an unknown.
 4. Separate observed facts, established commitments, conflicts, user-owned intent, and future direction.
-5. Use `fragment-detect-delivery-profile` to derive the layout, protected branches, environments, release workflows, change-ticket pattern, commands, and issue-tracker pattern with their evidence.
+5. Ask whether the user wants the optional delivery profile and accountability matrix; the default is no. When the user opts in, use `fragment-detect-delivery-profile` to derive the layout, protected branches, environments, release workflows, change-ticket pattern, commands, and issue-tracker pattern with their evidence.
 6. Stop on an unmanaged target or execution context that cannot be resolved.
 
 - Preserve acting-role context: `full-stack-tech-lead`, consulting `roadmapper` when repository ownership or invocation scope is ambiguous.
@@ -128,8 +128,8 @@ A framework-maintenance or feature-delivery loop may invoke this pipeline with t
 2. Use `fragment-ask-stack-details` only for a binding convention or intended technical direction that remains materially ambiguous.
 3. Use `fragment-draft-project-instruction` and `fragment-format-project-instruction` to compose an inline instruction from evidence and confirmed intent while preserving established commitments.
 4. Use `fragment-draft-codebase-conventions-rule` and `fragment-format-codebase-conventions-rule` to produce the live governance schema with Requirement, Enforcement, and concrete Checks.
-5. Use `fragment-format-delivery-profile` to compose `delivery.md` from the detected values and the user's answers to its open questions, and include the always-on line budget as `always_on_line_budget` in `project.md` frontmatter when the user wants one. Ask whether the project runs behavioral evals: include the Evals section only when it does, because the section makes eval results required at gate G6. When the user cannot be asked, omit the section and state that default.
-6. Use `fragment-ask-gate-holders` and `fragment-format-accountability-matrix` to compose `accountability.md`, resolving holders to evidence sources or the session user.
+5. When the user opted in, use `fragment-format-delivery-profile` to compose `delivery.md` from the detected values and the user's answers to its open questions. Include the always-on line budget as `always_on_line_budget` in `project.md` frontmatter when the user wants one. Ask whether the project runs behavioral evals: include the Evals section only when it does, because the section makes eval results required at gate G6. When the user cannot be asked, omit the section and state that default.
+6. When the user opted in, use `fragment-ask-gate-holders` and `fragment-format-accountability-matrix` to compose `accountability.md`, resolving holders to evidence sources or the session user.
 7. Use version `1.0` for new configured files or one minor increment for each substantive update; do not bump unchanged content.
 8. Identify every addition, correction, removal, target, mirror, and wrapper effect without writing it.
 
@@ -207,9 +207,9 @@ A framework-maintenance or feature-delivery loop may invoke this pipeline with t
 
 **Instructions:**
 1. Re-read every target; return to Phase 3 if ownership or content changed after approval.
-2. Use `fragment-create-files` to write canonical `.pipes/` targets in an installed project, or staged `.pipes-v2/` sources first and `.pipes/` mirrors second during starter maintenance.
+2. Use `fragment-create-files` to write canonical `.pipes/` targets in an installed project, or the starter source tree first and `.pipes/` mirrors second during starter maintenance.
 3. Refuse an unmanaged overwrite or unapproved commitment removal.
-4. Regenerate configured instruction wrappers, policy skills, and hook settings from the active source context, and validate `delivery.md` with `delivery-profile.cjs`.
+4. Regenerate configured instruction wrappers, policy skills, and hook settings from the active source context, and validate an opted-in `delivery.md` with `delivery-profile.cjs`.
 5. Re-read source and generated outputs, confirm staged/installed equivalence when applicable, and inspect wrappers for canonical `.pipes/` paths.
 6. Run structural, generator, and clean-install tests and report actual effects.
 
@@ -217,7 +217,7 @@ A framework-maintenance or feature-delivery loop may invoke this pipeline with t
 - Preserve routing semantics: Return factual paths and evidence to the invoking loop or user; defining the stack does not authorize unrelated implementation work.
 
 **Outputs:**
-- Written project instruction, delivery profile, accountability matrix, and conventions rule at approved paths.
+- Written project instruction and conventions rule, and an opted-in delivery profile and accountability matrix, at approved paths.
 - Refreshed wrappers and validation evidence.
 - Deviations, unchanged effects, and residual risk.
 

@@ -1,13 +1,13 @@
 ---
 title: E2E Tester
 description: Role contract for E2E Tester.
-version: 1.1
+version: 1.2
 role: e2e-tester
 role_type: validation
 default_loop_authority: gate_recommender
 subagent: true
 subagent_tools: Read, Grep, Glob, Bash
-subagent_description: Verifier that builds, tests, and runs the changed service and reports evidence without fixing anything. Use at the end of an implementation task, before review or a pull request.
+subagent_description: Verifier that builds, tests, and runs the changed code and reports evidence without fixing anything. Use at the end of an implementation task, before review or a pull request.
 ---
 # E2E Tester
 
@@ -82,8 +82,8 @@ The active mission or loop may narrow this authority. It may not expand it beyon
 
 When an agent tool can run this role as an isolated agent, the role acts as the verifier: a fresh context that checks finished work instead of the feedback loop that ran during the work.
 
-- Read this file, `.pipes/ai-instructions/core-workflows.md`, the plan and its acceptance criteria, and the service's working commands.
-- Run the build and verify commands from `.pipes/ai-instructions/delivery.md` and the target repository's `AGENTS.md`, and start the app when the acceptance criteria need runtime evidence.
+- Read this file, `.pipes/ai-instructions/core-workflows.md`, the plan and its acceptance criteria, and the project's working commands.
+- Run the build and verify commands from `.pipes/ai-instructions/project.md`, from `.pipes/ai-instructions/delivery.md` when it exists, and from the target repository's `AGENTS.md` when it has one, and start the app when the acceptance criteria need runtime evidence.
 - Do not fix anything. Never edit files, stage, commit, or push. Report each acceptance criterion as proved, failed, or not proved, with the command, its result, and the evidence path.
 - When the agent tool has no isolated agents, run the same verification in a separate session.
 

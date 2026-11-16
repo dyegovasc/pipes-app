@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Reads the project's delivery profile from `.pipes/ai-instructions/delivery.md`: Markdown sections
+// Reads the project's optional delivery profile from `.pipes/ai-instructions/delivery.md`: Markdown sections
 // with plain tables. Framework files stay generic and get project facts from here. Read-only.
 // Usage: node .pipes/utils/scripts/delivery-profile.cjs [--json]   (prints the parsed profile and validation)
 const fs = require('node:fs');
@@ -9,13 +9,13 @@ const PIPE_ROOT = path.resolve(__dirname, '..', '..');
 const PROFILE_PATH = path.join('ai-instructions', 'delivery.md');
 const AUTONOMY = new Set(['auto', 'ask', 'ticket']);
 
-// Used when a project has no delivery profile: protect the usual default branches, ask before any
-// workflow dispatch, and treat every environment as needing a ticket that no pattern can match.
+// Used when a project has no delivery profile: protect the usual default branches and ask the holder
+// of gate G5 before any release or promotion. Change tickets apply only when a profile opts in.
 const DEFAULT_PROFILE = Object.freeze({
   source: null,
   layout: { mode: 'single-repo', servicesRoot: '.' },
   protectedBranches: ['main', 'master'],
-  environments: [{ name: '*', autonomy: 'ticket', dispatch: '' }],
+  environments: [{ name: '*', autonomy: 'ask', dispatch: '' }],
   changeTicket: { pattern: null, approver: '' },
   releaseWorkflows: [],
   commands: [],
@@ -110,7 +110,8 @@ function loadProfile(pipeRoot = PIPE_ROOT) {
 function environmentRule(profile, name) {
   return profile.environments.find((environment) => environment.name === name)
     || profile.environments.find((environment) => environment.name === '*')
-    || { name, autonomy: 'ticket', dispatch: '' };
+    // An unlisted environment asks, unless the profile opts in to tickets: then it needs one too.
+    || { name, autonomy: profile.environments.some((environment) => environment.autonomy === 'ticket') ? 'ticket' : 'ask', dispatch: '' };
 }
 
 if (require.main === module) {

@@ -1,7 +1,7 @@
 ---
 title: Bootstrap Workspace
-description: Sets up a new Pipes workspace in order, from project identity and delivery profile to policies, architecture, generated surfaces, and evals, keeping every gate of the pipelines it runs.
-version: 1.2
+description: Sets up a new Pipes workspace in order, from project identity and an optional delivery profile to policies, architecture, generated surfaces, and evals, keeping every gate of the pipelines it runs.
+version: 1.3
 domain: framework
 category: definition
 fragments:
@@ -11,7 +11,7 @@ fragments:
 ---
 # Pipeline: Bootstrap Workspace
 
-Bring a newly installed Pipes workspace from placeholders to a working setup. It runs the definition pipelines in a fixed order, because each step needs the one before it: the delivery profile tells the policy survey which repositories to read, and the policies and profile shape the architecture. Every step keeps its own gates; this pipeline adds order and a final check, not extra authority.
+Bring a newly installed Pipes workspace from placeholders to a working setup. It runs the definition pipelines in a fixed order, because each step needs the one before it: the project identity, and the delivery profile when the user opts in, tell the policy survey which repositories to read, and the policies shape the architecture. Every step keeps its own gates; this pipeline adds order and a final check, not extra authority.
 
 ## Entry Points
 
@@ -25,12 +25,12 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 
 - Run the steps in order; skip a step only when its outputs already exist and are current.
 - Never merge the gates of different pipelines into one approval.
-- Change no service repository; onboarding of service repositories happens later through `pipeline-onboard-service-repo`, one repository at a time.
+- Change no repository other than this workspace.
 - The bootstrap is an agent-configuration change under gate G6 and ends with an eval run. The eval run is required when the delivery profile has an Evals table, and recommended when it has none.
 
 ## Output
 
-- `project.md`, `delivery.md`, `accountability.md`, and `rule-codebase-conventions.md`
+- `project.md` and `rule-codebase-conventions.md`, and `delivery.md` and `accountability.md` when the user opts in
 - Project policy rules with skills, and a note of conflicts and gaps
 - `architecture.md`
 - Generated instruction wrappers, skills, isolated agents, and hook settings
@@ -71,7 +71,7 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 
 ### Phase 2: Define Stack And Delivery
 
-**Objective:** Establish identity, delivery profile, accountability, and conventions.
+**Objective:** Establish identity and conventions, and the delivery profile and accountability matrix when the user opts in.
 
 **Acting Role:** `full-stack-tech-lead`
 
@@ -87,17 +87,17 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 1. Use `fragment-invoke-pipeline` to run `pipeline-define-codebase-stack`, with all its gates.
 
 - Preserve acting-role context: `full-stack-tech-lead`.
-- Preserve routing semantics: `full-stack-tech-lead` passes the written identity, profile, and accountability to Define Policies.
+- Preserve routing semantics: `full-stack-tech-lead` passes the written identity, and the profile and accountability when written, to Define Policies.
 
 **Outputs:**
-- `project.md`, `delivery.md`, `accountability.md`, and the conventions rule.
+- `project.md` and the conventions rule, and `delivery.md` and `accountability.md` when the user opts in.
 
 **Handoff To:** `full-stack-tech-lead`
 
 **Approval Gate:** The gates of `pipeline-define-codebase-stack`.
 
 **Exit Conditions:**
-- The four surfaces are established and `delivery.md` validates.
+- `project.md` and the conventions rule are established; an opted-in `delivery.md` validates.
 
 ### Phase 3: Define Policies
 
@@ -105,10 +105,10 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 
 **Acting Role:** `full-stack-tech-lead`
 
-**Entry Conditions:** Phase 2 established the delivery profile.
+**Entry Conditions:** Phase 2 is complete or skipped as current.
 
 **Inputs:**
-- Delivery profile layout.
+- Layout from the delivery profile when it exists, otherwise `single-repo`.
 
 **Fragments:**
 - `fragment-invoke-pipeline`
@@ -127,7 +127,7 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 **Approval Gate:** The gates of `pipeline-define-policies`.
 
 **Exit Conditions:**
-- Approved policies exist with skills, or the policy owner chose to defer them.
+- Approved policies exist with skills, or the holder of gate G6 chose to defer them.
 
 ### Phase 4: Define Architecture
 
@@ -138,7 +138,7 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 **Entry Conditions:** Phases 2 and 3 are complete or skipped as current.
 
 **Inputs:**
-- Delivery profile, repository survey, and policies.
+- Delivery profile when it exists, repository survey, and policies.
 
 **Fragments:**
 - `fragment-invoke-pipeline`
@@ -177,7 +177,7 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 1. Run the generators: instruction wrappers, pipeline, loop, and policy skills, isolated agents, hook settings, catalog, and source map.
 2. Refresh fork control with `generate-framework-provenance.cjs --root .pipes --refresh-fork`, because the bootstrap changes files that the framework baseline tracks, such as `project.md`, `architecture.md`, and the conventions rule. Without it, the install check reports a stale manifest.
 3. Use `fragment-validation` to run the delivery-profile validator, the record validator, the pure-Markdown validator, the always-on budget check, and the script tests.
-4. Propose project eval cases through `pipeline-add-eval` for the policies and the delivery profile. When `delivery.md` has an Evals table, run the eval suite once and report the result and cost. Without the table, offer the run with its cost estimate, and record that no eval ran when the user does not run it.
+4. Propose project eval cases through `pipeline-add-eval` for the policies and, when it exists, the delivery profile. When `delivery.md` has an Evals table, run the eval suite once and report the result and cost. Without the table, offer the run with its cost estimate, and record that no eval ran when the user does not run it.
 
 - Preserve acting-role context: `e2e-tester`.
 - Preserve routing semantics: Return the surface state, validation, and eval results to the invoking loop or user.

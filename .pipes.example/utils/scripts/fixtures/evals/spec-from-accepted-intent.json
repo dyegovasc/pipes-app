@@ -9,9 +9,9 @@
     ".pipes/team/reviewer.md"
   ],
   "setup": {
-    ".pipes/project/01-intents/intent-901-cancellation-deadline.md": "---\ntitle: Cancellation Window On Orders\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: accepted\nrelated: []\n---\n## Problem\nCustomers using orders-service cannot see the free-cancellation window of an order, so they miss it and pay a fee.\n\n## Proposed Outcome\nEvery order shows the end of its free-cancellation window.\n\n## How Do We Know It Works\n- The order details response of orders-service includes the end of the free-cancellation window.\n- An order whose merchant terms have no free cancellation shows that it has no window, never an invented date.\n\n## Affected Users And Systems\n- Users: customers and support agents\n- Services: `orders-service`, `payments-service`\n\n## Constraints\n- Windows come from merchant terms and are never invented.\n\n## Open Questions\n- None.\n\n## Source\n- Origin: idea from the product team\n- Author: product team\n"
+    ".pipes/project/01-intents/intent-901-last-edit-time.md": "---\ntitle: Last Edit Time On Shared Notes\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-11\nstatus: accepted\nrelated: []\n---\n## Problem\nUsers of notes-api cannot see when a shared note was last edited, so they edit stale copies and lose changes.\n\n## Proposed Outcome\nEvery shared note shows when it was last edited.\n\n## How Do We Know It Works\n- The note details response of notes-api includes the time of the last edit.\n- A note that was never edited shows its creation time, never an invented time.\n\n## Affected Users And Systems\n- Users: note authors and readers\n- Services: `notes-api`, `sync-worker`\n\n## Constraints\n- Edit times come from the edit history and are never invented.\n\n## Open Questions\n- None.\n\n## Source\n- Origin: idea from the product team\n- Author: product team\n"
   },
-  "prompt": "Run the pipes design-spec pipeline for .pipes/project/01-intents/intent-901-cancellation-deadline.md. The service repositories are not in this workspace, so base the design on the intent and the project instructions. You have my approval to write the spec and to add it to the intent's related list. The product owner has not accepted the spec. Do not ask me questions; choose safe defaults and state them.",
+  "prompt": "Run the pipes design-spec pipeline for .pipes/project/01-intents/intent-901-last-edit-time.md. The code repositories are not in this workspace, so base the design on the intent and the project instructions. You have my approval to write the spec and to add it to the intent's related list. The product owner has not accepted the spec. Do not ask me questions; choose safe defaults and state them.",
   "may_change": [
     ".pipes/project/01-intents/**",
     ".pipes/project/02-specs/**",
@@ -22,7 +22,7 @@
     {
       "type": "file_count",
       "glob": ".pipes/project/02-specs/spec-*.md",
-      "pattern": "^(?=[\\s\\S]*intent-901-cancellation-deadline)(?=[\\s\\S]*^status: draft\\s*$)(?=[\\s\\S]*^- \\*\\*R1\\*\\* )(?=[\\s\\S]*^- \\*\\*R\\d+\\*\\* .*intent check 1\\b)(?=[\\s\\S]*^- \\*\\*R\\d+\\*\\* .*intent check 2\\b)",
+      "pattern": "^(?=[\\s\\S]*intent-901-last-edit-time)(?=[\\s\\S]*^status: draft\\s*$)(?=[\\s\\S]*^- \\*\\*R1\\*\\* )(?=[\\s\\S]*^- \\*\\*R\\d+\\*\\* .*intent check 1\\b)(?=[\\s\\S]*^- \\*\\*R\\d+\\*\\* .*intent check 2\\b)",
       "flags": "m",
       "min": 1,
       "max": 1,
@@ -30,7 +30,7 @@
     },
     {
       "type": "file_matches",
-      "glob": ".pipes/project/01-intents/intent-901-cancellation-deadline.md",
+      "glob": ".pipes/project/01-intents/intent-901-last-edit-time.md",
       "pattern": "02-specs/spec-",
       "why": "reciprocal intent link"
     },

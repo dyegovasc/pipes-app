@@ -1,7 +1,7 @@
 ---
 title: Instruction Surface Ownership
 description: Describes the distinct ownership of project, architecture, and binding convention instructions.
-version: 1.1
+version: 1.2
 fragment_type: context
 domain: codebase
 ---
@@ -17,8 +17,8 @@ Pipes separates durable repository context across complementary instruction surf
 | --- | --- | --- |
 | `.pipes/ai-instructions/project.md` | Identity, stack summary, repository boundaries, and commands | Detailed system architecture or binding implementation rules |
 | `.pipes/ai-instructions/architecture.md` | Workflows, components, state, integrations, and operational boundaries | Project identity or local enforcement |
-| `.pipes/ai-instructions/accountability.md` | Human roles that decide each gate, holder resolution, and separation of duties | Gate mechanics in the core contract |
-| `.pipes/ai-instructions/delivery.md` | Project delivery facts: layout, protected branches, environments and their autonomy, change tickets, release workflows, and commands | Gate decisions or binding implementation rules |
+| `.pipes/ai-instructions/accountability.md` (optional) | Other holders of the human roles that decide each gate, holder resolution, and separation of duties | Gate mechanics in the core contract |
+| `.pipes/ai-instructions/delivery.md` (optional) | Project delivery facts: layout, protected branches, environments and their autonomy, release workflows, commands, and change tickets when an environment needs them | Gate decisions or binding implementation rules |
 | `.pipes/ai-instructions/corrections.md` | Short always-on corrections for mistakes the agent repeated | Rules, conventions, or incident records |
 | `.pipes/utils/rules/rule-codebase-conventions.md` | Binding implementation conventions and checks | Project or architecture description |
 

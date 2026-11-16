@@ -28,8 +28,8 @@ test('metrics are computed from records, reviews, corrections, and eval runs', (
   write(root, S1.slice(7), record('revised', '2026-11-04', [I1, P1]));
   write(root, P1.slice(7), record('done', '2026-11-06', [S1, O1, R1]));
   write(root, O1.slice(7), '---\ntitle: O\ndescription: D\nversion: 1.0\ncreated: 2026-11-10\nstatus: recorded\nrelated:\n  - ' + P1 + '\nresult: succeeded\n---\n');
-  write(root, R1.slice(7), record('final', '2026-11-09', [P1], 'ready with findings: 1 blocking, 0 major, 0 minor.', '## Verification\n\n| Acceptance criterion or requirement | Result | Evidence |\n| --- | --- | --- |\n| R1 | proved | test |\n| R2 | not proved | none |\n\n## Findings\n\n| Severity | Location | Rule or requirement | Finding | Correction |\n| --- | --- | --- | --- | --- |\n| blocking | `a.java:1` | rule-money-and-time | double | Money |\n'));
-  write(root, 'ai-instructions/corrections.md', '## Things\n\n- Use the :service: prefix.\n');
+  write(root, R1.slice(7), record('final', '2026-11-09', [P1], 'ready with findings: 1 blocking, 0 major, 0 minor.', '## Verification\n\n| Acceptance criterion or requirement | Result | Evidence |\n| --- | --- | --- |\n| R1 | proved | test |\n| R2 | not proved | none |\n\n## Findings\n\n| Severity | Location | Rule or requirement | Finding | Correction |\n| --- | --- | --- | --- | --- |\n| blocking | `a.ts:1` | rule-example-policy | double | Example policy |\n'));
+  write(root, 'ai-instructions/corrections.md', '## Things\n\n- Use the fixture prefix.\n');
   write(root, 'utils/state/evals/2026-11-11T00.json', JSON.stringify({ results: [{ passed: true }, { passed: false }] }));
 
   const metrics = computeMetrics(root);

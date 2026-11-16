@@ -1,7 +1,7 @@
 ---
 title: Define Policies
 description: Derives project policy rules from the rules the repositories already state, keeps conflicts and gaps out as recorded open points, and delivers each policy as a skill.
-version: 1.0
+version: 1.1
 domain: codebase
 category: definition
 fragments:
@@ -18,18 +18,18 @@ Turn the rules that a project's repositories already state into project policy r
 
 ## Entry Points
 
-Use during workspace bootstrap, when the project has no policy rules yet, or when repository docs have changed enough that the policies may be stale. Do not use to decide a conflict, which needs `pipeline-record-decision`, or to write rules that no repository states without an explicit decision by the policy owner.
+Use during workspace bootstrap, when the project has no policy rules yet, or when repository docs have changed enough that the policies may be stale. Do not use to decide a conflict, which needs `pipeline-record-decision`, or to write rules that no repository states without an explicit decision by the holder of gate G6.
 
 ## Loop Use
 
-`loop-framework-maintenance` and `pipeline-bootstrap-workspace` use this pipeline. Pass the layout from `delivery.md` and any topics the user wants covered. The pipeline returns written policy rules, their generated skills, and a note with conflicts and gaps. After a pause, read the existing policy rules and the note before resuming from the first incomplete phase; update an existing policy instead of creating a duplicate.
+`loop-framework-maintenance` and `pipeline-bootstrap-workspace` use this pipeline. Pass the layout from `delivery.md` when it exists, otherwise `single-repo`, and any topics the user wants covered. The pipeline returns written policy rules, their generated skills, and a note with conflicts and gaps. After a pause, read the existing policy rules and the note before resuming from the first incomplete phase; update an existing policy instead of creating a duplicate.
 
 ## Control Rules
 
 - Policy rules contain only `consistent` rules with source paths; never resolve a conflict while writing a policy.
 - Policy rules are project content (`scope: project`); they never become framework rules.
 - Read repositories only; change no repository in this pipeline.
-- Every policy is an agent-configuration change under gate G6; the policy owner in `.pipes/ai-instructions/accountability.md` decides.
+- Every policy is an agent-configuration change under gate G6; the holder of gate G6 for policy rules (core.md Gates) decides.
 - Keep the always-on budget in view: each policy adds one row to the rules table.
 
 ## Output
@@ -48,10 +48,10 @@ Use during workspace bootstrap, when the project has no policy rules yet, or whe
 
 **Support Team:** `be-architect`
 
-**Entry Conditions:** The layout in `delivery.md` is known, or the project is a single repository.
+**Entry Conditions:** The layout is known from `delivery.md` when it exists; otherwise the project is a single repository.
 
 **Inputs:**
-- Delivery profile layout, existing policy rules, and user topics.
+- Layout (from the delivery profile when it exists, otherwise `single-repo`), existing policy rules, and user topics.
 
 **Fragments:**
 - `fragment-survey-workspace-repositories`
@@ -109,7 +109,7 @@ Use during workspace bootstrap, when the project has no policy rules yet, or whe
 
 ### Phase 3: Review And Approve
 
-**Objective:** Check the drafts as a non-author and obtain the policy owner's approval.
+**Objective:** Check the drafts as a non-author and obtain the approval of the holder of gate G6.
 
 **Acting Role:** `roadmapper`
 
@@ -133,11 +133,11 @@ Use during workspace bootstrap, when the project has no policy rules yet, or whe
 - Preserve routing semantics: The approved unchanged package passes to Write And Generate; corrections return to Draft.
 
 **Outputs:**
-- Review findings and the policy owner's decision.
+- Review findings and the decision of the holder of gate G6.
 
 **Handoff To:** `roadmapper`
 
-**Approval Gate:** Human-mandatory gate G6: the policy owner approves the exact policies and note.
+**Approval Gate:** Human-mandatory gate G6: the holder of gate G6 for policy rules approves the exact policies and note.
 
 **Exit Conditions:**
 - The approved package is exact and current.

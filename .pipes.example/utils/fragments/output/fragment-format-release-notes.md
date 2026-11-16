@@ -1,7 +1,7 @@
 ---
 title: Format Release Notes
-description: Formats release notes for one service version from its plan, spec requirements, and merged pull requests.
-version: 1.0
+description: Formats release notes for one version from its plan, spec requirements, and merged pull requests.
+version: 1.1
 fragment_type: output
 domain: codebase
 ---
@@ -9,12 +9,12 @@ domain: codebase
 
 ## Format
 
-Produce release notes in English for one service version. Build them from the plan outcome, the spec requirement IDs it delivered, and the merged pull requests. Describe user-visible and contract changes first. The notes become the `## Release` section evidence of the outcome record and may be pasted into the release or the change ticket.
+Produce release notes in the project's documentation language for one version of a component. Build them from the plan outcome, the spec requirement IDs it delivered, and the merged pull requests. Describe user-visible and contract changes first. The notes become the `## Release` section evidence of the outcome record and may be pasted into the release, or into a change ticket when the environment uses one.
 
 ## Template
 
 ```markdown
-## {service} {version}
+## {component} {version}
 
 Delivers: {intent or spec title} (`{spec path}`)
 
@@ -29,5 +29,5 @@ Delivers: {intent or spec title} (`{spec path}`)
 
 ### Verification
 - Review: `{review record path}`, verdict {verdict}
-- Checks on `main`: {status}
+- Checks on the default branch: {status}
 ```
