@@ -1,6 +1,6 @@
 {
   "indexSchemaVersion": 1,
-  "generatedAt": "2026-11-14T17:44:02Z",
+  "generatedAt": "2026-11-16T14:05:55Z",
   "revokedKeyIds": [],
   "versions": [
     {
@@ -16,6 +16,20 @@
         "sha256": "189a77fceae51daa50d06664760636d203f2749bc57b2837aa59755f12c49fa6"
       },
       "manifestSha256": "47b6323c6e73b74e5deffc7961c05ba0ccba58180cfec77d7817f2eb2f0378a7"
+    },
+    {
+      "frameworkVersion": "2.3.0",
+      "manifestSchemaVersion": 2,
+      "projectLayoutVersion": 3,
+      "minAppVersion": "0.7.3",
+      "releasedAt": "2026-11-16T14:02:23Z",
+      "withdrawn": false,
+      "bundle": {
+        "url": "https://github.com/dyegovasc/pipes-app/releases/download/pipes-framework-v2.3.0/pipes-starter-2.3.0.json.gz",
+        "size": 588707,
+        "sha256": "d925fa902853066028129060c4f01a420eec10e07a414a95fbe6c4ef5ba0e2d8"
+      },
+      "manifestSha256": "98c131f1da44d29e21dbc9f0e93bbb701e210466929f007eb8949da26ff3d375"
     }
   ]
 }
