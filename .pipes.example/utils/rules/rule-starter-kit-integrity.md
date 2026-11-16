@@ -1,7 +1,7 @@
 ---
 title: Starter Kit Integrity
 description: Keeps canonical Markdown and its small generated discovery surfaces coherent.
-version: 2.4
+version: 2.5
 rule_type: validation
 enforcement: binding
 enforced_by: [model, ci]
@@ -14,7 +14,7 @@ A starter-kit change is complete only when staged source, installed Markdown, ge
 
 ## Checks
 
-- Keep exactly five starter loops and eighteen pipelines unless an approved framework decision changes the inventory.
+- Keep exactly five starter loops and seventeen pipelines unless an approved framework decision changes the inventory.
 - Project content is never starter content: rules with `scope: project`, eval cases with `scope: project`, project records, and the filled project instructions (`project.md`, `delivery.md`, `accountability.md`, `architecture.md`, `corrections.md`, and the filled conventions rule) ship as placeholders or not at all.
 - Scope that exact inventory to the shipped `.pipes.example` baseline. Installed `.pipes` workspaces may add any number of valid pipelines, and reusable discovery, skill-generation, catalog, and clean-install tests must derive expectations from the active inventory rather than impose the starter count.
 - Every pipeline has `## Loop Use`; every loop has real stop conditions.

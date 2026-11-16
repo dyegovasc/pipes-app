@@ -129,16 +129,16 @@ test('--changed selects covering cases, escalates broad changes, and ignores rec
   const cases = [
     { id: 'hook', scope: 'starter', covers: ['.pipes/utils/scripts/hook-*.cjs', '.pipes/ai-instructions/delivery.md'] },
     { id: 'spec', scope: 'starter', covers: ['.pipes/utils/pipelines/pipeline-design-spec.md'] },
-    { id: 'policy', scope: 'project', covers: ['.pipes/utils/rules/rule-money-and-time.md'] },
+    { id: 'policy', scope: 'project', covers: ['.pipes/utils/rules/rule-example-policy.md'] },
   ];
   const ids = (files) => selectChanged(cases, files).selected.map((item) => item.id);
   assert.deepEqual(ids(['.pipes/ai-instructions/delivery.md']), ['hook']);
-  assert.deepEqual(ids(['.pipes/utils/pipelines/pipeline-design-spec.md', '.pipes/utils/rules/rule-money-and-time.md']), ['spec', 'policy']);
+  assert.deepEqual(ids(['.pipes/utils/pipelines/pipeline-design-spec.md', '.pipes/utils/rules/rule-example-policy.md']), ['spec', 'policy']);
   assert.deepEqual(ids(['.pipes/project/00-notes/note-009-x.md', '.pipes/utils/scripts/x.test.cjs']), [], 'records and tests select nothing');
   assert.deepEqual(ids(['CLAUDE.md']), ['hook', 'spec'], 'a broad change runs the starter scope');
-  assert.deepEqual(ids(['CLAUDE.md', '.pipes/utils/rules/rule-money-and-time.md']), ['hook', 'spec', 'policy'], 'a broad change also runs the project cases that cover other changed files');
+  assert.deepEqual(ids(['CLAUDE.md', '.pipes/utils/rules/rule-example-policy.md']), ['hook', 'spec', 'policy'], 'a broad change also runs the project cases that cover other changed files');
   assert.deepEqual(selectChanged(cases, ['.pipes/team/visionaire.md']).uncovered, ['.pipes/team/visionaire.md']);
-  assert.deepEqual(ids(['orders-service/src/Main.java']), [], 'service code is not agent configuration');
+  assert.deepEqual(ids(['app/src/main.ts']), [], 'application code is not agent configuration');
 });
 
 test('eval model comes from --model, then the delivery profile tier', () => {

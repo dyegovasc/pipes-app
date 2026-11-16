@@ -41,13 +41,13 @@ Several steps do not automatically require a mission. Create one when objective,
 
 ## Staged Starter And Installed Project
 
-This repository maintains the distributable starter under `.pipes.example/`. The folder name marks the staged source only; when installed into a product, its contents live at canonical `.pipes/` paths.
+The framework source repository keeps the distributable starter in a staged folder. The folder name marks the staged source only; when Pipes Local installs the starter into a project, its contents live at canonical `.pipes/` paths.
 
-Framework maintenance changes `.pipes.example/` first, validates the staged contract, reconciles the repository's installed `.pipes/` counterpart, and refreshes affected generated discovery surfaces. Consumer-facing instructions and generated files use `.pipes/`, never `.pipes.example/`.
+In the framework source repository, framework maintenance changes the staged folder first, validates the staged contract, reconciles an installed `.pipes/` counterpart when one exists, and refreshes affected generated discovery surfaces. Consumer-facing instructions and generated files use `.pipes/`, never the staged folder name.
 
 ## Framework Provenance And Versioning
 
-The staged framework is a versioned release source. `utils/rules/rule-framework-provenance.md` defines its provenance contract. The current baseline is framework version `2.2.1`. It uses manifest schema version 2. New manifests use project-layout version 3; layout 2 stays readable. The compressed baseline archive and fork control use schema version 1.
+The staged framework is a versioned release source. `utils/rules/rule-framework-provenance.md` defines its provenance contract. The current baseline is framework version `2.3.0`. It uses manifest schema version 2. New manifests use project-layout version 3; layout 2 stays readable. The compressed baseline archive and fork control use schema version 1.
 
 The provenance contract tracks framework instructions, team roles, fragments, pipelines, rules, scripts, and three explicit shared files. Project records, local configs, runtime state, issue records beyond their shared README and placeholder, incidental files, and the provenance metadata itself remain excluded. Only immediate project-area directory names participate in baseline identity; project file details never do.
 
@@ -65,7 +65,7 @@ Refreshing an installed fork writes only changed fork-control bytes after valida
 node .pipes/utils/scripts/generate-framework-provenance.cjs --root .pipes --refresh-fork
 ```
 
-First baseline creation and later baseline replacement are protected release operations. They require `--allow-baseline-initialization` or `--allow-baseline-replacement` and an explicit framework semantic version. Obtain the governing approval before using either mode against a non-temporary root. This starter uses schema-v2 `2.2.1` origin metadata. Run the read-only check above to verify that the tracked content matches this release baseline.
+First baseline creation and later baseline replacement are protected release operations. They require `--allow-baseline-initialization` or `--allow-baseline-replacement` and an explicit framework semantic version. Obtain the governing approval before using either mode against a non-temporary root. This starter uses schema-v2 `2.3.0` origin metadata. Run the read-only check above to verify that the tracked content matches this release baseline.
 
 ## Canonical Surfaces
 
@@ -108,7 +108,7 @@ flowchart LR
 
 A loop keeps working until the objective is validated, a genuine user decision is required, a blocker prevents useful progress, or the next action is protected. Routine observations, choices, validation, and corrections stay inside the loop.
 
-## Eighteen Starter Pipelines
+## Starter Pipelines
 
 | Pipeline | Purpose |
 | --- | --- |
@@ -124,10 +124,9 @@ A loop keeps working until the objective is validated, a genuine user decision i
 | `pipeline-record-decision` | Capture an approved durable choice and its consequences |
 | `pipeline-capture-intent` | Turn an idea, ticket, or incident into an intent the product owner accepts (G1) |
 | `pipeline-design-spec` | Turn an accepted intent into a spec with requirement IDs (G2) |
-| `pipeline-review-change` | Review a change with a verifier and a non-author reviewer; never approve (G4 stays with code owners) |
-| `pipeline-release-change` | Release or promote through the delivery profile's environments behind G5 |
+| `pipeline-review-change` | Review a change with a verifier and a non-author reviewer; never approve (G4 stays with the code owner) |
+| `pipeline-release-change` | Release or promote behind G5, through the delivery profile's environments when one exists |
 | `pipeline-add-eval` | Turn an incident, repeated mistake, or contract into a behavioral eval case |
-| `pipeline-onboard-service-repo` | Align one service repository's agent docs with the project's policies |
 | `pipeline-define-policies` | Derive project policy rules from what the repositories already state |
 | `pipeline-bootstrap-workspace` | Set up a new workspace in order: stack and delivery, policies, architecture, generation, evals |
 
@@ -190,7 +189,7 @@ An immediate approved gate resumes the exact recorded action while its approval 
 
 The starter kit provides nine roles: `visionaire`, `roadmapper`, `full-stack-tech-lead`, `fe-architect`, `fe-coder`, `be-architect`, `be-coder`, `e2e-tester`, and `reviewer`. `reviewer` and `e2e-tester` can also run as read-only isolated agents. Roles provide ownership and perspective; they do not impersonate the user, imply background agents, or widen authority.
 
-The current starter contains 115 fragments grouped as context, instructions, questions, outputs, and validations. Pipelines and loops reference fragments by ID; resolve each exact filename recursively under `.pipes/utils/fragments/` and require exactly one match. Use `utils/fragments/CATALOG.md` for discovery, but treat the fragment Markdown as authoritative.
+The starter's fragments are grouped as context, instructions, questions, outputs, and validations. Pipelines and loops reference fragments by ID; resolve each exact filename recursively under `.pipes/utils/fragments/` and require exactly one match. Use `utils/fragments/CATALOG.md` for discovery, but treat the fragment Markdown as authoritative.
 
 The current starter contains 27 binding or advisory rules. Project policy rules (`scope: project`) are project content, written by `pipeline-define-policies`, and never part of the starter. Binding rules govern scope, authority, validation, records, recovery, generated surfaces, and version-control effects. When constraints conflict, the strictest applicable authority wins.
 
@@ -234,7 +233,7 @@ The supported static generators are:
 - `generate-catalog.cjs` for the fragment, pipeline, loop, and rule inventory;
 - `generate-source-map.cjs` for staged-to-installed source coverage.
 
-Scripts may also inspect project records and run development tests. `delivery-profile.cjs` reads and validates the Markdown delivery profile in `ai-instructions/delivery.md` that hooks and workflows use for project facts. `starter-layer.cjs` defines the framework and project layers, and `layer-separation.test.cjs` fails when a framework file contains a project fact derived from `delivery.md` or `project.md`. `verify-starter.cjs` builds a temporary `.pipes.example` with the project layer reset to placeholders and runs every generator and test in starter mode; nothing outside the temporary directory changes. `report-metrics.cjs` reports the SDLC indicators that Pipes records already hold, read-only. `run-evals.cjs` runs behavioral eval cases from `utils/scripts/fixtures/evals/` through an agent adapter in a disposable workspace copy; it is required before gate G6 approvals. The `hook-*.cjs` scripts run as read-only Claude Code PreToolUse hooks that return allow, ask, or deny under `rule-deterministic-enforcement`. They do not choose mission actions, own workflow state, schedule work, enforce a runtime kernel, or replace agent judgment.
+Scripts may also inspect project records and run development tests. `delivery-profile.cjs` reads and validates the optional Markdown delivery profile in `ai-instructions/delivery.md` that hooks and workflows use for project facts, and supplies safe defaults without it. `starter-layer.cjs` defines the framework and project layers, and `layer-separation.test.cjs` fails when a framework file contains a project fact derived from `delivery.md` or `project.md`. `verify-starter.cjs` builds a temporary `.pipes.example` with the project layer reset to placeholders and runs every generator and test in starter mode; nothing outside the temporary directory changes. `report-metrics.cjs` reports the SDLC indicators that Pipes records already hold, read-only. `run-evals.cjs` runs behavioral eval cases from `utils/scripts/fixtures/evals/` through an agent adapter in a disposable workspace copy; its results are required before gate G6 approvals when the delivery profile has an Evals table, and recommended otherwise. The `hook-*.cjs` scripts run as read-only Claude Code PreToolUse hooks that return allow, ask, or deny under `rule-deterministic-enforcement`. They do not choose mission actions, own workflow state, schedule work, enforce a runtime kernel, or replace agent judgment.
 
 The framework-provenance rule also permits deterministic static generation and freshness validation of the versioned manifest, compressed baseline archive, and fork control. That tooling remains subordinate to canonical Markdown and may not infer workspace history or overwrite installed provenance without explicit authority.
 

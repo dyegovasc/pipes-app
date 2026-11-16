@@ -1,7 +1,7 @@
 ---
 title: Extract Policy Candidates
-description: Groups the rules stated across repositories into org-wide policy candidates, conflicts, gaps, and repository-specific rules, each with sources.
-version: 1.0
+description: Groups the rules stated across repositories into project-wide policy candidates, conflicts, gaps, and repository-specific rules, each with sources.
+version: 1.1
 fragment_type: instruction
 domain: codebase
 ---
@@ -10,7 +10,7 @@ domain: codebase
 ## Instructions
 
 1. From the surveyed docs, collect every statement that tells an agent or developer how to build, test, secure, or deliver code. Keep the source path and line of each.
-2. Group the statements by topic, for example API contracts, layering and errors, security and identity, data and persistence, money and time, testing, and delivery.
+2. Group the statements by topic, for example API contracts, layering and errors, security and identity, data and persistence, dates and time, testing, and delivery.
 3. For each topic, classify each rule:
    - `consistent`: stated by more than one repository, or by the only repository in `single-repo` layout, with no repository stating the opposite. It is a policy candidate.
    - `conflict`: repositories state incompatible versions. Record both sides with their paths; never choose one.

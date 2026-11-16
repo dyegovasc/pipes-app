@@ -1,7 +1,7 @@
 ---
 title: Create Pipeline
 description: Designs and creates a deterministic fragment-driven Pipes workflow.
-version: 2.3
+version: 2.4
 domain: framework
 category: creation
 fragments:
@@ -60,7 +60,7 @@ A framework-maintenance loop may invoke this pipeline with a bounded workflow br
 1. Inspect current pipelines and loops before proposing a new workflow.
 2. Use `fragment-ask-pipeline-intent` to capture triggers, users, domain, current category, delivery mode, inputs, outputs, phases, gates, protected effects, failure behavior, resumption, and validation.
 3. Redirect adaptive work to a loop and clear one-off low-risk work to direct action when no reusable pipeline is justified.
-4. For starter maintenance, surface the exact-ten-pipeline inventory contract as a separate scope decision rather than silently widening it.
+4. For starter maintenance, surface any change to the shipped pipeline inventory (`rule-starter-kit-integrity`) as a separate scope decision rather than silently widening it.
 5. After a pause, inspect the current request and inventory before re-asking.
 
 - Preserve acting-role context: `roadmapper`.

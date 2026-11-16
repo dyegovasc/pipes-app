@@ -1,7 +1,7 @@
 ---
 title: ASD-STE100 Writing
 description: Requires every authored document to use clear language inspired by ASD-STE100 while preserving its requested language and technical meaning.
-version: 1.1
+version: 1.2
 rule_type: communication
 applies_to:
   - documentation
@@ -35,7 +35,7 @@ Apply these principles to document drafts, previews, new documents, templates, a
 ## Language And Conformance
 
 - Keep the document in the requested or established language. This rule does not require translation into English.
-- In Portuguese and other languages, apply these principles as a local writing practice.
+- In other languages, apply these principles as a local writing practice.
 - Formal ASD-STE100 conformance requires the applicable English writing rules and controlled dictionary. Applying this philosophy alone does not establish conformance.
 - Claim formal conformance only when the document was checked against the applicable official specification. State the edition and validation scope.
 

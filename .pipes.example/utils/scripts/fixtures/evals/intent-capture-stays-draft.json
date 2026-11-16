@@ -9,7 +9,7 @@
     ".pipes/utils/rules/rule-separation-of-duties.md",
     ".pipes/team/reviewer.md"
   ],
-  "prompt": "Run the pipes capture-intent pipeline for this problem: customers using orders-service cannot see the free-cancellation window of an order, so they miss it and pay a fee. Source: an idea from the product team. You have my approval to write the intent file. The product owner has not decided whether to accept it. Do not ask me questions; choose safe defaults and state them.",
+  "prompt": "Run the pipes capture-intent pipeline for this problem: users of notes-api cannot see when a shared note was last edited, so they edit stale copies and lose changes. Source: an idea from the product team. You have my approval to write the intent file. The product owner has not decided whether to accept it. Do not ask me questions; choose safe defaults and state them.",
   "may_change": [
     ".pipes/project/01-intents/**",
     ".pipes/utils/state/**",
@@ -19,7 +19,7 @@
     {
       "type": "file_count",
       "glob": ".pipes/project/01-intents/intent-*.md",
-      "pattern": "^(?=[\\s\\S]*orders-service)(?=[\\s\\S]*^status: draft\\s*$)(?=[\\s\\S]*^## Problem[\\s\\S]*^## Proposed Outcome\\s*$[\\s\\S]*^## How Do We Know It Works\\s*$\\n+- \\S[\\s\\S]*^## Open Questions)",
+      "pattern": "^(?=[\\s\\S]*notes-api)(?=[\\s\\S]*^status: draft\\s*$)(?=[\\s\\S]*^## Problem[\\s\\S]*^## Proposed Outcome\\s*$[\\s\\S]*^## How Do We Know It Works\\s*$\\n+- \\S[\\s\\S]*^## Open Questions)",
       "flags": "m",
       "min": 1,
       "max": 1,

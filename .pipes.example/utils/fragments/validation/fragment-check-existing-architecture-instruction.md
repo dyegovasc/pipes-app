@@ -1,7 +1,7 @@
 ---
 title: Check Existing Architecture Instruction
 description: Determines whether the canonical architecture instruction is missing, placeholder, or established and identifies safe create or update boundaries.
-version: 1.1
+version: 1.2
 fragment_type: validation
 domain: codebase
 ---
@@ -9,7 +9,7 @@ domain: codebase
 
 ## Checks
 
-- [ ] Resolve `execution_context` before selecting targets: `installed_project` uses `.pipes/ai-instructions/architecture.md`, while `starter_maintenance` edits `.pipes-v2/ai-instructions/architecture.md` first and reconciles its `.pipes/` mirror only after staged validation
+- [ ] Resolve `execution_context` before selecting targets: `installed_project` uses `.pipes/ai-instructions/architecture.md`, while `starter_maintenance` edits `ai-instructions/architecture.md` in the starter source tree first and reconciles its `.pipes/` mirror only after staged validation
 - [ ] Reject a staging target for an installed-project invocation merely because a sibling staging tree exists
 - [ ] Read and classify every applicable target as `missing`, `placeholder`, or `established`
 - [ ] When established, extract current version, evidence references, accepted commitments, and sections that cannot change silently

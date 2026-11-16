@@ -4,11 +4,39 @@
 // direct pushes to protected branches, force-pushes, merges, self-approvals, dispatches to
 // `ticket` environments without a matching change ticket, and direct infrastructure changes.
 // Project facts (protected branches, environments, ticket pattern, release workflows) come from
-// the Markdown delivery profile `.pipes/ai-instructions/delivery.md`; safe defaults apply without it.
-// Read-only: it inspects the command and, at most, reads the current git branch.
+// the optional Markdown delivery profile `.pipes/ai-instructions/delivery.md`; without it, every
+// release or promotion asks the holder of gate G5, who is the user unless the optional
+// `.pipes/ai-instructions/accountability.md` names another holder.
+// Read-only: it inspects the command and, at most, reads the current git branch and the two files.
 const { spawnSync } = require('node:child_process');
 const path = require('node:path');
+const fs = require('node:fs');
 const { environmentRule, loadProfile } = require('./delivery-profile.cjs');
+
+const DEFAULT_G5_HOLDER = 'you, the G5 holder';
+
+// The holder of gate G5 from an accountability matrix: the last cell of the table row whose first
+// cell starts with `G5`. A missing row, an empty cell, a `{...}` placeholder, or the session user
+// resolves to the default holder.
+function g5HolderFrom(markdown) {
+  for (const line of String(markdown || '').split(/\r?\n/)) {
+    const cells = line.trim().replace(/^\||\|$/g, '').split('|').map((cell) => cell.trim());
+    if (!/^\|/.test(line.trim()) || !/^G5\b/.test(cells[0] || '')) continue;
+    const holder = cells[cells.length - 1].replace(/^`(.*)`$/, '$1').trim();
+    if (!holder || holder.includes('{') || /session user/i.test(holder)) return DEFAULT_G5_HOLDER;
+    return holder;
+  }
+  return DEFAULT_G5_HOLDER;
+}
+
+function loadG5Holder(pipeRoot = path.resolve(__dirname, '..', '..')) {
+  try {
+    const file = path.join(pipeRoot, 'ai-instructions', 'accountability.md');
+    return fs.existsSync(file) ? g5HolderFrom(fs.readFileSync(file, 'utf8')) : DEFAULT_G5_HOLDER;
+  } catch {
+    return DEFAULT_G5_HOLDER;
+  }
+}
 
 const RANK = { none: 0, ask: 1, deny: 2 };
 
@@ -168,20 +196,22 @@ function decideGh(args, raw, context) {
     return { decision: 'ask', reason: 'Posting a review publishes it to the pull request; confirm it (rule-commit-guardrails).' };
   }
   if ((group === 'pr' || group === 'issue') && action === 'comment') return { decision: 'ask', reason: 'Posting a comment publishes it; confirm it (rule-commit-guardrails).' };
-  if (group === 'release' && action === 'create') return { decision: 'ask', reason: 'Creating a release needs your approval (gate G5).' };
+  if (group === 'release' && action === 'create') return { decision: 'ask', reason: 'Creating a release needs the confirmation of ' + context.g5Holder + ' (gate G5).' };
   if (group === 'workflow' && action === 'run') {
     const workflow = path.basename(rest.find((arg) => !arg.startsWith('-')) || '');
     const { profile } = context;
     const isRelease = profile.releaseWorkflows.length ? profile.releaseWorkflows.includes(workflow) : /release|promote|deploy/i.test(workflow);
     if (!isRelease) return { decision: 'ask', reason: 'Dispatching a workflow is an external effect; confirm it.' };
     const environment = workflowEnvironment(rest);
-    const rule = environmentRule(profile, environment || '*');
-    if (environment && rule.autonomy !== 'ticket') {
-      return { decision: 'ask', reason: 'Release or promotion to ' + environment + ' needs your approval (gate G5).' };
+    // Without an environment, a profile that uses tickets treats the dispatch as a ticket release.
+    const usesTickets = profile.environments.some((candidate) => candidate.autonomy === 'ticket');
+    const rule = environment || !usesTickets ? environmentRule(profile, environment || '*') : { autonomy: 'ticket' };
+    if (rule.autonomy !== 'ticket') {
+      return { decision: 'ask', reason: 'Release or promotion to ' + (environment || 'an unspecified environment') + ' needs the confirmation of ' + context.g5Holder + ' (gate G5).' };
     }
     const ticket = profile.changeTicket.pattern;
     const ticketName = ticket ? ticket.source.replace(/\\b/g, '').replace(/\\d\+/g, '') + ' ' : '';
-    const approver = 'the ' + (profile.changeTicket.approver || 'release manager').toLowerCase();
+    const approver = profile.changeTicket.approver ? 'the ' + profile.changeTicket.approver.toLowerCase() : context.g5Holder;
     if (ticket && ticket.test(raw)) {
       return { decision: 'ask', reason: 'Release or promotion to ' + (environment || 'an unspecified environment') + ' with a change ticket; ' + approver + ' must confirm (gate G5).' };
     }
@@ -242,7 +272,12 @@ function gitBranch(directory) {
 
 function decide(input, options = {}) {
   if (!input || input.tool_name !== 'Bash') return { decision: 'none' };
-  const context = { cwd: input.cwd || process.cwd(), currentBranch: options.currentBranch || gitBranch, profile: options.profile || loadProfile() };
+  const context = {
+    cwd: input.cwd || process.cwd(),
+    currentBranch: options.currentBranch || gitBranch,
+    profile: options.profile || loadProfile(),
+    g5Holder: options.g5Holder || loadG5Holder(),
+  };
   return decideCommand(input.tool_input?.command, context);
 }
 
@@ -274,4 +309,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { decide, decideCommand, hookOutput, splitSegments, tokenize };
+module.exports = { DEFAULT_G5_HOLDER, decide, decideCommand, g5HolderFrom, hookOutput, splitSegments, tokenize };

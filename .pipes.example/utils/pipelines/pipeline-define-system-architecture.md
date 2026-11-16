@@ -1,7 +1,7 @@
 ---
 title: Define System Architecture
 description: Builds or refreshes an evidence-backed architecture instruction with explicit ownership, write context, and preservation gates.
-version: 2.4
+version: 2.5
 domain: architecture
 category: definition
 fragments:
@@ -27,7 +27,7 @@ Use during onboarding, after a material architecture change, or when the archite
 
 ## Loop Use
 
-A framework-maintenance, concept-development, or feature-delivery loop may invoke this pipeline with execution context, project instructions, repository evidence, decisions, current architecture content, and unresolved user-owned boundaries. It returns exact architecture content, targets, approval state, wrapper effects, and validation. Installed projects write canonical `.pipes/` only; starter maintenance writes `.pipes-v2/` first and reconciles `.pipes/` second. Resume from the first incomplete phase after inspecting actual targets and generated wrappers.
+A framework-maintenance, concept-development, or feature-delivery loop may invoke this pipeline with execution context, project instructions, repository evidence, decisions, current architecture content, and unresolved user-owned boundaries. It returns exact architecture content, targets, approval state, wrapper effects, and validation. Installed projects write canonical `.pipes/` only; starter maintenance writes the starter source tree first and reconciles `.pipes/` second. Resume from the first incomplete phase after inspecting actual targets and generated wrappers.
 
 ## Control Rules
 
@@ -40,7 +40,7 @@ A framework-maintenance, concept-development, or feature-delivery loop may invok
 ## Output
 
 - Installed-project mode: `.pipes/ai-instructions/architecture.md`
-- Starter-maintenance mode: staged `.pipes-v2/ai-instructions/architecture.md` followed by its equivalent installed `.pipes/` mirror
+- Starter-maintenance mode: the matching `ai-instructions/architecture.md` in the starter source tree, when the repository has one, followed by its equivalent installed `.pipes/` mirror
 - Refreshed configured instruction wrappers and validation evidence
 
 ## Phases
@@ -192,7 +192,7 @@ A framework-maintenance, concept-development, or feature-delivery loop may invok
 
 **Instructions:**
 1. Re-read every target and return to Phase 3 if current content or ownership changed after approval.
-2. Use `fragment-write-architecture-instruction` to write canonical `.pipes/` only in an installed project, or `.pipes-v2/` first and `.pipes/` second in starter-maintenance context.
+2. Use `fragment-write-architecture-instruction` to write canonical `.pipes/` only in an installed project, or the starter source tree first and `.pipes/` second in starter-maintenance context.
 3. Report an already matching target as unchanged and never overwrite unmanaged or unapproved established content.
 4. Regenerate configured instruction wrappers from the active source context.
 5. Re-read source and wrappers, validate staged/installed equivalence when applicable, canonical paths, section structure, and preserved commitments.

@@ -21,7 +21,6 @@ const EXPECTED = [
   'pipeline-design-spec',
   'pipeline-execute-mission',
   'pipeline-execute-plan',
-  'pipeline-onboard-service-repo',
   'pipeline-plan-new-feature',
   'pipeline-record-decision',
   'pipeline-release-change',

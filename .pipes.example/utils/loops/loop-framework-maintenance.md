@@ -1,7 +1,7 @@
 ---
 title: Framework Maintenance Loop
 description: Evolve Pipes Markdown contracts and keep their generated discovery surfaces current.
-version: 2.11
+version: 2.12
 domain: all
 loop_type: maintenance
 status: active
@@ -34,7 +34,6 @@ pipelines:
   - pipeline-execute-plan
   - pipeline-record-decision
   - pipeline-add-eval
-  - pipeline-onboard-service-repo
   - pipeline-define-policies
   - pipeline-bootstrap-workspace
 rules:
@@ -54,7 +53,7 @@ Use this loop to change Pipes instructions, records, fragments, pipelines, loops
 
 ## Operating Envelope
 
-The loop may inspect framework sources, edit approved Markdown contracts, update static generators, regenerate managed surfaces, and run development tests. Change staged source first, then reconcile the installed `.pipes` copy.
+The loop may inspect framework sources, edit approved Markdown contracts, update static generators, regenerate managed surfaces, and run development tests. When the repository has a separate starter source tree, change it first, then reconcile the installed `.pipes` copy.
 
 Ask before widening the framework contract beyond the approved change, removing user-owned records, publishing a starter, or performing version-control actions.
 
@@ -97,7 +96,7 @@ Only after the outcome and relationships are written, re-read, and validated may
 
 ## Available Pipelines
 
-Use the creation pipelines for loops, pipelines, and roles; the definition pipelines for project or architecture instructions; `pipeline-add-eval` to turn an incident, a repeated agent mistake, or a new contract into an eval case; `pipeline-onboard-service-repo` to align one service repository's agent docs with the Pipes policies; `pipeline-bootstrap-workspace` to set up a new workspace in order; `pipeline-define-policies` to derive project policy rules from repository evidence; and planning, execution, or decision pipelines when their deterministic contract fits.
+Use the creation pipelines for loops, pipelines, and roles; the definition pipelines for project or architecture instructions; `pipeline-add-eval` to turn an incident, a repeated agent mistake, or a new contract into an eval case; `pipeline-bootstrap-workspace` to set up a new workspace in order; `pipeline-define-policies` to derive project policy rules from repository evidence; and planning, execution, or decision pipelines when their deterministic contract fits.
 
 ## Generation Policy
 
@@ -105,14 +104,14 @@ Canonical Markdown owns behavior. Generators may emit wrappers, skills, agents, 
 
 ## Validation
 
-- The shipped starter baseline retains its approved five-loop and ten-pipeline inventory, while installed workspace additions remain valid and generated surfaces reflect the active inventory.
+- The shipped starter baseline retains its approved loop and pipeline inventory, while installed workspace additions remain valid and generated surfaces reflect the active inventory.
 - Referenced fragments, rules, roles, and paths resolve.
 - Catalogs, mappings, wrappers, and managed skills match canonical sources.
 - A clean temporary installation can regenerate the same surfaces.
 - No staged-only path leaks into installed output.
 - Every generator's `--check` mode, where it has one, reports no stale output, and the always-on instruction block is within its budget.
-- Gate G6 in `.pipes/ai-instructions/accountability.md`: before a human approves a change to `.pipes/**` other than the project records in `.pipes/project/**`, or to `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, `.claude/**`, or `.agents/**`, when `.pipes/ai-instructions/delivery.md` has an Evals table, eval results are required: run the eval tier the change needs and attach its result file. Without the table, an eval run is recommended: offer the tier and its cost estimate, and record in the approval receipt that no eval ran when the human approves without one. A failing case blocks the approval unless the human accepts the named failure as residual risk; an invalid case is rerun with `--rerun-failed`.
-- Eval tiers, to keep usage low: for every such change, `node .pipes/utils/scripts/run-evals.cjs --changed` (the cases whose `covers` match the changed files; a broad change such as `core.md` or a generated entrypoint runs the starter scope); before the commit that completes a step, `--scope starter`; at a milestone, such as before a release or a port, all cases with `--milestone`. Routine tiers use the routine model and milestones the milestone model from the Evals table in `delivery.md`. Never run two full suites in a row; rerun only failed or invalid cases.
+- Gate G6, decided by the holder of gate G6 (core.md Gates): before a human approves a change to `.pipes/**` other than the project records in `.pipes/project/**`, or to `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, `.claude/**`, or `.agents/**`, when `.pipes/ai-instructions/delivery.md` has an Evals table, eval results are required: run the eval tier the change needs and attach its result file. Without the table, an eval run is recommended: offer the tier and its cost estimate, and record in the approval receipt that no eval ran when the human approves without one. A failing case blocks the approval unless the human accepts the named failure as residual risk; an invalid case is rerun with `--rerun-failed`.
+- Eval tiers, to keep usage low: for every such change, `node .pipes/utils/scripts/run-evals.cjs --changed` (the cases whose `covers` match the changed files; a broad change such as `core.md` or a generated entrypoint runs the starter scope); before the commit that completes a step, `--scope starter`; at a milestone, such as before a release or a port, all cases with `--milestone`. Routine tiers use the routine model and milestones the milestone model from the Evals table in `delivery.md` when it has one, otherwise the agent tool's default model. Never run two full suites in a row; rerun only failed or invalid cases.
 
 ## Stop Conditions
 

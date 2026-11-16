@@ -1,7 +1,7 @@
 ---
 title: Format Implementation Plan
 description: Formats framing, codebase evidence, solution design, implementation work, tests, and risks into an executable Markdown plan.
-version: 2.5
+version: 2.6
 fragment_type: output
 domain: codebase
 ---
@@ -15,7 +15,7 @@ Keep the plan title in frontmatter only; begin the body with `## Outcome`.
 
 Serialize `related` as a YAML list: use `related: []` when no files apply; otherwise use unique, readable project-relative paths. A plan that implements a spec lists the spec path in `related`, and the spec lists the plan in return.
 
-When the plan implements a spec, fill `## Spec Traceability` with every requirement ID the plan covers and cite only IDs that exist in the related spec. Course plan sections map to this template as follows: Files that change is `### Impacted Files`, Order of work is `## Implementation`, Risks is `## Risks And Preconditions`, and Proof is `## Test Strategy` together with `## Acceptance Criteria`. When implementation diverges from the approved plan, update the plan in the same commit as the divergent change.
+When the plan implements a spec, fill `## Spec Traceability` with every requirement ID the plan covers and cite only IDs that exist in the related spec. Plan sections map to this template as follows: Files that change is `### Impacted Files`, Order of work is `## Implementation`, Risks is `## Risks And Preconditions`, and Proof is `## Test Strategy` together with `## Acceptance Criteria`. When implementation diverges from the approved plan, update the plan in the same commit as the divergent change.
 
 ## Template
 

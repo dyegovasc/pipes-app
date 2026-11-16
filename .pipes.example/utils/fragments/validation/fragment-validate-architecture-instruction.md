@@ -1,7 +1,7 @@
 ---
 title: Validate Architecture Instruction
 description: Checks that a proposed architecture instruction is complete, evidence-aware, correctly scoped, internally consistent, and safe to assemble.
-version: 1.1
+version: 1.2
 fragment_type: validation
 domain: codebase
 ---
@@ -23,7 +23,7 @@ domain: codebase
 
 ### Operational Readiness
 - [ ] `installed_project` mode targets only canonical `.pipes/ai-instructions/architecture.md`
-- [ ] `starter_maintenance` mode targets the approved `.pipes-v2/` source first and its `.pipes/` mirror second
+- [ ] `starter_maintenance` mode targets the approved starter source tree file first and its `.pipes/` mirror second
 - [ ] Staged and installed proposals are equivalent and generated output contains no staging-root path
 - [ ] Wrapper regeneration, source context, and validation steps are identified
 - [ ] Idempotency is based on inspecting current content and exact approved text, not on a second persisted workflow-state contract

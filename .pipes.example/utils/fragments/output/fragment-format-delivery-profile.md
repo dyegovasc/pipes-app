@@ -1,7 +1,7 @@
 ---
 title: Format Delivery Profile
 description: Formats the Markdown delivery profile that hooks, rules, and workflows read for project delivery facts.
-version: 1.2
+version: 1.3
 fragment_type: output
 domain: codebase
 ---
@@ -9,9 +9,9 @@ domain: codebase
 
 ## Format
 
-Produce `.pipes/ai-instructions/delivery.md`. It holds project delivery facts as Markdown sections with plain tables, so people read it as a document and `utils/scripts/delivery-profile.cjs` parses it. Keep every section heading and table header row exactly as in the template; change only the rows. Wrap literal values such as branch names, environment names, commands, and patterns in backticks. Validate the result with `node .pipes/utils/scripts/delivery-profile.cjs`.
+Produce the optional `.pipes/ai-instructions/delivery.md` when the user opts in. It holds project delivery facts as Markdown sections with plain tables, so people read it as a document and `utils/scripts/delivery-profile.cjs` parses it. Keep every section heading and table header row exactly as in the template; change only the rows. Wrap literal values such as branch names, environment names, commands, and patterns in backticks. Validate the result with `node .pipes/utils/scripts/delivery-profile.cjs`.
 
-Autonomy values: `auto` deploys without an agent dispatch; `ask` needs a human confirmation of the exact dispatch; `ticket` needs an approved change ticket that matches the pattern and its approver. The `*` row applies to every environment that is not listed; use `ticket` for it unless the user decides otherwise.
+Autonomy values: `auto` deploys without an agent dispatch; `ask` needs a human confirmation of the exact dispatch; `ticket` needs an approved change ticket that matches the pattern and its approver. The `*` row applies to every environment that is not listed; use `ask` for it unless the user decides otherwise. Include the Change Tickets section only when an environment uses `ticket`.
 
 The Evals section is optional. Include it when the project runs behavioral evals: an Evals table with at least one row makes eval results required at gate G6 and names the model of each eval tier, where `default` means the agent tool's own default model. Omit the whole section, heading included, when the project does not run evals yet; eval runs are then recommended but not required.
 
@@ -46,7 +46,7 @@ This file is part of the project identity and has project-identity precedence ev
 | Environment | Autonomy | Dispatch |
 | --- | --- | --- |
 | `{environment}` | `{auto, ask, or ticket}` | {how it deploys, or the dispatch command} |
-| `*` | `ticket` | {dispatch command for any other environment} |
+| `*` | `ask` | {dispatch command for any other environment} |
 
 ## Change Tickets
 

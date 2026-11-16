@@ -1,7 +1,7 @@
 ---
 title: Review Change
-description: Reviews one service pull request or branch against its plan, spec, and org policies with a verifier and a non-author reviewer, and hands a recommendation to the code owner.
-version: 1.0
+description: Reviews one pull request or branch against its plan, spec, and project policies with a verifier and a non-author reviewer, and hands a recommendation to the code owner.
+version: 1.1
 domain: codebase
 category: delivery
 fragments:
@@ -14,13 +14,13 @@ fragments:
 ---
 # Pipeline: Review Change
 
-Review one change in a backend service repository before the code owner decides on it. The review layers are the pull request checks the repository already runs, a verifier that proves the acceptance criteria, and a non-author reviewer that checks the diff against its plan, spec requirements, and org policies. The result is a recorded recommendation with a severity tally.
+Review one change in a code repository before the holder of gate G4 decides on it. The review layers are the pull request checks the repository already runs, a verifier that proves the acceptance criteria, and a non-author reviewer that checks the diff against its plan, spec requirements, and project policies. The result is a recorded recommendation with a severity tally.
 
-This pipeline never approves, merges, requests changes, or edits the change. Gate G4 belongs to the code owner in the repository's `.github/CODEOWNERS`.
+This pipeline never approves, merges, requests changes, or edits the change. Gate G4 belongs to its holder (core.md Gates; the user unless `.pipes/ai-instructions/accountability.md` names another holder, for example from `.github/CODEOWNERS`).
 
 ## Entry Points
 
-Use when a pull request or branch in a service repository is ready for review, or when `loop-feature-delivery` reaches review after Validate. Do not use for changes to this orchestration repository, which `loop-framework-maintenance` and the eval suite cover.
+Use when a pull request or branch in a code repository is ready for review, or when `loop-feature-delivery` reaches review after Validate. Do not use for changes to the `.pipes/` framework layer, which `loop-framework-maintenance` and the eval suite cover.
 
 ## Loop Use
 
@@ -32,7 +32,7 @@ Use when a pull request or branch in a service repository is ready for review, o
 - The `e2e-tester` and `reviewer` roles run as isolated agents where the agent tool supports them, otherwise in separate sessions, so the author of the change never reviews it.
 - Every finding has a verified file and line or a verified command result.
 - Do not repeat what the pull request checks already enforce, unless a check failed.
-- Write the record and any comment in English.
+- Write the record and any comment in the project's documentation language.
 - Posting a comment or review on the pull request is external publishing and needs explicit approval; the hook asks for it.
 
 ## Output
@@ -49,7 +49,7 @@ Use when a pull request or branch in a service repository is ready for review, o
 
 **Acting Role:** `full-stack-tech-lead`
 
-**Entry Conditions:** A service repository and a pull request number or branch are named.
+**Entry Conditions:** A repository and a pull request number or branch are named.
 
 **Inputs:**
 - Repository, pull request or branch, and the plan path when known.
@@ -83,14 +83,14 @@ Use when a pull request or branch in a service repository is ready for review, o
 **Entry Conditions:** Phase 1 produced a worktree and the upstream records.
 
 **Inputs:**
-- Worktree, plan acceptance criteria, spec requirement IDs, and the service's working commands.
+- Worktree, plan acceptance criteria, spec requirement IDs, and the project's working commands.
 
 **Fragments:**
 - `fragment-validation`
 
 **Instructions:**
 1. Run as the `e2e-tester` isolated agent in verifier mode, or in a separate session.
-2. Use `fragment-validation` to run the build and verify commands from `.pipes/ai-instructions/delivery.md` and the plan's proof commands in the worktree.
+2. Use `fragment-validation` to run the build and verify commands from project identity, or from `.pipes/ai-instructions/delivery.md` when it exists, and the plan's proof commands in the worktree.
 3. Mark each acceptance criterion and requirement as proved, failed, or not proved, with the command and result.
 
 - Preserve acting-role context: `e2e-tester` in verifier mode.
@@ -108,7 +108,7 @@ Use when a pull request or branch in a service repository is ready for review, o
 
 ### Phase 3: Review
 
-**Objective:** Check the diff against the plan, spec requirements, org policies, the service review guide, and its blast radius, as a non-author.
+**Objective:** Check the diff against the plan, spec requirements, project policies, the repository's review guide when present, and its blast radius, as a non-author.
 
 **Acting Role:** `reviewer`
 
@@ -122,7 +122,7 @@ Use when a pull request or branch in a service repository is ready for review, o
 
 **Instructions:**
 1. Run as the `reviewer` isolated agent, or in a separate session that did not author the change.
-2. Check each changed file against the plan steps and the spec requirement IDs it claims, and against the org policy rules that apply.
+2. Check each changed file against the plan steps and the spec requirement IDs it claims, and against the project policy rules that apply.
 3. Use `fragment-assess-blast-radius` to check consumers of changed contracts, data migrations, and security-relevant paths.
 4. Apply the repository's `REVIEW.md` when present. Report each finding with severity, file and line, rule or requirement, and correction.
 
@@ -158,7 +158,7 @@ Use when a pull request or branch in a service repository is ready for review, o
 
 **Instructions:**
 1. Use `fragment-tally-review-findings` to produce the tally and verdict.
-2. Use `fragment-format-review-record` to write the review record and link it reciprocally with the plan. Writing the record is part of this pipeline's approved scope; it changes nothing in the service repository.
+2. Use `fragment-format-review-record` to write the review record and link it reciprocally with the plan. Writing the record is part of this pipeline's approved scope; it changes nothing in the reviewed repository.
 3. Run `node .pipes/utils/scripts/validate-project-records.cjs` and resolve record findings.
 4. Remove the temporary worktree and local ref.
 
@@ -177,7 +177,7 @@ Use when a pull request or branch in a service repository is ready for review, o
 
 ### Phase 5: Hand Off
 
-**Objective:** Give the recommendation to the developer and the code owner, and post it only with approval.
+**Objective:** Give the recommendation to the developer and the holder of gate G4, and post it only with approval.
 
 **Acting Role:** `roadmapper`
 
@@ -190,8 +190,8 @@ Use when a pull request or branch in a service repository is ready for review, o
 - `fragment-request-approval`
 
 **Instructions:**
-1. Present the verdict, tally, and blocking findings, and state that the code owner in `.github/CODEOWNERS` decides gate G4.
-2. When the user wants the review on the pull request, use `fragment-request-approval` for the exact comment text, then post it with `gh pr comment`; the hook asks again before it runs.
+1. Present the verdict, tally, and blocking findings, and state that the holder of gate G4 decides it.
+2. When the user wants the review on the pull request, use `fragment-request-approval` for the exact comment text, then post it with the forge command, for example `gh pr comment`; the hook asks again before it runs.
 3. Never approve, merge, or request changes on the pull request.
 
 - Preserve acting-role context: `roadmapper`.
@@ -202,7 +202,7 @@ Use when a pull request or branch in a service repository is ready for review, o
 
 **Handoff To:**
 
-**Approval Gate:** Human-mandatory for posting. Gate G4 itself belongs to the code owner and is never decided here.
+**Approval Gate:** Human-mandatory for posting. Gate G4 itself belongs to its holder and is never decided here.
 
 **Exit Conditions:**
 - The developer has the recommendation; any posted comment was approved.

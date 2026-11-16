@@ -1,7 +1,7 @@
 ---
 title: Feature Delivery Loop
 description: Plan, implement, and validate a bounded feature through adaptive delivery.
-version: 2.8
+version: 2.9
 domain: all
 loop_type: delivery
 status: active
@@ -97,8 +97,8 @@ Only after the outcome and relationships are written, re-read, and validated may
 - `pipeline-plan-new-feature` for a deterministic implementation plan that cites spec requirement IDs
 - `pipeline-execute-plan` for an approved plan
 - `pipeline-record-decision` for a lasting delivery choice
-- `pipeline-review-change` after Validate, to review a service pull request with the verifier and the non-author reviewer and hand the recommendation to the code owner
-- `pipeline-release-change` after merge, to release or promote through the environments in `.pipes/ai-instructions/delivery.md` behind gate G5 and record the release in the outcome
+- `pipeline-review-change` after Validate, to review a pull request with the verifier and the non-author reviewer and hand the recommendation to the code owner
+- `pipeline-release-change` after merge, to release or promote behind gate G5, through the environments in `.pipes/ai-instructions/delivery.md` when it exists and record the release in the outcome
 
 ## Validation
 

@@ -1,7 +1,7 @@
 ---
 title: Create Team Member
 description: Defines a reusable Pipes role with clear ownership, boundaries, consultation, and handoffs.
-version: 2.4
+version: 2.5
 domain: team
 category: creation
 fragments:
@@ -31,12 +31,12 @@ A framework-maintenance loop may invoke this pipeline after identifying a real o
 - Avoid overlapping owners for the same responsibility.
 - Keep the role reusable across missions and pipelines.
 - Resolve `installed_project` or `starter_maintenance` before proposing targets.
-- Installed projects write canonical `.pipes/` only; starter maintenance writes and validates `.pipes-v2/` first, then reconciles `.pipes/`.
+- Installed projects write canonical `.pipes/` only; starter maintenance writes and validates the starter source tree first, then reconciles `.pipes/`.
 
 ## Output
 
 - Installed-project mode: `.pipes/team/{role-id}.md`
-- Starter-maintenance mode: `.pipes-v2/team/{role-id}.md` followed by its equivalent `.pipes/team/{role-id}.md` mirror
+- Starter-maintenance mode: `team/{role-id}.md` in the starter source tree followed by its equivalent `.pipes/team/{role-id}.md` mirror
 
 ## Phases
 
@@ -181,7 +181,7 @@ A framework-maintenance loop may invoke this pipeline after identifying a real o
 **Instructions:**
 1. Re-read every applicable target and return to Phase 3 if its content, ownership, or approved context changed.
 2. Use `fragment-create-team-member-file` to create or reuse only the approved content at the exact context-dependent targets.
-3. In `installed_project`, write only `.pipes/team/{role-id}.md`; in `starter_maintenance`, write and validate `.pipes-v2/team/{role-id}.md` first, then reconcile and validate `.pipes/team/{role-id}.md`.
+3. In `installed_project`, write only `.pipes/team/{role-id}.md`; in `starter_maintenance`, write and validate `team/{role-id}.md` in the starter source tree first, then reconcile and validate `.pipes/team/{role-id}.md`.
 4. Stop instead of overwriting a different existing or unmanaged role.
 5. Re-read every role target and validate frontmatter, required sections, authority, handoffs, target path, content equivalence when paired, and referenced role ID.
 6. Report created and reused paths, evidence, deviations, and any separately proposed reference updates without applying them automatically.

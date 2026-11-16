@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// Proves in place that the framework layer of this install works as a starter kit (step 6d-2).
+// Proves in place that the framework layer of this install works as a starter kit.
 // It builds a temporary `.pipes.example/` from this install, resets the project layer to starter
 // placeholders (restored from the installed baseline archive) and removes project content, writes a
 // temporary provenance baseline, regenerates every surface, and runs the script tests in strict
 // starter mode. Nothing outside the temporary directory changes. Read-only for this install.
-// Usage: node .pipes/utils/scripts/verify-starter.cjs [--keep] [--version 2.2.0]
+// Usage: node .pipes/utils/scripts/verify-starter.cjs [--keep] [--version X]   (X defaults to a pre-release of the installed framework version)
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
@@ -17,8 +17,18 @@ const PLACEHOLDERS_FROM_BASELINE = ['ai-instructions/project.md', 'ai-instructio
 const REMOVED_INSTRUCTIONS = ['ai-instructions/delivery.md', 'ai-instructions/accountability.md'];
 const STARTER_CORRECTIONS = '---\ntitle: Corrections\ndescription: Short always-on corrections for mistakes an agent made more than once in this repository.\nversion: 1.0\nassembly: inline\n---\n## Things The Agent Gets Wrong\n\nEach line is a correction for a mistake that happened at least twice, with a link to its evidence. Add a line only through `loop-framework-maintenance` under `rule-capture-pipeline-incidents`, and remove a line when a rule, hook, or check makes it unnecessary.\n\n- None recorded yet.\n';
 
+// The default version of the temporary starter: a pre-release of this install's framework version, so
+// the temporary provenance baseline always differs from the installed one.
+function installedVersion() {
+  let version = '0.0.0';
+  try {
+    version = JSON.parse(fs.readFileSync(path.join(PIPE_ROOT, 'manifest.json'), 'utf8')).frameworkVersion || version;
+  } catch {}
+  return version.split('-')[0] + '-starter';
+}
+
 function parseArgs(argv) {
-  const options = { keep: false, version: '2.2.0' };
+  const options = { keep: false, version: installedVersion() };
   for (let index = 2; index < argv.length; index += 1) {
     if (argv[index] === '--keep') options.keep = true;
     else if (argv[index] === '--version') { options.version = argv[index + 1]; index += 1; }
@@ -110,7 +120,7 @@ function buildStarter(workspace, dirName = '.pipes.example') {
 // Builds the starter in `workspace/dirName`, regenerates every surface from it into `workspace`,
 // and writes a temporary provenance baseline. `step` receives each generator result.
 // The eval runner uses it with dirName `.pipes` to give a case a fresh install.
-function installStarter(workspace, { dirName = '.pipes.example', version = '2.2.0', step = () => true } = {}) {
+function installStarter(workspace, { dirName = '.pipes.example', version = installedVersion(), step = () => true } = {}) {
   const { starter, removed } = buildStarter(workspace, dirName);
   for (const name of ['README.md', 'utils/rules/rule-framework-provenance.md']) {
     const file = path.join(starter, name);

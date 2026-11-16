@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const { decide } = require('./hook-guard-protected-actions.cjs');
+const { DEFAULT_G5_HOLDER, decide, g5HolderFrom } = require('./hook-guard-protected-actions.cjs');
 const { parseProfile } = require('./delivery-profile.cjs');
 
 // A neutral fixture profile, so these cases do not depend on the installed project's profile. Its names
@@ -11,7 +11,7 @@ const FIXTURE_PROFILE = parseProfile([
   '## Protected Branches', '', '| Branch | Rule |', '| --- | --- |', '| `main` | PR only |', '| `master` | PR only |', '| `develop` | PR only |', '',
   '## Environments', '', '| Environment | Autonomy | Dispatch |', '| --- | --- | --- |',
   '| `fixture-auto` | `auto` | on merge |', '| `fixture-ask` | `ask` | x |', '| `*` | `ticket` | y |', '',
-  '## Change Tickets', '', '| Key | Value |', '| --- | --- |', '| Pattern | `FXT-\\d+` |', '| Approver | Release manager |', '',
+  '## Change Tickets', '', '| Key | Value |', '| --- | --- |', '| Pattern | `FXT-\\d+` |', '| Approver | Fixture approver |', '',
   '## Release Workflows', '', '| Workflow | Purpose |', '| --- | --- |', '| `fixture-ship.yml` | ship |', '| `fixture-rollout.yml` | roll out |',
 ].join('\n'));
 
@@ -25,7 +25,7 @@ const CASES = [
   ['git status && git diff', 'none'],
   ['make build', 'none'],
   ['git commit -m "feat: x"', 'ask'],
-  ['git -C orders-service commit -am "x"', 'ask'],
+  ['git -C fixture-app commit -am "x"', 'ask'],
   ['git push origin feature/x', 'ask'],
   ['git push', 'ask'],
   ['git push origin main', 'deny'],
@@ -36,7 +36,7 @@ const CASES = [
   ['git push origin +feature/x', 'deny'],
   ['git push origin --delete feature/x', 'deny'],
   ['git push --all', 'deny'],
-  ['cd orders-service && git push origin main', 'deny'],
+  ['cd fixture-app && git push origin main', 'deny'],
   ['echo ok; git push origin main', 'deny'],
   ['bash -c "git push origin main"', 'deny'],
   ['FOO=1 git commit -m x', 'ask'],
@@ -47,8 +47,8 @@ const CASES = [
   ['gh pr review 12 --request-changes -b "see findings"', 'ask'],
   ['gh pr comment 12 --body-file review.md', 'ask'],
   ['gh issue comment 7 -b "x"', 'ask'],
-  ['git -C orders-service worktree add /tmp/review-12 pr-12', 'none'],
-  ['git -C orders-service fetch origin pull/12/head:pr-12', 'none'],
+  ['git -C fixture-app worktree add /tmp/review-12 pr-12', 'none'],
+  ['git -C fixture-app fetch origin pull/12/head:pr-12', 'none'],
   ['gh pr view 12', 'none'],
   ['gh workflow run fixture-rollout.yml -f version=0.9.0 -f environment=fixture-ask', 'ask'],
   ['gh workflow run fixture-ship.yml -f environment=fixture-auto', 'ask'],
@@ -113,7 +113,11 @@ test('without a delivery profile the hook falls back to safe defaults', () => {
   const run = withProfile(DEFAULT_PROFILE);
   assert.equal(run('git push origin main'), 'deny');
   assert.equal(run('git push origin develop'), 'ask', 'develop is protected only when a profile says so');
-  assert.equal(run('gh workflow run fixture-deploy.yml -f environment=fixture-ask'), 'deny', 'every environment needs a ticket and no pattern exists');
+  assert.equal(run('gh workflow run fixture-deploy.yml -f environment=fixture-any'), 'ask', 'without a profile every release or promotion asks the G5 holder');
+  assert.equal(run('gh workflow run fixture-deploy.yml'), 'ask', 'a release without an environment also asks');
+  const reason = decide({ tool_name: 'Bash', tool_input: { command: 'gh workflow run release.yml -f environment=production' }, cwd: '/repo' }, { currentBranch: () => 'feature/x', profile: DEFAULT_PROFILE, g5Holder: DEFAULT_G5_HOLDER }).reason;
+  assert.match(reason, /you, the G5 holder/);
+  assert.match(reason, /gate G5/);
   assert.equal(run('gh workflow run lint.yml'), 'ask');
 });
 
@@ -122,7 +126,7 @@ test('another project profile changes branches, environments, ticket pattern, an
     '## Protected Branches', '', '| Branch | Rule |', '| --- | --- |', '| `trunk` | PR only |', '',
     '## Environments', '', '| Environment | Autonomy | Dispatch |', '| --- | --- | --- |',
     '| `fixture-qa` | `ask` | x |', '| `*` | `ticket` | y |', '',
-    '## Change Tickets', '', '| Key | Value |', '| --- | --- |', '| Pattern | `FXT-\\d+` |', '| Approver | Change board |', '',
+    '## Change Tickets', '', '| Key | Value |', '| --- | --- |', '| Pattern | `FXT-\\d+` |', '| Approver | Fixture approvers |', '',
     '## Release Workflows', '', '| Workflow | Purpose |', '| --- | --- |', '| `fixture-ship.yml` | ship |',
   ].join('\n')));
   assert.equal(run('git push origin trunk'), 'deny');
@@ -133,3 +137,28 @@ test('another project profile changes branches, environments, ticket pattern, an
   assert.equal(run('gh workflow run fixture-ship.yml -f environment=fixture-live -f t=FXR-7'), 'deny', 'another project\'s ticket pattern does not apply');
   assert.equal(run('gh workflow run deploy-docs.yml -f environment=fixture-live'), 'ask', 'not a release workflow in this profile');
 });
+
+test('the G5 holder comes from the accountability matrix when it names one', () => {
+  const matrix = (holder) => ['| Gate | Decision | Deciding human role | Holder resolved by |', '| --- | --- | --- | --- |', '| G4 Pull request | x | Code owner | fixture-owners |', '| G5 Release | x | Release approver | ' + holder + ' |'].join('\n');
+  assert.equal(g5HolderFrom(matrix('fixture-release-team')), 'fixture-release-team');
+  assert.equal(g5HolderFrom(matrix('{environment reviewers, or session user}')), DEFAULT_G5_HOLDER, 'a template placeholder is not a holder');
+  assert.equal(g5HolderFrom(matrix('session user')), DEFAULT_G5_HOLDER);
+  assert.equal(g5HolderFrom(''), DEFAULT_G5_HOLDER, 'no matrix means the user holds G5');
+  const reason = decide({ tool_name: 'Bash', tool_input: { command: 'gh workflow run release.yml' }, cwd: '/repo' }, { currentBranch: () => 'feature/x', profile: DEFAULT_PROFILE, g5Holder: 'fixture-release-team' }).reason;
+  assert.match(reason, /fixture-release-team \(gate G5\)/);
+});
+
+test('a profile that opts in to tickets keeps the ticket rule for an unlisted environment and for a dispatch without one', () => {
+  const run = withProfile(parseProfile([
+    '## Environments', '', '| Environment | Autonomy | Dispatch |', '| --- | --- | --- |',
+    '| `fixture-qa` | `ask` | x |', '| `fixture-live` | `ticket` | y |', '',
+    '## Change Tickets', '', '| Key | Value |', '| --- | --- |', '| Pattern | `FXT-\\d+` |', '| Approver | Fixture approvers |', '',
+    '## Release Workflows', '', '| Workflow | Purpose |', '| --- | --- |', '| `fixture-ship.yml` | ship |',
+  ].join('\n')));
+  assert.equal(run('gh workflow run fixture-ship.yml -f environment=fixture-qa'), 'ask');
+  assert.equal(run('gh workflow run fixture-ship.yml -f environment=fixture-live'), 'deny');
+  assert.equal(run('gh workflow run fixture-ship.yml -f environment=fixture-staging'), 'deny', 'an unlisted environment needs a ticket when the profile uses tickets');
+  assert.equal(run('gh workflow run fixture-ship.yml'), 'deny', 'a dispatch without an environment needs a ticket when the profile uses tickets');
+  assert.equal(run('gh workflow run fixture-ship.yml -f t=FXT-9'), 'ask');
+});
+

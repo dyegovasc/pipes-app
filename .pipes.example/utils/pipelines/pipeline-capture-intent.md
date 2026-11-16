@@ -1,7 +1,7 @@
 ---
 title: Capture Intent
 description: Turns an idea, ticket, or incident into one intent record that the product owner accepts or rejects before design starts.
-version: 1.2
+version: 1.3
 domain: project
 category: record
 fragments:
@@ -18,18 +18,18 @@ This pipeline drafts and records the intent. It does not accept the intent, desi
 
 ## Entry Points
 
-Use when a person describes a problem or idea, when a Jira ticket needs to enter the delivery chain, or when an incident or monitoring finding needs a fix. Do not use for a change that already has an accepted intent, for exploratory research without a problem to solve, or for a framework maintenance task.
+Use when a person describes a problem or idea, when an issue-tracker ticket, for example a Jira issue, needs to enter the delivery chain, or when an incident or monitoring finding needs a fix. Do not use for a change that already has an accepted intent, for exploratory research without a problem to solve, or for a framework maintenance task.
 
 ## Loop Use
 
-`loop-concept-development` uses this pipeline to end concept work in an intent. `loop-investigation-and-recovery` uses it to turn a confirmed incident cause into a new intent. Pass the source, known problem and outcome, affected services, constraints, evidence paths, and the invoking mission path when mission-bound. The pipeline returns a duplicate finding, an exact proposal awaiting approval, or a written intent path with its status. Acceptance by the product owner remains a separate human-mandatory decision. After a pause, inspect existing intents and the proposed target before resuming from the first incomplete phase.
+`loop-concept-development` uses this pipeline to end concept work in an intent. `loop-investigation-and-recovery` uses it to turn a confirmed incident cause into a new intent. Pass the source, known problem and outcome, affected systems, constraints, evidence paths, and the invoking mission path when mission-bound. The pipeline returns a duplicate finding, an exact proposal awaiting approval, or a written intent path with its status. Acceptance by the product owner remains a separate human-mandatory decision. After a pause, inspect existing intents and the proposed target before resuming from the first incomplete phase.
 
 ## Control Rules
 
 - One intent owns one problem and one proposed outcome. Split a request that mixes independent problems.
 - Describe the problem, not a solution. Move solution ideas to open questions or constraints.
-- Read the source before asking: a Jira ticket through an available Atlassian connector, or incident evidence from its records.
-- `accepted` and `rejected` mean the product owner for gate G1 in `.pipes/ai-instructions/accountability.md` decided. File approval alone never accepts an intent.
+- Read the source before asking: an issue-tracker ticket through an available connector, for example Jira through an Atlassian connector, or incident evidence from its records.
+- `accepted` and `rejected` mean the holder of gate G1 (core.md Gates) decided. File approval alone never accepts an intent.
 - A new intent may name one it supersedes, but changing the older intent's status is a separate displayed and approved effect.
 - An intent created during active mission execution must link its invoking mission reciprocally before creation completes.
 
@@ -43,7 +43,7 @@ Use when a person describes a problem or idea, when a Jira ticket needs to enter
 
 ### Phase 1: Capture
 
-**Objective:** Capture one problem, its proposed outcome, the checks that show the outcome is reached, affected users and services, constraints, open questions, and origin, and check that no existing intent already owns it.
+**Objective:** Capture one problem, its proposed outcome, the checks that show the outcome is reached, affected users and systems, constraints, open questions, and origin, and check that no existing intent already owns it.
 
 **Acting Role:** `visionaire`
 
@@ -52,7 +52,7 @@ Use when a person describes a problem or idea, when a Jira ticket needs to enter
 **Entry Conditions:** A person, ticket, incident, or governed workflow names a problem worth solving.
 
 **Inputs:**
-- The idea, Jira key, or incident reference and any supplied context.
+- The idea, issue-tracker key, or incident reference and any supplied context.
 - Existing intent records in `.pipes/project/01-intents/`.
 - Project identity and repository groups from `.pipes/ai-instructions/project.md`.
 
@@ -60,9 +60,9 @@ Use when a person describes a problem or idea, when a Jira ticket needs to enter
 - `fragment-capture-intent-source`
 
 **Instructions:**
-1. Read the source before asking. Read a Jira ticket through an available Atlassian connector and an incident through its evidence and outcome records.
-2. Use `fragment-capture-intent-source` to capture the problem, proposed outcome, success checks, affected users and services, constraints, open questions, origin, and author. Record a success check that the source cannot give as an open question instead of inventing it. Ask only for facts the source and repositories cannot provide.
-3. Check affected services against the repository groups in project identity. List an unknown service as an open question.
+1. Read the source before asking. Read an issue-tracker ticket through an available connector and an incident through its evidence and outcome records.
+2. Use `fragment-capture-intent-source` to capture the problem, proposed outcome, success checks, affected users and systems, constraints, open questions, origin, and author. Record a success check that the source cannot give as an open question instead of inventing it. Ask only for facts the source and repositories cannot provide.
+3. Check affected systems against the components and repositories in project identity. List an unknown system as an open question.
 4. Read existing intents. Return a duplicate finding with the owning path when an existing intent already covers the same problem, or identify an intent this one supersedes.
 5. Split the request, or ask which problem this intent owns, when it combines independent problems.
 
@@ -70,7 +70,7 @@ Use when a person describes a problem or idea, when a Jira ticket needs to enter
 - Preserve routing semantics: `visionaire` passes the captured intent to Format And Approve, or ends the pipeline with a duplicate finding.
 
 **Outputs:**
-- One captured problem with proposed outcome, success checks, affected users and services, constraints, open questions, and origin.
+- One captured problem with proposed outcome, success checks, affected users and systems, constraints, open questions, and origin.
 - Duplicate or supersession finding against existing intents.
 
 **Handoff To:** `roadmapper`
@@ -103,10 +103,10 @@ Use when a person describes a problem or idea, when a Jira ticket needs to enter
 **Instructions:**
 1. Choose the next available filename without reserving or writing it.
 2. Use `fragment-format-intent-record` to build the complete preview with a frontmatter-only title and the Problem, Proposed Outcome, How Do We Know It Works, Affected Users And Systems, Constraints, Open Questions, and Source sections.
-3. Keep `status: draft` unless the product owner for gate G1 explicitly accepts or rejects the intent in this interaction.
+3. Keep `status: draft` unless the holder of gate G1 (core.md Gates) explicitly accepts or rejects the intent in this interaction.
 4. Under `rule-separation-of-duties`, run a `reviewer` pass in a fresh context that did not author the intent, using the `reviewer` isolated agent where the agent tool supports one and a separate session otherwise: check the intent against its source and report findings with severity. Attach the review summary to the approval package.
 5. Present the exact content, filename, status, review summary, invoking mission when mission-bound, both reciprocal relationship effects, and any separately proposed supersession effect.
-6. Use `fragment-request-approval` once for the unchanged proposal. Ask the product owner separately whether to accept the intent; rebuild and revalidate after any correction.
+6. Use `fragment-request-approval` once for the unchanged proposal. Ask the holder of gate G1 separately whether to accept the intent; rebuild and revalidate after any correction.
 
 - Preserve acting-role context: `roadmapper`, consulting `e2e-tester` for area config, filename, and relationship validation, and `reviewer` for the non-author review.
 - Preserve routing semantics: The approved unchanged proposal passes to Create; corrections return to the phase that owns them.
@@ -117,7 +117,7 @@ Use when a person describes a problem or idea, when a Jira ticket needs to enter
 
 **Handoff To:** `roadmapper`
 
-**Approval Gate:** Human-mandatory. Approval covers the displayed intent content, filename, and listed file effects. Acceptance or rejection is gate G1 and belongs to the product owner named in the Accountability Matrix; without that decision the intent stays `draft`.
+**Approval Gate:** Human-mandatory. Approval covers the displayed intent content, filename, and listed file effects. Acceptance or rejection is gate G1 and belongs to the holder of gate G1 (core.md Gates); without that decision the intent stays `draft`.
 
 **Exit Conditions:**
 - The proposal satisfies the area config and relationship contracts.

@@ -7,8 +7,8 @@ domain: all
 ---
 # Framework Catalog
 
-**Total Fragments:** 115
-**Total Pipelines:** 18
+**Total Fragments:** 107
+**Total Pipelines:** 17
 **Total Loops:** 5
 **Total Rules:** 27
 
@@ -23,7 +23,7 @@ domain: all
 | `fragment-instruction-surface-ownership` | `.pipes/utils/fragments/context/fragment-instruction-surface-ownership.md` | Instruction Surface Ownership | codebase | Describes the distinct ownership of project, architecture, and binding convention instructions. |
 | `fragment-source-tree-execution-context` | `.pipes/utils/fragments/context/fragment-source-tree-execution-context.md` | Source Tree Execution Context | framework | Describes canonical write ownership for installed projects and staged starter maintenance. |
 
-### Instruction (62)
+### Instruction (60)
 
 | Fragment | Path | Title | Domain | Description |
 | --- | --- | --- | --- | --- |
@@ -31,7 +31,6 @@ domain: all
 | `fragment-activate-mission` | `.pipes/utils/fragments/instruction/fragment-activate-mission.md` | Activate Mission | project | Records explicit execution approval and prepares an approved mission for its selected loop. |
 | `fragment-analyze-codebase-context` | `.pipes/utils/fragments/instruction/fragment-analyze-codebase-context.md` | Analyze Codebase Context | codebase | Scans the codebase to understand its structure and identify modules relevant to the feature being planned. |
 | `fragment-apply-plan-lifecycle-transition` | `.pipes/utils/fragments/instruction/fragment-apply-plan-lifecycle-transition.md` | Apply Plan Lifecycle Transition | project | Applies one authorized, evidence-backed, idempotent lifecycle transition to an executing recorded plan. |
-| `fragment-apply-status-updates` | `.pipes/utils/fragments/instruction/fragment-apply-status-updates.md` | Apply Status Updates | project | Applies only approved status and relationship edits to readable records. |
 | `fragment-assess-blast-radius` | `.pipes/utils/fragments/instruction/fragment-assess-blast-radius.md` | Assess Blast Radius | codebase | Assesses the potential impact and regression surface of the feature implementation. |
 | `fragment-assess-decision-durability` | `.pipes/utils/fragments/instruction/fragment-assess-decision-durability.md` | Assess Decision Durability | project | Evaluates whether the proposed decision is durable enough to record and determines whether it overlaps with or supersedes existing decision records. |
 | `fragment-assess-implementation-risks` | `.pipes/utils/fragments/instruction/fragment-assess-implementation-risks.md` | Assess Implementation Risks | codebase | Identifies implementation risks, regressions, and mitigations before any code is written. |
@@ -40,7 +39,6 @@ domain: all
 | `fragment-capture-execution-outcome` | `.pipes/utils/fragments/instruction/fragment-capture-execution-outcome.md` | Capture Execution Outcome | project | Classifies what happened and records evidence, deviations, residual risk, and follow-up. |
 | `fragment-check-existing-codebase-files` | `.pipes/utils/fragments/instruction/fragment-check-existing-codebase-files.md` | Check Existing Codebase Files | codebase | Resolves execution context and classifies existing project identity and convention contracts before drafting. |
 | `fragment-classify-feature-unknowns` | `.pipes/utils/fragments/instruction/fragment-classify-feature-unknowns.md` | Classify Feature Unknowns | codebase | Classifies unresolved items from feature framing so the pipeline asks the user only for what they own and defers repo-specific questions to later phases. |
-| `fragment-classify-service-guidance` | `.pipes/utils/fragments/instruction/fragment-classify-service-guidance.md` | Classify Service Guidance | codebase | Classifies every statement in a service repository's agent docs against the Pipes policies and decisions, so nothing service-specific is lost. |
 | `fragment-create-decision-file` | `.pipes/utils/fragments/instruction/fragment-create-decision-file.md` | Create Decision File | project | Writes an approved durable decision without silently changing related records. |
 | `fragment-create-eval-case` | `.pipes/utils/fragments/instruction/fragment-create-eval-case.md` | Create Eval Case | framework | Writes an approved eval case and runs it once to record whether it reproduces or guards the behavior. |
 | `fragment-create-files` | `.pipes/utils/fragments/instruction/fragment-create-files.md` | Create Files | all | Writes an approved framework component and refreshes only its static generated surfaces. |
@@ -64,7 +62,7 @@ domain: all
 | `fragment-establish-scope-guardrails` | `.pipes/utils/fragments/instruction/fragment-establish-scope-guardrails.md` | Establish Scope Guardrails | codebase | Defines explicit in-scope and out-of-scope boundaries and safety constraints for the feature implementation. |
 | `fragment-execute-approved-plan` | `.pipes/utils/fragments/instruction/fragment-execute-approved-plan.md` | Execute Approved Plan | project | Executes only ready approved plan steps with explicit recovery, deviation, protected-action, and validation stops. |
 | `fragment-execution` | `.pipes/utils/fragments/instruction/fragment-execution.md` | Execution | project | Performs a selected action within scope while preserving evidence and user-owned changes. |
-| `fragment-extract-policy-candidates` | `.pipes/utils/fragments/instruction/fragment-extract-policy-candidates.md` | Extract Policy Candidates | codebase | Groups the rules stated across repositories into org-wide policy candidates, conflicts, gaps, and repository-specific rules, each with sources. |
+| `fragment-extract-policy-candidates` | `.pipes/utils/fragments/instruction/fragment-extract-policy-candidates.md` | Extract Policy Candidates | codebase | Groups the rules stated across repositories into project-wide policy candidates, conflicts, gaps, and repository-specific rules, each with sources. |
 | `fragment-gate-evaluation` | `.pipes/utils/fragments/instruction/fragment-gate-evaluation.md` | Gate Evaluation | project | Decides whether the loop should continue or stop at a consequential boundary. |
 | `fragment-generate-solution-hypotheses` | `.pipes/utils/fragments/instruction/fragment-generate-solution-hypotheses.md` | Generate Solution Hypotheses | codebase | Generates multiple distinct solution approaches for the feature, each with trade-offs assessed. |
 | `fragment-identify-fragments` | `.pipes/utils/fragments/instruction/fragment-identify-fragments.md` | Identify Fragments | all | Determines which fragments to reuse and which to create. |
@@ -90,11 +88,10 @@ domain: all
 | `fragment-validation` | `.pipes/utils/fragments/instruction/fragment-validation.md` | Validation | project | Tests the current result against objective, acceptance, and quality criteria. |
 | `fragment-write-architecture-instruction` | `.pipes/utils/fragments/instruction/fragment-write-architecture-instruction.md` | Write Architecture Instruction | codebase | Writes an exact approved architecture instruction in installed or starter-maintenance context and refreshes configured wrappers. |
 
-### Output (22)
+### Output (16)
 
 | Fragment | Path | Title | Domain | Description |
 | --- | --- | --- | --- | --- |
-| `fragment-consolidate-structure` | `.pipes/utils/fragments/output/fragment-consolidate-structure.md` | Consolidate Structure | all | Presents a complete readable pipeline or loop and its exact file set for approval. |
 | `fragment-format-accountability-matrix` | `.pipes/utils/fragments/output/fragment-format-accountability-matrix.md` | Format Accountability Matrix | project | Formats the accountability matrix that maps each delivery gate to the human role that decides it and where the holder is resolved. |
 | `fragment-format-architecture-instruction` | `.pipes/utils/fragments/output/fragment-format-architecture-instruction.md` | Format Architecture Instruction | codebase | Formats the canonical system architecture instruction with stable sections, factual boundaries, and explicit evolution notes. |
 | `fragment-format-codebase-conventions-rule` | `.pipes/utils/fragments/output/fragment-format-codebase-conventions-rule.md` | Format Codebase Conventions Rule | codebase | Template for formatting the codebase conventions rule with the shared rule frontmatter schema. |
@@ -104,16 +101,11 @@ domain: all
 | `fragment-format-implementation-plan` | `.pipes/utils/fragments/output/fragment-format-implementation-plan.md` | Format Implementation Plan | codebase | Formats framing, codebase evidence, solution design, implementation work, tests, and risks into an executable Markdown plan. |
 | `fragment-format-intent-record` | `.pipes/utils/fragments/output/fragment-format-intent-record.md` | Format Intent Record | project | Formats an intent record with the problem, proposed outcome, success checks, affected systems, constraints, open questions, and source. |
 | `fragment-format-mission-record` | `.pipes/utils/fragments/output/fragment-format-mission-record.md` | Format Mission Record | project | Formats a compact draft mission record without starting its selected loop. |
-| `fragment-format-onboarding-record` | `.pipes/utils/fragments/output/fragment-format-onboarding-record.md` | Format Onboarding Record | codebase | Formats the record of one service repository's agent-docs onboarding, with its classification, drafts, review, and pull request state. |
 | `fragment-format-outcome-record` | `.pipes/utils/fragments/output/fragment-format-outcome-record.md` | Format Outcome Record | project | Formats factual closure for a mission or plan. |
 | `fragment-format-policy-rule` | `.pipes/utils/fragments/output/fragment-format-policy-rule.md` | Format Policy Rule | codebase | Formats a project policy rule that agents load as a skill and that cites the repositories it comes from. |
 | `fragment-format-project-instruction` | `.pipes/utils/fragments/output/fragment-format-project-instruction.md` | Format Project Instruction | codebase | Defines the canonical markdown structure for `.pipes/ai-instructions/project.md`. |
-| `fragment-format-release-notes` | `.pipes/utils/fragments/output/fragment-format-release-notes.md` | Format Release Notes | codebase | Formats release notes for one service version from its plan, spec requirements, and merged pull requests. |
-| `fragment-format-review-record` | `.pipes/utils/fragments/output/fragment-format-review-record.md` | Format Review Record | codebase | Formats a review of one service change as a durable artifact record linked to its plan. |
-| `fragment-format-service-agents-guide` | `.pipes/utils/fragments/output/fragment-format-service-agents-guide.md` | Format Service Agents Guide | codebase | Formats a tool-neutral, about one-page AGENTS.md for a backend service repository that keeps only service-specific guidance and points to the org policies. |
-| `fragment-format-service-bands` | `.pipes/utils/fragments/output/fragment-format-service-bands.md` | Format Service Bands | codebase | Formats a bands.yaml that declares a service's monitored signals, normal bands, and the agent's diagnose and act thresholds. |
-| `fragment-format-service-claude-guide` | `.pipes/utils/fragments/output/fragment-format-service-claude-guide.md` | Format Service Claude Guide | codebase | Formats a short CLAUDE.md for a backend service repository that imports AGENTS.md and adds only Claude Code specifics. |
-| `fragment-format-service-review-guide` | `.pipes/utils/fragments/output/fragment-format-service-review-guide.md` | Format Service Review Guide | codebase | Formats a REVIEW.md for a backend service repository that tells human and agent reviewers what blocks a merge. |
+| `fragment-format-release-notes` | `.pipes/utils/fragments/output/fragment-format-release-notes.md` | Format Release Notes | codebase | Formats release notes for one version from its plan, spec requirements, and merged pull requests. |
+| `fragment-format-review-record` | `.pipes/utils/fragments/output/fragment-format-review-record.md` | Format Review Record | codebase | Formats a review of one change as a durable artifact record linked to its plan. |
 | `fragment-format-spec-record` | `.pipes/utils/fragments/output/fragment-format-spec-record.md` | Format Spec Record | project | Formats a spec with numbered requirements, design, constraint coverage, open questions, areas of concern, and risk class. |
 | `fragment-format-team-member-record` | `.pipes/utils/fragments/output/fragment-format-team-member-record.md` | Format Team Member Record | all | Defines the canonical markdown structure for a .pipes/team role file. |
 
@@ -161,22 +153,21 @@ domain: all
 | Pipeline | Title | Category | Domain | Description |
 | --- | --- | --- | --- | --- |
 | `pipeline-add-eval` | Add Eval | record | framework | Turns an incident, a repeated agent mistake, or a new contract into a behavioral eval case for this repository's agent configuration. |
-| `pipeline-bootstrap-workspace` | Bootstrap Workspace | definition | framework | Sets up a new Pipes workspace in order, from project identity and delivery profile to policies, architecture, generated surfaces, and evals, keeping every gate of the pipelines it runs. |
+| `pipeline-bootstrap-workspace` | Bootstrap Workspace | definition | framework | Sets up a new Pipes workspace in order, from project identity and an optional delivery profile to policies, architecture, generated surfaces, and evals, keeping every gate of the pipelines it runs. |
 | `pipeline-capture-intent` | Capture Intent | record | project | Turns an idea, ticket, or incident into one intent record that the product owner accepts or rejects before design starts. |
 | `pipeline-create-loop` | Create Loop | creation | framework | Designs and creates a distinct adaptive Pipes loop and refreshes its generated discovery surfaces. |
 | `pipeline-create-pipeline` | Create Pipeline | creation | framework | Designs and creates a deterministic fragment-driven Pipes workflow. |
 | `pipeline-create-team-member` | Create Team Member | creation | team | Defines a reusable Pipes role with clear ownership, boundaries, consultation, and handoffs. |
-| `pipeline-define-codebase-stack` | Define Codebase Stack | definition | codebase | Establishes evidence-backed project identity, repository boundaries, working stack, delivery profile, gate accountability, and binding local conventions. |
+| `pipeline-define-codebase-stack` | Define Codebase Stack | definition | codebase | Establishes evidence-backed project identity, repository boundaries, working stack, binding local conventions, and, when the user opts in, a delivery profile and gate accountability. |
 | `pipeline-define-policies` | Define Policies | definition | codebase | Derives project policy rules from the rules the repositories already state, keeps conflicts and gaps out as recorded open points, and delivers each policy as a skill. |
 | `pipeline-define-system-architecture` | Define System Architecture | definition | architecture | Builds or refreshes an evidence-backed architecture instruction with explicit ownership, write context, and preservation gates. |
-| `pipeline-design-spec` | Design Spec | planning | project | Turns one accepted intent into a spec with numbered requirements and a design grounded in the affected service repositories. |
+| `pipeline-design-spec` | Design Spec | planning | project | Turns one accepted intent into a spec with numbered requirements and a design grounded in the affected repositories. |
 | `pipeline-execute-mission` | Execute Mission | delivery | project | Loads a recorded mission, validates readiness, obtains explicit execution approval, and starts its selected loop. |
 | `pipeline-execute-plan` | Execute Approved Plan | delivery | project | Executes a bounded approved plan, validates the result, and reports factual closure. |
-| `pipeline-onboard-service-repo` | Onboard Service Repository | delivery | codebase | Aligns one backend service repository's agent docs with the Pipes policies and decisions, as a reviewed proposal that ends in a dry-run record or a pull request. |
 | `pipeline-plan-new-feature` | New Feature Implementation Plan | planning | codebase | Frames a feature, grounds it in live codebase evidence, selects a solution, and produces a validated executable plan before implementation begins. |
 | `pipeline-record-decision` | Record Decision | record | project | Captures an approved durable choice with context, alternatives, and consequences. |
-| `pipeline-release-change` | Release Change | delivery | codebase | Releases or promotes a reviewed and merged change through the environments and workflows in the delivery profile, behind gate G5, and records the release in the outcome. |
-| `pipeline-review-change` | Review Change | delivery | codebase | Reviews one service pull request or branch against its plan, spec, and org policies with a verifier and a non-author reviewer, and hands a recommendation to the code owner. |
+| `pipeline-release-change` | Release Change | delivery | codebase | Releases or promotes a reviewed and merged change through its environments and release workflows, behind gate G5, and records the release in the outcome. |
+| `pipeline-review-change` | Review Change | delivery | codebase | Reviews one pull request or branch against its plan, spec, and project policies with a verifier and a non-author reviewer, and hands a recommendation to the code owner. |
 | `pipeline-start-mission` | Start Mission | orchestration | project | Frames and records a compact draft mission without starting its execution. |
 
 ## Loops

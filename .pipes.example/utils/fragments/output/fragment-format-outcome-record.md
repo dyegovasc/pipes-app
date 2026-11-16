@@ -1,7 +1,7 @@
 ---
 title: Format Outcome Record
 description: Formats factual closure for a mission or plan.
-version: 2.6
+version: 2.7
 fragment_type: output
 domain: project
 ---
@@ -46,11 +46,11 @@ result: {succeeded|partial|failed|cancelled}
 - {Action or none.}
 
 ## Release
-- Environment: {dev, previews, stg, or later environment, or not released}
+- Environment: {target environment, or not released}
 - Version: {version}
 - Workflow run: {URL of the release or promote run}
-- Change ticket: {reference matching the change-ticket pattern in delivery.md, or not required for this environment}
-- Approved by: {release manager or session user, per gate G5}
+- Change ticket: {reference matching the change-ticket pattern in delivery.md; leave this line out when the environment does not use tickets}
+- Approved by: {holder of gate G5}
 ```
 
 Include `## Release` only when the outcome closes a release or promotion; omit it for work that is not released.

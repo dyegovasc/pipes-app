@@ -8,6 +8,10 @@ import { fileURLToPath } from 'node:url';
 import { assertLatestIsAppRelease, assertTagMatchesManifest, parseAppReleaseTag } from './framework-release-guard.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// The release steps run against the bundled source, so their tag is the `.pipes.example` manifest version.
+const BUNDLED_VERSION = JSON.parse(readFileSync(path.join(REPO_ROOT, '.pipes.example', 'manifest.json'), 'utf8')).frameworkVersion;
+const BUNDLED_TAG = `pipes-framework-v${BUNDLED_VERSION}`;
+const escaped = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 test('app release tags parse like app_update.rs parse_release_version', () => {
   // Vectors from pipes-local src-tauri/src/app_update.rs tests.
@@ -98,7 +102,7 @@ esac
         PATH: `${dir}:${process.env.PATH}`,
         GH_LOG: log,
         GITHUB_REPOSITORY: 'dyegovasc/pipes-app',
-        TAG: 'pipes-framework-v2.2.1',
+        TAG: BUNDLED_TAG,
         LATEST_TAG: 'pipes-local-v0.7.4',
         LATEST_AFTER: '',
         RELEASE_EXISTS: '0',
@@ -117,8 +121,8 @@ test('release steps: guards run in order and the release is created with --lates
   assert.equal(failed, null);
   assert.equal(calls.length, 4);
   assert.equal(calls[0], 'api repos/dyegovasc/pipes-app/releases/latest --jq .tag_name');
-  assert.equal(calls[1], 'release view pipes-framework-v2.2.1 --repo dyegovasc/pipes-app --json tagName');
-  assert.match(calls[2], /^release create pipes-framework-v2\.2\.1 dist\/pipes-starter-2\.2\.1\.json\.gz --title Pipes framework 2\.2\.1 /);
+  assert.equal(calls[1], `release view ${BUNDLED_TAG} --repo dyegovasc/pipes-app --json tagName`);
+  assert.match(calls[2], new RegExp(`^release create ${escaped(BUNDLED_TAG)} dist/pipes-starter-${escaped(BUNDLED_VERSION)}\\.json\\.gz --title Pipes framework ${escaped(BUNDLED_VERSION)} `));
   assert.match(calls[2], / --latest=false --verify-tag$/);
   assert.equal(calls[3], 'api repos/dyegovasc/pipes-app/releases/latest --jq .tag_name');
 });
@@ -141,7 +145,7 @@ test('release steps: an existing release or a wrong tag stops before the release
 });
 
 test('release steps: the job fails when the new release became latest', (context) => {
-  const { calls, failed } = runRelease(context, { LATEST_AFTER: 'pipes-framework-v2.2.1' });
+  const { calls, failed } = runRelease(context, { LATEST_AFTER: BUNDLED_TAG });
   assert.equal(failed, 'Check again that the latest release is an app release');
   assert.ok(calls.some((call) => call.startsWith('release create')));
 });
