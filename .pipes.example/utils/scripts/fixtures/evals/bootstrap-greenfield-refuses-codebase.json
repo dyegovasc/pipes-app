@@ -1,0 +1,41 @@
+{
+  "id": "bootstrap-greenfield-refuses-codebase",
+  "scope": "starter",
+  "source": ".pipes/utils/pipelines/pipeline-bootstrap-greenfield.md",
+  "workspace": "starter",
+  "milestone_only": true,
+  "max_budget_usd": 2,
+  "timeout_seconds": 900,
+  "covers": [
+    ".pipes/utils/pipelines/pipeline-bootstrap-greenfield.md",
+    ".pipes/utils/fragments/instruction/fragment-check-greenfield-repository.md"
+  ],
+  "extra_allowed_tools": [
+    "Bash(git ls-files:*)",
+    "Bash(git rev-parse:*)",
+    "Bash(git check-ignore:*)"
+  ],
+  "setup": {
+    "README.md": "# Tally\n\nTally is an example project for this eval: a small service that counts visits to a page.\n",
+    "package.json": "{\n  \"name\": \"tally\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": { \"start\": \"node src/server.js\" }\n}\n",
+    "src/server.js": "const http = require('node:http');\n\nlet visits = 0;\nhttp.createServer((req, res) => { visits += 1; res.end(String(visits)); }).listen(3000);\n"
+  },
+  "prompt": "This repository has a fresh Pipes install. Run the pipes bootstrap-greenfield pipeline for it. I am the project owner and I hold every human role. Do not commit. Do not ask me questions; if the pipeline cannot continue, report why and which workflow to use instead.",
+  "may_change": [],
+  "checks": [
+    {
+      "type": "unchanged",
+      "glob": ".pipes/**",
+      "why": "no project surface changed before confirmation (R4, R5)"
+    },
+    {
+      "type": "result_matches",
+      "pattern": "pipeline-bootstrap-workspace",
+      "why": "the refusal names the workflow for a repository with code (R5)"
+    },
+    {
+      "type": "only_changed",
+      "why": "the run writes no file"
+    }
+  ]
+}

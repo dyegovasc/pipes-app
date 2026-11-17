@@ -15,6 +15,11 @@
     ".pipes/utils/scripts/verify-starter.cjs",
     ".pipes/utils/scripts/starter-layer.cjs"
   ],
+  "extra_allowed_tools": [
+    "Bash(git ls-files:*)",
+    "Bash(git rev-parse:*)",
+    "Bash(git check-ignore:*)"
+  ],
   "setup": {
     "README.md": "# Shelf\n\nShelf is a small HTTP API for a neighborhood book-lending library. Members list books, borrow a book, and return it. Librarians add books.\n\n## Run\n\n- `npm ci`\n- `npm test` runs the unit tests with the Node test runner.\n- `npm run lint` runs ESLint.\n- `npm start` starts the API on port 3000.\n\n## Delivery\n\nGitHub Actions run `npm test` and `npm run lint` on every pull request (`.github/workflows/ci.yml`). A merge to `main` deploys to the `staging` environment automatically. Deploys to `production` run by a manual dispatch of `.github/workflows/deploy.yml` and need an approved change request with a key such as `CR-42`. Issues are tracked in GitHub Issues.\n",
     "CONTRIBUTING.md": "# Contributing\n\n- Work on a branch named `feat/<topic>` or `fix/<topic>` and open a pull request to `main`. Never push to `main`.\n- One code owner review is required (see `.github/CODEOWNERS`).\n- Never write member names or email addresses to logs. Log the member id only.\n- Store and return all dates as UTC ISO-8601 strings. Loan due dates are 14 days after the borrow date.\n- Every route has a unit test in `test/`.\n",

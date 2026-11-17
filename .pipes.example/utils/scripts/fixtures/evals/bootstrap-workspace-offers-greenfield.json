@@ -1,0 +1,51 @@
+{
+  "id": "bootstrap-workspace-offers-greenfield",
+  "scope": "starter",
+  "source": ".pipes/utils/pipelines/pipeline-bootstrap-workspace.md",
+  "workspace": "starter",
+  "milestone_only": true,
+  "max_budget_usd": 2,
+  "timeout_seconds": 900,
+  "covers": [
+    ".pipes/utils/pipelines/pipeline-bootstrap-workspace.md",
+    ".pipes/utils/fragments/instruction/fragment-check-greenfield-repository.md"
+  ],
+  "extra_allowed_tools": [
+    "Bash(git ls-files:*)",
+    "Bash(git rev-parse:*)",
+    "Bash(git check-ignore:*)"
+  ],
+  "setup": {
+    "README.md": "# Tally\n\nTally is an example project for this eval: a small service that will count visits to a page. It has no code yet.\n",
+    ".gitignore": "node_modules/\n.env\n"
+  },
+  "prompt": "This repository has a fresh Pipes install, and its project instructions are still placeholders. Run the pipes bootstrap-workspace pipeline for it. I am the project owner and I hold every human role. Do not commit. Do not ask me questions; when the pipeline offers a choice, report the offer and stop.",
+  "may_change": [
+    ".pipes/utils/state/**"
+  ],
+  "checks": [
+    {
+      "type": "tool_called",
+      "pattern": "^Bash .*git (ls-files|rev-parse)",
+      "why": "Phase 1 ran the greenfield check before the offer (R18)"
+    },
+    {
+      "type": "result_matches",
+      "pattern": "pipeline-bootstrap-greenfield",
+      "why": "Phase 1 offers the greenfield pipeline (R18)"
+    },
+    {
+      "type": "unchanged",
+      "glob": ".pipes/ai-instructions/**",
+      "why": "no other change (R18)"
+    },
+    {
+      "type": "unchanged",
+      "glob": ".pipes/utils/rules/**",
+      "why": "no other change (R18)"
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}

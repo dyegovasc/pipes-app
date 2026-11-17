@@ -1,7 +1,7 @@
 ---
 title: Framework Maintenance Loop
 description: Evolve Pipes Markdown contracts and keep their generated discovery surfaces current.
-version: 2.12
+version: 2.13
 domain: all
 loop_type: maintenance
 status: active
@@ -36,6 +36,7 @@ pipelines:
   - pipeline-add-eval
   - pipeline-define-policies
   - pipeline-bootstrap-workspace
+  - pipeline-bootstrap-greenfield
 rules:
   - rule-pure-markdown-writing
   - rule-starter-kit-integrity
@@ -96,7 +97,7 @@ Only after the outcome and relationships are written, re-read, and validated may
 
 ## Available Pipelines
 
-Use the creation pipelines for loops, pipelines, and roles; the definition pipelines for project or architecture instructions; `pipeline-add-eval` to turn an incident, a repeated agent mistake, or a new contract into an eval case; `pipeline-bootstrap-workspace` to set up a new workspace in order; `pipeline-define-policies` to derive project policy rules from repository evidence; and planning, execution, or decision pipelines when their deterministic contract fits.
+Use the creation pipelines for loops, pipelines, and roles; the definition pipelines for project or architecture instructions; `pipeline-add-eval` to turn an incident, a repeated agent mistake, or a new contract into an eval case; `pipeline-bootstrap-workspace` to set up a new workspace in order; `pipeline-bootstrap-greenfield` to set up a repository with no code from declared choices; `pipeline-define-policies` to derive project policy rules from repository evidence; and planning, execution, or decision pipelines when their deterministic contract fits.
 
 ## Generation Policy
 

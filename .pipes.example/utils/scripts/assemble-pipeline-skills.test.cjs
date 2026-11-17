@@ -10,6 +10,7 @@ const {
 
 const EXPECTED = [
   'pipeline-add-eval',
+  'pipeline-bootstrap-greenfield',
   'pipeline-bootstrap-workspace',
   'pipeline-capture-intent',
   'pipeline-create-loop',
