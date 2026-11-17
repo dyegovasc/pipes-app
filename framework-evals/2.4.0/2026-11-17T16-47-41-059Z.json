@@ -1,0 +1,91 @@
+{
+  "adapter": "claude",
+  "model": "default",
+  "tier": "milestone",
+  "results": [
+    {
+      "id": "spec-on-fresh-install-keeps-evidence-path",
+      "invalid": false,
+      "passed": true,
+      "checks": [
+        {
+          "type": "file_count",
+          "passed": true,
+          "detail": "exactly one draft spec for this intent"
+        },
+        {
+          "type": "file_not_matches",
+          "passed": true,
+          "detail": "a placeholder architecture.md keeps the version 1.2 evidence path (R14, R23)"
+        },
+        {
+          "type": "validator_clean",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "type": "only_changed",
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "changed": [
+        ".pipes/project/01-intents/intent-901-daily-visit-summary.md",
+        ".pipes/project/02-specs/spec-001-daily-visit-summary.md"
+      ],
+      "cost": 1.118137,
+      "baselineErrors": [],
+      "outOfScope": [],
+      "evidence": {
+        "toolUses": [
+          "Skill {\"skill\":\"pipes.design-spec\"}",
+          "Bash {\"command\":\"cd \\\"$PWD\\\"; cat .pipes/ai-instructions/core-workflows.md .pipes/utils/pipelines/pipeline-design-spec.md; cat .pipes/project/01-intents/intent-901-daily-visit-summary.md; ls -R .pipes",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/utils/pipelines/pipeline-design-spec.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/01-intents/intent-901-daily-visit-summary.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/ai-instructions/core-workflows.md\"}",
+          "Bash {\"command\":\"ls -la; git ls-files | grep -v '^\\\\.pipes/utils\\\\|^\\\\.claude' | head -50; ls .pipes/project/02-specs; grep -n basis .pipes/ai-instructions/architecture.md; ls .pipes/ai-instructions\",",
+          "Glob {\"pattern\":\".pipes/utils/fragments/**/fragment-{format-spec-record,create-spec-file,draft-spec-requirements,check-greenfield-repository,request-approval}.md\"}",
+          "Bash {\"command\":\"cd .pipes; cat project/02-specs/config.md project/02-specs/README.md ai-instructions/architecture.md utils/fragments/instruction/fragment-check-greenfield-repository.md utils/fragment",
+          "Bash {\"command\":\"cd ..; git rev-parse --show-toplevel; echo ---others; git ls-files --others --exclude-standard; echo ---ignored; git ls-files --others --ignored --exclude-standard --directory; echo -",
+          "Bash {\"command\":\"R=/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC; git -C $R rev-parse --show-toplevel; echo ---others; git -C $R ",
+          "Bash {\"command\":\"git ls-files --others --exclude-standard --full-name :/ ; git status --short --ignored :/\",\"description\":\"List untracked and ignored files\"}",
+          "Glob {\"pattern\":\"{.pipes/team/*,.pipes/ai-instructions/accountability.md,.pipes/ai-instructions/delivery.md,.pipes/project/05-decisions/*}\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit-summary.md\",\"conte",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/01-intents/intent-901-daily-v",
+          "Agent {\"subagent_type\":\"reviewer\",\"description\":\"Non-author spec review\",\"prompt\":\"Non-author review under rule-separation-of-duties. Repo root: /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/",
+          "Bash {\"command\":\"R=/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC; cd $R; cat .pipes/team/reviewer.md | sed -n '/Isolated Agent Mo",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit-summary.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/01-intents/intent-901-daily-visit-summary.md\"}",
+          "Grep {\"pattern\":\"Isolated Agent Mode\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/team/reviewer.md\",\"output_mode",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/utils/fragments/output/fragment-format-spec-record.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/utils/fragments/instruction/fragment-draft-spec-requireme",
+          "Bash {\"command\":\"git -C /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC ls-files | awk -F/ '{print $1}' | sort | uniq -c; git -C /p",
+          "Bash {\"command\":\"git ls-files --full-name :/ \",\"description\":\"List tracked files in repository\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/utils/pipelines/pipeline-design-spec.md\"}",
+          "Bash {\"command\":\"git status --short --ignored; git diff\",\"description\":\"Show working tree status and diff\"}",
+          "Grep {\"pattern\":\"^(basis|status|title):|placeholder|Replace\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/ai-inst",
+          "Bash {\"command\":\"D=/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC; grep -n '<' $D/.pipes/project/02-specs/spec-001-daily-visit-sum",
+          "Grep {\"pattern\":\"<[a-zA-Z/!]\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit-",
+          "Bash {\"command\":\"node /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/utils/scripts/validate-project-records.cjs\",\"descripti",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC/.pipes/project/02-specs/spec-001-daily-visit",
+          "Bash {\"command\":\"node utils/scripts/validate-project-records.cjs; grep -n -E '\\\\*\\\\*R[0-9]' project/02-specs/spec-001-daily-visit-summary.md | cut -c1-20; grep -n -A2 '^related' project/01-intents/int"
+        ],
+        "deniedOrFailed": [
+          "Quoted text in this command can't be checked before it runs",
+          "This command changes directory before running a version-control command, which can pick up untrusted hooks or repository configuration from the target directory. Approve only if you trust it.",
+          "This Bash command contains multiple operations. The following parts require approval: R=/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC; git -C $R rev-parse --show-toplevel; echo ---others; git -C $R ls-files --others --exclude-sta",
+          "This command changes directory before running a version-control command, which can pick up untrusted hooks or repository configuration from the target directory. Approve only if you trust it.",
+          "This Bash command contains multiple operations. The following parts require approval: git -C /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-spec-on-fresh-install-keeps-evidence-path-ymKHTC ls-files, awk -F/ '{print $1}', uniq -c; git -C /private/var/folders/8w/7qy9b7l139l7pn0xwd",
+          "This Bash command contains multiple operations. The following part requires approval: tail -15; node $D/.pipes/utils/scripts/validate-pure-markdown.cjs $D/.pipes/project/02-specs/spec-001-daily-visit-summary.md 2>&1"
+        ],
+        "result": "I ran the design-spec pipeline and wrote the spec as a **draft**. It is not accepted: only the product owner can accept it at gate G2.\n\n**What changed**\n- New file: `.pipes/project/02-specs/spec-001-daily-visit-summary.md`, with `status: draft`, requirements R1 to R5, and risk class `routine (provisional)`.\n- The intent's `related` list now points to the spec. The spec already points back to the intent. I changed nothing else in the intent.\n\n**The main finding: this repository has no service yet.** The intent says \"the service in this repository returns a daily visit summary,\" but the repository contains only Pipes files and agent setup files. It has no service code, stack, storage or visit records. The project and architecture instruction files are still starter placeholders. The spec has a \"Context Evidence\" section that records this, so the design describes behaviour only. It names no runtime, framework, file path or storage, and it does not claim anything already exists.\n\n**Requirements**\n- **R1:** return the number of recorded visits for one page on one date (intent check 1).\n- **R2:** return `0` when there are no visits on that date (intent check 2).\n- **R3:** count only recorded visits; never estimate or fill in a number (from the intent's constraint).\n- **R4:** if the visit records can't be read, return an error and no count.\n- **R5:** if the page or date is missing or invalid, return a validation error and no count.\n\n**Design:** count the visits at the moment of each"
+      }
+    }
+  ]
+}

@@ -47,7 +47,7 @@ In the framework source repository, framework maintenance changes the staged fol
 
 ## Framework Provenance And Versioning
 
-The staged framework is a versioned release source. `utils/rules/rule-framework-provenance.md` defines its provenance contract. The current baseline is framework version `2.3.0`. It uses manifest schema version 2. New manifests use project-layout version 3; layout 2 stays readable. The compressed baseline archive and fork control use schema version 1.
+The staged framework is a versioned release source. `utils/rules/rule-framework-provenance.md` defines its provenance contract. The current baseline is framework version `2.4.0`. It uses manifest schema version 2. New manifests use project-layout version 3; layout 2 stays readable. The compressed baseline archive and fork control use schema version 1.
 
 The provenance contract tracks framework instructions, team roles, fragments, pipelines, rules, scripts, and three explicit shared files. Project records, local configs, runtime state, issue records beyond their shared README and placeholder, incidental files, and the provenance metadata itself remain excluded. Only immediate project-area directory names participate in baseline identity; project file details never do.
 
@@ -65,7 +65,7 @@ Refreshing an installed fork writes only changed fork-control bytes after valida
 node .pipes/utils/scripts/generate-framework-provenance.cjs --root .pipes --refresh-fork
 ```
 
-First baseline creation and later baseline replacement are protected release operations. They require `--allow-baseline-initialization` or `--allow-baseline-replacement` and an explicit framework semantic version. Obtain the governing approval before using either mode against a non-temporary root. This starter uses schema-v2 `2.3.0` origin metadata. Run the read-only check above to verify that the tracked content matches this release baseline.
+First baseline creation and later baseline replacement are protected release operations. They require `--allow-baseline-initialization` or `--allow-baseline-replacement` and an explicit framework semantic version. Obtain the governing approval before using either mode against a non-temporary root. This starter uses schema-v2 `2.4.0` origin metadata. Run the read-only check above to verify that the tracked content matches this release baseline.
 
 ## Canonical Surfaces
 
@@ -129,6 +129,7 @@ A loop keeps working until the objective is validated, a genuine user decision i
 | `pipeline-add-eval` | Turn an incident, repeated mistake, or contract into a behavioral eval case |
 | `pipeline-define-policies` | Derive project policy rules from what the repositories already state |
 | `pipeline-bootstrap-workspace` | Set up a new workspace in order: stack and delivery, policies, architecture, generation, evals |
+| `pipeline-bootstrap-greenfield` | Set up a repository with no code from declared choices, marked with revisit triggers |
 
 Each pipeline preserves its declared phase order. A phase states its Objective, Acting Role, optional Support Team, Entry Conditions, Inputs, Fragments, Instructions, Outputs, Handoff To, Approval Gate, and Exit Conditions.
 

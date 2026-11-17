@@ -19,7 +19,7 @@ The staged Pipes framework is a versioned release source. Its provenance metadat
 ## Framework Identity And Schemas
 
 - The framework identity is `pipes`.
-- This repository's current staged provenance baseline is framework version `2.3.0`.
+- This repository's current staged provenance baseline is framework version `2.4.0`.
 - `manifest.json` uses `manifestSchemaVersion: 2`. A manifest that this framework writes uses `projectLayoutVersion: 3`: areas `00-notes`, `01-intents`, `02-specs`, `03-missions`, `04-plans`, `05-decisions`, `06-outcomes`, and `07-artifacts`, each record named `{type}-{number}-{slug}`. The manifest validator also reads `projectLayoutVersion: 2`, so that an install from an earlier release can be compared and migrated. The record validator and the other scripts read only the layout 3 areas; an install on layout 2 is migrated first.
 - `framework-baseline.json.gz` contains canonical JSON using `baselineArchiveSchemaVersion: 1`.
 - `framework-fork.json` uses `forkControlSchemaVersion: 1`.
