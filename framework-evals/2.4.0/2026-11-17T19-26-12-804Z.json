@@ -1,0 +1,293 @@
+{
+  "adapter": "claude",
+  "model": "default",
+  "tier": "milestone",
+  "results": [
+    {
+      "id": "bootstrap-fresh-workspace",
+      "invalid": false,
+      "passed": true,
+      "checks": [
+        {
+          "type": "frontmatter",
+          "passed": true,
+          "detail": "identity replaced"
+        },
+        {
+          "type": "file_matches",
+          "passed": true,
+          "detail": "identity comes from the repository"
+        },
+        {
+          "type": "file_exists",
+          "passed": true,
+          "detail": "delivery profile written; the validator passes without one"
+        },
+        {
+          "type": "file_matches",
+          "passed": true,
+          "detail": "environments come from the repository"
+        },
+        {
+          "type": "script_passes",
+          "passed": true,
+          "detail": "delivery profile is valid"
+        },
+        {
+          "type": "file_exists",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "type": "file_exists",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "type": "file_not_matches",
+          "passed": true,
+          "detail": "conventions established"
+        },
+        {
+          "type": "frontmatter",
+          "passed": true,
+          "detail": "architecture established"
+        },
+        {
+          "type": "file_count",
+          "passed": true,
+          "detail": "policies derived, at most two plus the conventions rule"
+        },
+        {
+          "type": "file_matches",
+          "passed": true,
+          "detail": "entrypoints regenerated from the canonical source"
+        },
+        {
+          "type": "script_passes",
+          "passed": true,
+          "detail": "policy skills current"
+        },
+        {
+          "type": "script_passes",
+          "passed": true,
+          "detail": "hook settings current"
+        },
+        {
+          "type": "script_passes",
+          "passed": true,
+          "detail": "isolated agents current"
+        },
+        {
+          "type": "script_passes",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "type": "file_matches",
+          "passed": true,
+          "detail": "fork control refreshed after the bootstrap changed baseline-tracked files"
+        },
+        {
+          "type": "validator_clean",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "type": "tool_called",
+          "passed": true,
+          "detail": "non-author reviewer pass before the pre-approved writes"
+        },
+        {
+          "type": "tool_not_called",
+          "passed": true,
+          "detail": "no paid eval run from inside an eval; reading the script is fine"
+        },
+        {
+          "type": "tool_not_called",
+          "passed": true,
+          "detail": "no commit was approved; record text about pushes is fine"
+        },
+        {
+          "type": "result_matches",
+          "passed": true,
+          "detail": "the bootstrap acceptance stays pending for the human"
+        },
+        {
+          "type": "file_not_matches",
+          "passed": true,
+          "detail": "no bootstrap acceptance recorded"
+        },
+        {
+          "type": "result_matches",
+          "passed": true,
+          "detail": "the suite command is reported for the human"
+        },
+        {
+          "type": "unchanged",
+          "passed": true,
+          "detail": "eval cases proposed, not written"
+        },
+        {
+          "type": "only_changed",
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "changed": [
+        ".github/copilot-instructions.md",
+        ".pipes/ai-instructions/architecture.md",
+        ".pipes/ai-instructions/project.md",
+        ".pipes/framework-fork.json",
+        ".pipes/utils/fragments/CATALOG.md",
+        ".pipes/utils/mapping/source-to-target-map.md",
+        ".pipes/utils/rules/rule-codebase-conventions.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+        ".agents/skills/pipes.policy-codebase-conventions/SKILL.md",
+        ".agents/skills/pipes.policy-dates-and-loan-terms/SKILL.md",
+        ".agents/skills/pipes.policy-member-data-logging/SKILL.md",
+        ".claude/skills/pipes.policy-codebase-conventions/SKILL.md",
+        ".claude/skills/pipes.policy-dates-and-loan-terms/SKILL.md",
+        ".claude/skills/pipes.policy-member-data-logging/SKILL.md",
+        ".pipes/ai-instructions/accountability.md",
+        ".pipes/ai-instructions/delivery.md",
+        ".pipes/project/00-notes/note-001-policy-conflicts-and-gaps.md",
+        ".pipes/utils/rules/rule-dates-and-loan-terms.md",
+        ".pipes/utils/rules/rule-member-data-logging.md"
+      ],
+      "cost": 2.8153706,
+      "baselineErrors": [],
+      "outOfScope": [],
+      "evidence": {
+        "toolUses": [
+          "Skill {\"skill\":\"pipes.bootstrap-workspace\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ai-instructions/core-workflows.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/pipelines/pipeline-bootstrap-workspace.md\"}",
+          "Bash {\"command\":\"git ls-files | grep -v '^.pipes/utils/' | head -100; echo; ls -la; ls .pipes .pipes/*\",\"description\":\"List repository files and Pipes layout\"}",
+          "Bash {\"command\":\"for f in README.md CONTRIBUTING.md package.json src/*.js test/*.js .github/CODEOWNERS .github/workflows/*.yml .github/copilot-instructions.md .claude/settings.json .pipes/ai-instructi",
+          "Bash {\"command\":\"tail -n +1 README.md CONTRIBUTING.md package.json src/loans.js src/routes.js src/server.js test/loans.test.js .github/CODEOWNERS .github/workflows/ci.yml .github/workflows/deploy.yml ",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils && cat pipelines/pipeline-define-codebase-stack.md fragments/instr",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/fragments && cat output/fragment-format-project-instruction.md out",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils && cat pipelines/pipeline-define-policies.md fragments/instruction",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes && sed -n '1,400p' utils/pipelines/pipeline-define-system-architecture.m",
+          "Bash {\"command\":\"sed -n '1,40p' utils/pipelines/pipeline-add-eval.md; cat utils/fragments/output/fragment-format-eval-case.md | sed -n '1,60p'; head -60 utils/scripts/run-evals.cjs; grep -n \\\"node \\\\|",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/scripts && sed -n '1,60p' hook-protect-paths.cjs; ls fixtures fixt",
+          "Bash {\"command\":\"mkdir -p /tmp/shelf-bootstrap-drafts && cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz && ls package-lock.json .eslintrc* esli",
+          "Bash {\"command\":\"mkdir -p /tmp/shelf-bootstrap-drafts; R=/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz; ls $R/package-lock.json $R/.eslintrc* $R/",
+          "Bash {\"command\":\"mkdir -p /tmp/shelf-bootstrap-drafts; cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz; ls package-lock.json .eslintrc* eslint.c",
+          "Bash {\"command\":\"git -C /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz remote -v; git -C /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/",
+          "Glob {\"pattern\":\"{package-lock.json,.eslintrc*,eslint.config.*,.nvmrc}\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz\"}",
+          "Bash {\"command\":\"git remote -v; git branch -a; wc -l ../../../../CLAUDE.md\",\"description\":\"Show remotes, branches, CLAUDE.md length\"}",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/project.md\",\"content\":\"---\\ntitle: Shelf\\ndescription: Shelf is a small HTTP API for a neighborhood book-lending library, written in plain Node.js.\\nver",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/rule-codebase-conventions.md\",\"content\":\"---\\ntitle: Codebase Conventions\\ndescription: Binding implementation conventions for Shelf.\\nversion: 1.3\\nrul",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/delivery.md\",\"content\":\"---\\ntitle: Delivery Profile\\ndescription: Project facts that Pipes workflows, hooks, and scripts read: repository layout, prote",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/accountability.md\",\"content\":\"---\\ntitle: Accountability Matrix\\ndescription: Human roles that decide each delivery gate, where each holder is resolved,",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/rule-member-data-logging.md\",\"content\":\"---\\ntitle: Member Data In Logs\\ndescription: Keeps member names and email addresses out of Shelf logs so that o",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/rule-dates-and-loan-terms.md\",\"content\":\"---\\ntitle: Dates And Loan Terms\\ndescription: Keeps every Shelf date in UTC ISO-8601 form and fixes the loan d",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/note-001-policy-conflicts-and-gaps.md\",\"content\":\"---\\ntitle: Policy Conflicts And Gaps\\ndescription: Conflicts, gaps, and broken pointers found while d",
+          "Write {\"file_path\":\"/tmp/shelf-bootstrap-drafts/architecture.md\",\"content\":\"---\\ntitle: System Architecture\\ndescription: Canonical system boundaries, workflows, components, state, integrations, and o",
+          "Agent {\"description\":\"Review bootstrap proposals\",\"subagent_type\":\"reviewer\",\"run_in_background\":false,\"prompt\":\"You are the non-author reviewer (rule-separation-of-duties) for a Pipes workspace boots",
+          "Bash {\"command\":\"R=/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz; cd $R; sed -n '/Isolated Agent Mode/,$p' .pipes/team/reviewer.md | head -40; ls",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz && ls -a && for f in README.md CONTRIBUTING.md package.json src/*.js test/*.js ",
+          "Bash {\"command\":\"cd /tmp/shelf-bootstrap-drafts && for f in *; do echo \\\"=== $f\\\"; cat -n \\\"$f\\\"; done\",\"description\":\"Read draft files\"}",
+          "Glob {\"pattern\":\"{README.md,CONTRIBUTING.md,package.json,src/*,test/*,.github/**/*}\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz\"}",
+          "Glob {\"pattern\":\"*\",\"path\":\"/tmp/shelf-bootstrap-drafts\"}",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz && cat README.md CONTRIBUTING.md package.json src/server.js src/routes.js src/l",
+          "Bash {\"command\":\"cd /tmp/shelf-bootstrap-drafts && cat -n project.md architecture.md delivery.md accountability.md\",\"description\":\"Print first set of drafts\"}",
+          "Bash {\"command\":\"cd /tmp/shelf-bootstrap-drafts && cat -n rule-codebase-conventions.md rule-member-data-logging.md rule-dates-and-loan-terms.md note-001-policy-conflicts-and-gaps.md\",\"description\":\"Pr",
+          "Bash {\"command\":\"cat -n /tmp/shelf-bootstrap-drafts/project.md /tmp/shelf-bootstrap-drafts/architecture.md /tmp/shelf-bootstrap-drafts/delivery.md /tmp/shelf-bootstrap-drafts/accountability.md\",\"descr",
+          "Bash {\"command\":\"cat -n /tmp/shelf-bootstrap-drafts/rule-codebase-conventions.md /tmp/shelf-bootstrap-drafts/rule-member-data-logging.md /tmp/shelf-bootstrap-drafts/rule-dates-and-loan-terms.md /tmp/s",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/project.md\"}",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/architecture.md\"}",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/delivery.md\"}",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/accountability.md\"}",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/rule-codebase-conventions.md\"}",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/rule-member-data-logging.md\"}",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/rule-dates-and-loan-terms.md\"}",
+          "Read {\"file_path\":\"/tmp/shelf-bootstrap-drafts/note-001-policy-conflicts-and-gaps.md\"}",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes && cat utils/fragments/output/fragment-format-project-instruction.md uti",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes && sed -n '/^## Format/,$p' utils/fragments/output/fragment-format-codeb",
+          "Bash {\"command\":\"cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes && sed -n '/^---$/,$p' utils/rules/rule-frontmatter-title-only.md | sed ",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/fragments/output/fragment-format-policy-rule.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/fragments/output/fragment-format-codebase-conventions-rule.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/fragments/output/fragment-format-architecture-instruction.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/project/00-notes/config.md\"}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/rules/rule-frontmatter-title-only.md\"}",
+          "Grep {\"pattern\":\"^version:\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes\",\"glob\":\"{ai-instructions/project.md,ai-instructions/arc",
+          "Bash {\"command\":\"node /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/scripts/delivery-profile.cjs --help\",\"description\":\"Show deliver",
+          "Grep {\"pattern\":\"(?i)conflict|source|overreach|repository-specific|evidence|invent\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/",
+          "Grep {\"pattern\":\"argv|readFileSync|delivery\\\\.md|heading|Autonomy|auto\\\\b|ticket\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ut",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/scripts/delivery-profile.cjs\",\"offset\":25,\"limit\":110}",
+          "Bash {\"command\":\"node -e \\\"const d=require('/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/scripts/delivery-profile.cjs');const p=d.p",
+          "Grep {\"pattern\":\"^[^`]*(`[^`]*`[^`]*)*<[A-Za-z/]\",\"path\":\"/tmp/shelf-bootstrap-drafts\",\"output_mode\":\"content\"}",
+          "Glob {\"pattern\":\"{package-lock.json,.eslintrc*,eslint.config.*}\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz\"}",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/delivery.md\",\"old_string\":\"| Key pattern | `#\\\\d+` |\",\"new_string\":\"| Key pattern | `(?<=#)\\\\d+` |\"}",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/delivery.md\",\"old_string\":\"| Install | `npm ci` | Installs from the lockfile and exits with status 0 |\",\"new_string\":\"| Install | `np",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/delivery.md\",\"old_string\":\"---\\n# Delivery Profile\\n\\n\",\"new_string\":\"---\\n\"}",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/accountability.md\",\"old_string\":\"---\\n# Accountability Matrix\\n\\n\",\"new_string\":\"---\\n\"}",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/accountability.md\",\"old_string\":\"Session user (project owner); `.github/CODEOWNERS` also requires one review from `@shelf-maintainers",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/project.md\",\"old_string\":\" This repository holds the whole service, its unit tests, and its GitHub Actions delivery; it has no siblin",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/project.md\",\"old_string\":\"- `test/` holds one `*.test.js` unit test file per module, run by `node --test test/`.\",\"new_string\":\"- `te",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/architecture.md\",\"old_string\":\"- Every route needs a unit test; CI blocks a pull request when lint or tests fail.\",\"new_string\":\"- Ev",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/architecture.md\",\"old_string\":\"deploys to `production` after an approved change request.\",\"new_string\":\"deploys to `production`. The ",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/rule-codebase-conventions.md\",\"old_string\":\"`node:assert/strict`. `package.json` declares no dependencies, so name any new dependency",
+          "Edit {\"replace_all\":false,\"file_path\":\"/tmp/shelf-bootstrap-drafts/note-001-policy-conflicts-and-gaps.md\",\"old_string\":\"and it declares no ESLint dependency or ESLint configuration.\\n\",\"new_string\":\"a",
+          "Bash {\"command\":\"D=/tmp/shelf-bootstrap-drafts; P=/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes; cp \\\"$D/project.md\\\" \\\"$D/delivery.md\\\" \\",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ai-instructions/project.md\",\"limit\":3}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ai-instructions/architecture.md\",\"limit\":3}",
+          "Read {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/rules/rule-codebase-conventions.md\",\"limit\":3}",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ai-instructions/project.md\",\"content\":\"---\\ntitle: Shelf\\ndescription: S",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/rules/rule-codebase-conventions.md\",\"content\":\"---\\ntitle: Codebas",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ai-instructions/delivery.md\",\"content\":\"---\\ntitle: Delivery Profile\\nde",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ai-instructions/accountability.md\",\"content\":\"---\\ntitle: Accountability",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/rules/rule-member-data-logging.md\",\"content\":\"---\\ntitle: Member D",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/rules/rule-dates-and-loan-terms.md\",\"content\":\"---\\ntitle: Dates A",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/project/00-notes/note-001-policy-conflicts-and-gaps.md\",\"content\":\"---\\n",
+          "Write {\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/ai-instructions/architecture.md\",\"content\":\"---\\ntitle: System Architect",
+          "Bash {\"command\":\"for s in assemble-instructions assemble-pipeline-skills assemble-loop-skills assemble-rule-skills assemble-agents assemble-hooks generate-catalog generate-source-map; do echo \\\"== $s\\",
+          "Bash {\"command\":\"node assemble-instructions.cjs 2>&1 | tail -5; node assemble-pipeline-skills.cjs 2>&1 | tail -3; node assemble-loop-skills.cjs 2>&1 | tail -3; node assemble-rule-skills.cjs 2>&1 | tai",
+          "Bash {\"command\":\"node generate-framework-provenance.cjs --root ../.. --refresh-fork 2>&1 | tail -5; echo \\\"== check\\\"; node generate-framework-provenance.cjs --root ../.. --check 2>&1 | tail -5\",\"desc",
+          "Bash {\"command\":\"git status --short ../../..; git diff ../../framework-fork.json | grep '^[+-]' | grep -v '^+++\\\\|^---' | head -40\",\"description\":\"Show changed files and fork-control diff\"}",
+          "Bash {\"command\":\"git diff ../../framework-fork.json | grep -A4 '\\\"deleted\\\": \\\\[' ; grep -n \\\"stale\\\\|--check\\\" generate-framework-provenance.cjs | head -20\",\"description\":\"Inspect deleted entry and s",
+          "Bash {\"command\":\"echo \\\"== delivery\\\"; node delivery-profile.cjs 2>&1 | tail -5; echo \\\"== records\\\"; node validate-project-records.cjs 2>&1 | tail -8; echo \\\"== markdown\\\"; node validate-pure-markdow",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/project/00-notes/note-001-policy-conflicts-and-gaps.m",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/project/00-notes/note-001-policy-conflicts-and-gaps.m",
+          "Bash {\"command\":\"node validate-project-records.cjs 2>&1 | tail -3; node generate-framework-provenance.cjs --root ../.. --refresh-fork 2>&1 | tail -2; wc -l ../../../CLAUDE.md; node --test . 2>&1 | tai",
+          "Grep {\"pattern\":\"spawn|execFile|--dry-run|adapter\",\"path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/scripts/run-evals.test.cjs\"",
+          "Bash {\"command\":\"node --test *.test.cjs 2>&1 | grep -E \\\"^# (tests|pass|fail)|^not ok|failureType|error:\\\" | head -30\",\"description\":\"Run Pipes script unit tests\",\"timeout\":600000}",
+          "Bash {\"command\":\"node --test *.test.cjs > /tmp/shelf-bootstrap-drafts/test-output.txt 2>&1; echo \\\"exit $?\\\"; tail -12 /tmp/shelf-bootstrap-drafts/test-output.txt\",\"description\":\"Run script tests and ",
+          "Bash {\"command\":\"node --test *.test.cjs 2>&1 | tail -12\",\"description\":\"Run script tests and show summary\",\"timeout\":600000}",
+          "Bash {\"command\":\"cat layer-separation.test.cjs; node --test *.test.cjs 2>&1 | grep -E \\\"^# (tests|pass|fail)|^not ok\\\"\",\"description\":\"Read layer-separation test and list failing tests\",\"timeout\":6000",
+          "Edit {\"replace_all\":false,\"file_path\":\"/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes/utils/rules/rule-codebase-conventions.md\",\"old_string",
+          "Bash {\"command\":\"node assemble-rule-skills.cjs 2>&1 | grep -v unchanged | tail -3; node assemble-instructions.cjs 2>&1 | tail -3; node generate-catalog.cjs >/dev/null 2>&1; node generate-source-map.cj",
+          "Bash {\"command\":\"node --test *.test.cjs 2>&1 | grep -E \\\"^ℹ (tests|pass|fail)|^✖ \\\" | head -20\",\"description\":\"Show test summary and failing test names\",\"timeout\":600000}",
+          "Bash {\"command\":\"node -e \\\"const {findLeaks}=require('./starter-layer.cjs');console.log(findLeaks().leaks.map(l=>l.rel+':'+l.line+' '+l.kind+' '+l.term).join('\\\\n'))\\\"; node assemble-instructions.cjs ",
+          "Bash {\"command\":\"git status --short ../../.. | grep -E \\\"src/|test/|\\\\.github/workflows|\\\\.pipes/team|package.json|CODEOWNERS\\\" || echo \\\"no app/CI/team changes\\\"; git status --short ../../.. | wc -l\""
+        ],
+        "deniedOrFailed": [
+          "A variable in this command can't be checked before it runs",
+          "This command changes directory before running a version-control command, which can pick up untrusted hooks or repository configuration from the target directory. Approve only if you trust it.",
+          "A variable in this command can't be checked before it runs",
+          "Commands that change directories and perform write operations require explicit approval to ensure paths are evaluated correctly. For security, Claude Code cannot automatically determine the final working directory when 'cd' is used in compound commands.",
+          "This Bash command contains multiple operations. The following parts require approval: git -C /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz remote -v, git -C /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-work",
+          "wc in '/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/CLAUDE.md' was blocked. For security, Claude Code may only count lines/words/bytes in files from the allowed working directories for this session: '/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-work",
+          "A variable in this command can't be checked before it runs",
+          "A variable in this command can't be checked before it runs",
+          "A variable in this command can't be checked before it runs",
+          "cd in '/private/tmp/shelf-bootstrap-drafts' was blocked. For security, Claude Code may only change directories to the allowed working directories for this session: '/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz'.",
+          "cd in '/private/tmp/shelf-bootstrap-drafts' was blocked. For security, Claude Code may only change directories to the allowed working directories for this session: '/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz'.",
+          "cat in '/private/tmp/shelf-bootstrap-drafts/project.md' was blocked. For security, Claude Code may only concatenate files from the allowed working directories for this session: '/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz'.",
+          "cat in '/private/tmp/shelf-bootstrap-drafts/rule-codebase-conventions.md' was blocked. For security, Claude Code may only concatenate files from the allowed working directories for this session: '/private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz'.",
+          "Commands that change directories and perform write operations require explicit approval to ensure paths are evaluated correctly. For security, Claude Code cannot automatically determine the final working directory when 'cd' is used in compound commands.",
+          "This Bash command contains multiple operations. The following part requires approval: cd /private/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz/.pipes && sed -n '/^---$/,$p' utils/rules/rule-frontmatter-title-only.md",
+          "This Bash command contains multiple operations. The following parts require approval: cp /tmp/shelf-bootstrap-drafts/project.md /tmp/shelf-bootstrap-drafts/delivery.md /tmp/shelf-bootstrap-drafts/accountability.md /tmp/shelf-bootstrap-drafts/architecture.md /private/var/folders/8w/7qy9b7l139l7pn0xwd",
+          "A variable in this command can't be checked before it runs",
+          "This Bash command contains multiple operations. The following parts require approval: node --test *.test.cjs, tail -12 /tmp/shelf-bootstrap-drafts/test-output.txt"
+        ],
+        "result": "The bootstrap ran through all five phases and the files are written. One check still fails: a framework test, explained under Validation. Gate G6 acceptance of the whole bootstrap is **pending** for you; I have not recorded it as accepted. Nothing is staged or committed.\n\n## What was written\n\n| Surface | Path | Version |\n| --- | --- | --- |\n| Project identity | `.pipes/ai-instructions/project.md` | placeholder 1.0 → 1.1 |\n| Delivery profile | `.pipes/ai-instructions/delivery.md` | new, 1.0 |\n| Accountability matrix | `.pipes/ai-instructions/accountability.md` | new, 1.0 |\n| Conventions rule | `.pipes/utils/rules/rule-codebase-conventions.md` | placeholder 1.2 → 1.3 |\n| Policy: member data in logs | `.pipes/utils/rules/rule-member-data-logging.md` | new, 1.0 |\n| Policy: dates and loan terms | `.pipes/utils/rules/rule-dates-and-loan-terms.md` | new, 1.0 |\n| Conflicts and gaps note | `.pipes/project/00-notes/note-001-policy-conflicts-and-gaps.md` | new, draft |\n| Architecture | `.pipes/ai-instructions/architecture.md` | placeholder 1.0 → 1.1 |\n\nI also regenerated `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, three new `pipes.policy-*` skills (for Claude and for `.agents`), the catalog, the source map, and `framework-fork.json`. No file under `src/`, `test/`, `.github/workflows/`, `.pipes/team/`, `package.json`, or `CODEOWNERS` changed.\n\n## Reviewer pass and gate receipts\n\n- **Reviewer:** one non-author `reviewer` pass covered all eight proposals together. **Verdic"
+      },
+      "workspace": "/var/folders/8w/7qy9b7l139l7pn0xwdnt3syw0000gq/T/pipes-eval-bootstrap-fresh-workspace-lG3BFz"
+    }
+  ]
+}

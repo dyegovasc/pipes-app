@@ -1,10 +1,11 @@
 ---
 title: Bootstrap Workspace
 description: Sets up a new Pipes workspace in order, from project identity and an optional delivery profile to policies, architecture, generated surfaces, and evals, keeping every gate of the pipelines it runs.
-version: 1.3
+version: 1.4
 domain: framework
 category: definition
 fragments:
+  - fragment-check-greenfield-repository
   - fragment-check-existing-codebase-files
   - fragment-invoke-pipeline
   - fragment-validation
@@ -15,7 +16,7 @@ Bring a newly installed Pipes workspace from placeholders to a working setup. It
 
 ## Entry Points
 
-Use right after Pipes is installed in a codebase or workspace, or when several project instructions are still placeholders. Do not use to change one surface that is already set up; run its own pipeline instead.
+Use right after Pipes is installed in a codebase or workspace, or when several project instructions are still placeholders. Do not use to change one surface that is already set up; run its own pipeline instead. For a repository with no code, use `pipeline-bootstrap-greenfield`.
 
 ## Loop Use
 
@@ -50,16 +51,19 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 - `.pipes/ai-instructions/`, `.pipes/utils/rules/`, and the workspace tree.
 
 **Fragments:**
+- `fragment-check-greenfield-repository`
 - `fragment-check-existing-codebase-files`
 
 **Instructions:**
-1. Use `fragment-check-existing-codebase-files` to classify `project.md`, `delivery.md`, `accountability.md`, `architecture.md`, `rule-codebase-conventions.md`, and project policy rules as missing, placeholder, or established.
-2. Plan the steps that the classification requires, in order, and show the plan.
+1. Use `fragment-check-greenfield-repository`. When `greenfield` is true, offer `pipeline-bootstrap-greenfield` and stop unless the user chooses to continue here.
+2. Use `fragment-check-existing-codebase-files` to classify `project.md`, `delivery.md`, `accountability.md`, `architecture.md`, `rule-codebase-conventions.md`, and project policy rules as missing, placeholder, or established.
+3. Plan the steps that the classification requires, in order, and show the plan.
 
 - Preserve acting-role context: `roadmapper`.
 - Preserve routing semantics: `roadmapper` passes the step plan to Define Stack And Delivery.
 
 **Outputs:**
+- The greenfield result and, when it is true, the offer.
 - Surface classification and the step plan.
 
 **Handoff To:** `full-stack-tech-lead`
@@ -67,7 +71,7 @@ Use right after Pipes is installed in a codebase or workspace, or when several p
 **Approval Gate:** None.
 
 **Exit Conditions:**
-- Every surface is classified.
+- Every surface is classified, or the greenfield offer was made and the user did not choose to continue.
 
 ### Phase 2: Define Stack And Delivery
 

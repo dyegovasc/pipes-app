@@ -1,0 +1,51 @@
+{
+  "id": "spec-on-fresh-install-keeps-evidence-path",
+  "scope": "starter",
+  "source": ".pipes/utils/pipelines/pipeline-design-spec.md",
+  "workspace": "starter",
+  "milestone_only": true,
+  "max_budget_usd": 2,
+  "timeout_seconds": 900,
+  "covers": [
+    ".pipes/utils/pipelines/pipeline-design-spec.md",
+    ".pipes/utils/fragments/instruction/fragment-check-greenfield-repository.md"
+  ],
+  "extra_allowed_tools": [
+    "Bash(git ls-files:*)",
+    "Bash(git rev-parse:*)",
+    "Bash(git check-ignore:*)"
+  ],
+  "setup": {
+    ".pipes/project/01-intents/intent-901-daily-visit-summary.md": "---\ntitle: Daily Visit Summary\ndescription: Eval fixture.\nversion: 1.0\ncreated: 2026-11-17\nstatus: accepted\nrelated: []\n---\n## Problem\nThe owner of this repository cannot see how many visits each page had per day.\n\n## Proposed Outcome\nThe service in this repository returns a daily visit summary per page.\n\n## How Do We Know It Works\n- A request for a page and a date returns the number of visits on that date.\n- A date with no visits returns zero, never an invented number.\n\n## Affected Users And Systems\n- Users: the repository owner\n- Systems: this repository only\n\n## Constraints\n- Counts come from recorded visits and are never invented.\n\n## Open Questions\n- None.\n\n## Source\n- Origin: idea from the repository owner\n- Author: repository owner\n"
+  },
+  "prompt": "Run the pipes design-spec pipeline for .pipes/project/01-intents/intent-901-daily-visit-summary.md. You have my approval to write the spec and to add it to the intent's related list. The product owner has not accepted the spec. Do not ask me questions; choose safe defaults and state them.",
+  "may_change": [
+    ".pipes/project/01-intents/**",
+    ".pipes/project/02-specs/**",
+    ".pipes/project/07-artifacts/**",
+    ".pipes/utils/state/**"
+  ],
+  "checks": [
+    {
+      "type": "file_count",
+      "glob": ".pipes/project/02-specs/spec-*.md",
+      "pattern": "^(?=[\\s\\S]*intent-901-daily-visit-summary)(?=[\\s\\S]*^status: draft\\s*$)(?=[\\s\\S]*^- \\*\\*R1\\*\\* )",
+      "flags": "m",
+      "min": 1,
+      "max": 1,
+      "why": "exactly one draft spec for this intent"
+    },
+    {
+      "type": "file_not_matches",
+      "glob": ".pipes/project/02-specs/spec-*.md",
+      "pattern": "Basis: declared",
+      "why": "a placeholder architecture.md keeps the version 1.2 evidence path (R14, R23)"
+    },
+    {
+      "type": "validator_clean"
+    },
+    {
+      "type": "only_changed"
+    }
+  ]
+}

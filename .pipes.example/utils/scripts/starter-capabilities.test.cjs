@@ -255,6 +255,7 @@ const TEAM_MEMBER_IDS = new Set(
 
 const EXPECTED_PHASE_MEMBERS = {
   'pipeline-define-policies.md': [[['full-stack-tech-lead'], ['be-architect'], ['be-architect']], [['be-architect'], [], ['roadmapper']], [['roadmapper'], ['reviewer'], ['roadmapper']], [['roadmapper'], ['e2e-tester'], []]],
+  'pipeline-bootstrap-greenfield.md': [[['roadmapper'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], ['be-architect'], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], ['reviewer'], ['e2e-tester']], [['e2e-tester'], [], []]],
   'pipeline-bootstrap-workspace.md': [[['roadmapper'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['e2e-tester']], [['e2e-tester'], [], []]],
   'pipeline-review-change.md': [[['full-stack-tech-lead'], [], ['e2e-tester']], [['e2e-tester'], [], ['reviewer']], [['reviewer'], [], ['roadmapper']], [['roadmapper'], ['e2e-tester'], ['roadmapper']], [['roadmapper'], [], []]],
   'pipeline-release-change.md': [[['roadmapper'], ['e2e-tester'], ['roadmapper']], [['roadmapper'], [], ['full-stack-tech-lead']], [['full-stack-tech-lead'], [], ['roadmapper']], [['roadmapper'], ['e2e-tester'], []]],
@@ -307,7 +308,7 @@ test('required starter pipelines preserve accountable actors, support, and membe
   assertPhaseMembers(EXPECTED_PHASE_MEMBERS);
 });
 
-const SDLC_PIPELINES = ['pipeline-define-policies.md', 'pipeline-bootstrap-workspace.md', 'pipeline-review-change.md', 'pipeline-release-change.md', 'pipeline-add-eval.md', 'pipeline-capture-intent.md', 'pipeline-design-spec.md'];
+const SDLC_PIPELINES = ['pipeline-define-policies.md', 'pipeline-bootstrap-workspace.md', 'pipeline-bootstrap-greenfield.md', 'pipeline-review-change.md', 'pipeline-release-change.md', 'pipeline-add-eval.md', 'pipeline-capture-intent.md', 'pipeline-design-spec.md'];
 
 test('SDLC delivery pipelines have complete phase contracts', () => {
   for (const name of SDLC_PIPELINES) assertDetailedPipelineContract(name, EXPECTED_PHASE_MEMBERS[name].length);
@@ -322,7 +323,7 @@ test('starter capabilities remain present while installed workspaces may extend 
   for (const name of Object.keys(EXPECTED_PHASE_MEMBERS)) {
     assert.ok(pipelineFiles.includes(name), name + ' remains available');
   }
-  if (path.basename(ROOT) === '.pipes.example') assert.equal(pipelineFiles.length, 17);
+  if (path.basename(ROOT) === '.pipes.example') assert.equal(pipelineFiles.length, 18);
   assert.deepEqual(
     files(
       path.join(ROOT, 'utils/scripts'),
@@ -622,6 +623,7 @@ test('creation pipelines have complete phase contracts and compatible foundation
     .filter((name) => frontmatterFragments(pipelineContent(name)).includes('fragment-request-approval'));
   assert.deepEqual(approvalConsumers, [
     'pipeline-add-eval.md',
+    'pipeline-bootstrap-greenfield.md',
     'pipeline-capture-intent.md',
     'pipeline-create-loop.md',
     'pipeline-create-pipeline.md',

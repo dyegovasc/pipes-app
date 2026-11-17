@@ -1,7 +1,7 @@
 ---
 title: Design Spec
 description: Turns one accepted intent into a spec with numbered requirements and a design grounded in the affected repositories.
-version: 1.2
+version: 1.3
 domain: project
 category: planning
 fragments:
@@ -9,6 +9,7 @@ fragments:
   - fragment-analyze-codebase-context
   - fragment-map-system-boundaries
   - fragment-assess-blast-radius
+  - fragment-check-greenfield-repository
   - fragment-draft-spec-requirements
   - fragment-generate-solution-hypotheses
   - fragment-select-solution
@@ -100,12 +101,14 @@ Use when an intent is `accepted` and no accepted spec covers it yet. Do not use 
 - `fragment-analyze-codebase-context`
 - `fragment-map-system-boundaries`
 - `fragment-assess-blast-radius`
+- `fragment-check-greenfield-repository`
 
 **Instructions:**
-1. Use `fragment-analyze-codebase-context` on each affected repository to find current behavior, patterns, contracts, and tests relevant to the intent.
-2. Use `fragment-map-system-boundaries` to map component boundaries, shared contracts, events, and data ownership across the affected components and the shared libraries they depend on.
-3. Use `fragment-assess-blast-radius` to identify dependents, consumers, and regression risk.
-4. Answer intent open questions that the repositories can answer, and keep the rest open with an owner role.
+1. In a single-repository workspace, the workspace root is the affected repository when the intent names it or names no other repository. Read the `basis` field of `.pipes/ai-instructions/architecture.md`. When the value is `declared` and an affected repository is present, use `fragment-check-greenfield-repository` on that repository. When the check finds that repository greenfield, use the declared `architecture.md` and the decision records as its context evidence, label that context `Basis: declared`, state that the affected components are not built yet, and skip `fragment-analyze-codebase-context` for that repository. Otherwise continue with the next instructions.
+2. Use `fragment-analyze-codebase-context` on each affected repository to find current behavior, patterns, contracts, and tests relevant to the intent.
+3. Use `fragment-map-system-boundaries` to map component boundaries, shared contracts, events, and data ownership across the affected components and the shared libraries they depend on.
+4. Use `fragment-assess-blast-radius` to identify dependents, consumers, and regression risk.
+5. Answer intent open questions that the repositories can answer, and keep the rest open with an owner role.
 
 - Preserve acting-role context: `full-stack-tech-lead`, consulting `be-architect` for component and contract boundaries.
 - Preserve routing semantics: `full-stack-tech-lead` passes the context evidence to Requirements And Design.
@@ -119,7 +122,7 @@ Use when an intent is `accepted` and no accepted spec covers it yet. Do not use 
 **Approval Gate:** None for read-only observation. Ask only when repository evidence contradicts the accepted intent.
 
 **Exit Conditions:**
-- Every affected component has current evidence.
+- Every affected component has current evidence (declared evidence for a greenfield repository).
 - Design can proceed without guessing where the change belongs.
 
 ### Phase 3: Requirements And Design

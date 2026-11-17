@@ -14,7 +14,7 @@ const IS_STARTER_BASELINE = path.basename(ROOT) === '.pipes.example';
 test('catalog reflects the complete Markdown-first inventory', () => {
   const items = inventory(ROOT);
   if (IS_STARTER_BASELINE) {
-    assert.equal(items.pipelines.length, 17);
+    assert.equal(items.pipelines.length, 18);
     assert.equal(items.loops.length, 5);
     // Starter rules exclude project policy rules (scope: project); the conventions placeholder is included.
     assert.equal(items.rules.filter((item) => item.meta.scope !== 'project' || item.id === 'rule-codebase-conventions').length, 27);

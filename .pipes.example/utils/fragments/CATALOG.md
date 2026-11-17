@@ -7,8 +7,8 @@ domain: all
 ---
 # Framework Catalog
 
-**Total Fragments:** 107
-**Total Pipelines:** 17
+**Total Fragments:** 110
+**Total Pipelines:** 18
 **Total Loops:** 5
 **Total Rules:** 27
 
@@ -23,7 +23,7 @@ domain: all
 | `fragment-instruction-surface-ownership` | `.pipes/utils/fragments/context/fragment-instruction-surface-ownership.md` | Instruction Surface Ownership | codebase | Describes the distinct ownership of project, architecture, and binding convention instructions. |
 | `fragment-source-tree-execution-context` | `.pipes/utils/fragments/context/fragment-source-tree-execution-context.md` | Source Tree Execution Context | framework | Describes canonical write ownership for installed projects and staged starter maintenance. |
 
-### Instruction (60)
+### Instruction (61)
 
 | Fragment | Path | Title | Domain | Description |
 | --- | --- | --- | --- | --- |
@@ -38,6 +38,7 @@ domain: all
 | `fragment-bind-team-roles-to-loop` | `.pipes/utils/fragments/instruction/fragment-bind-team-roles-to-loop.md` | Bind Team Roles To Loop | all | Assigns one owning role per loop phase and defines bounded consultation, handoff, and gate-authority relationships. |
 | `fragment-capture-execution-outcome` | `.pipes/utils/fragments/instruction/fragment-capture-execution-outcome.md` | Capture Execution Outcome | project | Classifies what happened and records evidence, deviations, residual risk, and follow-up. |
 | `fragment-check-existing-codebase-files` | `.pipes/utils/fragments/instruction/fragment-check-existing-codebase-files.md` | Check Existing Codebase Files | codebase | Resolves execution context and classifies existing project identity and convention contracts before drafting. |
+| `fragment-check-greenfield-repository` | `.pipes/utils/fragments/instruction/fragment-check-greenfield-repository.md` | Check Greenfield Repository | codebase | Decides read-only and fail-closed whether a repository has no code yet, so that a workflow can set it up from declared choices instead of repository evidence. |
 | `fragment-classify-feature-unknowns` | `.pipes/utils/fragments/instruction/fragment-classify-feature-unknowns.md` | Classify Feature Unknowns | codebase | Classifies unresolved items from feature framing so the pipeline asks the user only for what they own and defers repo-specific questions to later phases. |
 | `fragment-create-decision-file` | `.pipes/utils/fragments/instruction/fragment-create-decision-file.md` | Create Decision File | project | Writes an approved durable decision without silently changing related records. |
 | `fragment-create-eval-case` | `.pipes/utils/fragments/instruction/fragment-create-eval-case.md` | Create Eval Case | framework | Writes an approved eval case and runs it once to record whether it reproduces or guards the behavior. |
@@ -88,7 +89,7 @@ domain: all
 | `fragment-validation` | `.pipes/utils/fragments/instruction/fragment-validation.md` | Validation | project | Tests the current result against objective, acceptance, and quality criteria. |
 | `fragment-write-architecture-instruction` | `.pipes/utils/fragments/instruction/fragment-write-architecture-instruction.md` | Write Architecture Instruction | codebase | Writes an exact approved architecture instruction in installed or starter-maintenance context and refreshes configured wrappers. |
 
-### Output (16)
+### Output (17)
 
 | Fragment | Path | Title | Domain | Description |
 | --- | --- | --- | --- | --- |
@@ -96,6 +97,7 @@ domain: all
 | `fragment-format-architecture-instruction` | `.pipes/utils/fragments/output/fragment-format-architecture-instruction.md` | Format Architecture Instruction | codebase | Formats the canonical system architecture instruction with stable sections, factual boundaries, and explicit evolution notes. |
 | `fragment-format-codebase-conventions-rule` | `.pipes/utils/fragments/output/fragment-format-codebase-conventions-rule.md` | Format Codebase Conventions Rule | codebase | Template for formatting the codebase conventions rule with the shared rule frontmatter schema. |
 | `fragment-format-decision-record` | `.pipes/utils/fragments/output/fragment-format-decision-record.md` | Format Decision Record | project | Formats a durable choice with context, alternatives, and consequences. |
+| `fragment-format-declared-surface` | `.pipes/utils/fragments/output/fragment-format-declared-surface.md` | Format Declared Surface | codebase | Marks a project surface drafted from declared choices, cites the decision or statement it comes from, and records it in the Declared Setup table of project.md. |
 | `fragment-format-delivery-profile` | `.pipes/utils/fragments/output/fragment-format-delivery-profile.md` | Format Delivery Profile | codebase | Formats the Markdown delivery profile that hooks, rules, and workflows read for project delivery facts. |
 | `fragment-format-eval-case` | `.pipes/utils/fragments/output/fragment-format-eval-case.md` | Format Eval Case | framework | Formats one behavioral eval case as JSON for the Pipes eval runner. |
 | `fragment-format-implementation-plan` | `.pipes/utils/fragments/output/fragment-format-implementation-plan.md` | Format Implementation Plan | codebase | Formats framing, codebase evidence, solution design, implementation work, tests, and risks into an executable Markdown plan. |
@@ -109,13 +111,14 @@ domain: all
 | `fragment-format-spec-record` | `.pipes/utils/fragments/output/fragment-format-spec-record.md` | Format Spec Record | project | Formats a spec with numbered requirements, design, constraint coverage, open questions, areas of concern, and risk class. |
 | `fragment-format-team-member-record` | `.pipes/utils/fragments/output/fragment-format-team-member-record.md` | Format Team Member Record | all | Defines the canonical markdown structure for a .pipes/team role file. |
 
-### Question (19)
+### Question (20)
 
 | Fragment | Path | Title | Domain | Description |
 | --- | --- | --- | --- | --- |
 | `fragment-ask-delivery-approach` | `.pipes/utils/fragments/question/fragment-ask-delivery-approach.md` | Ask Delivery Approach | project | Captures an informed spec-driven or adaptive mission delivery choice only when both routes are valid. |
 | `fragment-ask-feature-requirements` | `.pipes/utils/fragments/question/fragment-ask-feature-requirements.md` | Ask Feature Requirements | codebase | Gathers the feature description, requirements, and success criteria from the user. |
 | `fragment-ask-gate-holders` | `.pipes/utils/fragments/question/fragment-ask-gate-holders.md` | Ask Gate Holders | project | Asks who holds each human role that decides a delivery gate, with evidence-based defaults. |
+| `fragment-ask-greenfield-choices` | `.pipes/utils/fragments/question/fragment-ask-greenfield-choices.md` | Ask Greenfield Choices | codebase | Captures the stack, conventions, architecture direction, and policies of a repository with no code as declared choices, each with a revisit trigger. |
 | `fragment-ask-loop-intent` | `.pipes/utils/fragments/question/fragment-ask-loop-intent.md` | Ask Loop Intent | all | Captures the adaptive mission class, boundaries, authority, evidence, and stop behavior a new loop must govern. |
 | `fragment-ask-mission-definition` | `.pipes/utils/fragments/question/fragment-ask-mission-definition.md` | Ask Mission Definition | project | Captures only the material information missing from a new mission frame. |
 | `fragment-ask-mission-selection` | `.pipes/utils/fragments/question/fragment-ask-mission-selection.md` | Ask Mission Selection | project | Identifies the single recorded mission the user wants to start or resume. |
@@ -153,6 +156,7 @@ domain: all
 | Pipeline | Title | Category | Domain | Description |
 | --- | --- | --- | --- | --- |
 | `pipeline-add-eval` | Add Eval | record | framework | Turns an incident, a repeated agent mistake, or a new contract into a behavioral eval case for this repository's agent configuration. |
+| `pipeline-bootstrap-greenfield` | Bootstrap Greenfield | definition | framework | Sets up a repository with no code from declared choices, marks each surface as declared with a revisit trigger, and leaves the workspace ready for its first intent and spec, keeping every gate. |
 | `pipeline-bootstrap-workspace` | Bootstrap Workspace | definition | framework | Sets up a new Pipes workspace in order, from project identity and an optional delivery profile to policies, architecture, generated surfaces, and evals, keeping every gate of the pipelines it runs. |
 | `pipeline-capture-intent` | Capture Intent | record | project | Turns an idea, ticket, or incident into one intent record that the product owner accepts or rejects before design starts. |
 | `pipeline-create-loop` | Create Loop | creation | framework | Designs and creates a distinct adaptive Pipes loop and refreshes its generated discovery surfaces. |

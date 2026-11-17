@@ -2,14 +2,14 @@
   "manifestSchemaVersion": 2,
   "projectLayoutVersion": 3,
   "framework": "pipes",
-  "frameworkVersion": "2.3.0",
-  "baselineDigest": "a88e8add9b4ccdfd0abc0c07f4dfca293b75ec087277315d0661b7d2b6668fa2",
+  "frameworkVersion": "2.4.0",
+  "baselineDigest": "3d4ac5337c7d71f006f05389177d08655052a68dafeb3ca48c9ed5a71ac02e72",
   "baselineArchive": {
     "path": "framework-baseline.json.gz",
     "format": "gzip-json-v1",
-    "size": 281939,
-    "uncompressedSize": 1132245,
-    "sha256": "f804585ea63bcf5e7165cdc4465963cdff809ae997c158d05d9b9e00b047a966"
+    "size": 289128,
+    "uncompressedSize": 1171367,
+    "sha256": "554c8e54110f01f0d7726103c9dc105a284b637fe9c4fd95947fe4742b82b5a5"
   },
   "forkControlPath": "framework-fork.json",
   "ownership": {
@@ -55,8 +55,8 @@
     {
       "path": "README.md",
       "encoding": "utf-8",
-      "size": 20409,
-      "sha256": "4862829a0ad8e7e7afb999880604fce5612bdb7ab2f9d5dee3eb2a759c5ec7b2"
+      "size": 20532,
+      "sha256": "0d81082299e075817e002ef07b2e2b95d18c6e085ab7a5c06cd46973644ba6e1"
     },
     {
       "path": "ai-instructions/architecture.md",
@@ -151,8 +151,8 @@
     {
       "path": "utils/fragments/CATALOG.md",
       "encoding": "utf-8",
-      "size": 36684,
-      "sha256": "be99d95867d52e3a8da253313057e330f902a64cabf1b0a2f395810b964f6be3"
+      "size": 37892,
+      "sha256": "d0d9603270373d574fcb7060f83ef062476e9595655c88a989637f5205f263b5"
     },
     {
       "path": "utils/fragments/TEMPLATE-context.md",
@@ -261,6 +261,12 @@
       "encoding": "utf-8",
       "size": 2473,
       "sha256": "889de6f9104c17ddd15d4ecd2a0b45b7d43414f05e6880b7fa6b6c3b101a4efe"
+    },
+    {
+      "path": "utils/fragments/instruction/fragment-check-greenfield-repository.md",
+      "encoding": "utf-8",
+      "size": 3071,
+      "sha256": "8bb37bf8e12272fcbd571b6c4df118f545f7dfe51647f41b06412b32c9d5bf33"
     },
     {
       "path": "utils/fragments/instruction/fragment-classify-feature-unknowns.md",
@@ -581,6 +587,12 @@
       "sha256": "9acb7385f828cb95b37fbbbeb8cbb3bf77b83c71f506ea34f62171483c670745"
     },
     {
+      "path": "utils/fragments/output/fragment-format-declared-surface.md",
+      "encoding": "utf-8",
+      "size": 2083,
+      "sha256": "15d48bea056fec113b84c32243cb05cb091e1f47fb9f696e84b48e9dcab011c6"
+    },
+    {
       "path": "utils/fragments/output/fragment-format-delivery-profile.md",
       "encoding": "utf-8",
       "size": 3399,
@@ -669,6 +681,12 @@
       "encoding": "utf-8",
       "size": 1242,
       "sha256": "c29b4670361110adc04c16d99a76a27b26fdf8e23f00c3d5647bb40f606b09d2"
+    },
+    {
+      "path": "utils/fragments/question/fragment-ask-greenfield-choices.md",
+      "encoding": "utf-8",
+      "size": 2189,
+      "sha256": "588ca833af3f92b262c638ccae5e119c0e2b6cae1ad86c89be5a71618a933102"
     },
     {
       "path": "utils/fragments/question/fragment-ask-loop-intent.md",
@@ -859,8 +877,8 @@
     {
       "path": "utils/loops/loop-framework-maintenance.md",
       "encoding": "utf-8",
-      "size": 9896,
-      "sha256": "f8f5fb469df6f40547bd986c3e08d0472080ad7addc04437a34546b357841885"
+      "size": 10021,
+      "sha256": "a6d06787ba2e5c39c81ee19e3d1c5cf3e02651e73b9ebf93a149e600093393c5"
     },
     {
       "path": "utils/loops/loop-investigation-and-recovery.md",
@@ -881,10 +899,16 @@
       "sha256": "194f55569c5c5b2672af965cc889ed2ec8c12551c676011e1cb073a54e1189cc"
     },
     {
+      "path": "utils/pipelines/pipeline-bootstrap-greenfield.md",
+      "encoding": "utf-8",
+      "size": 11279,
+      "sha256": "0ac53ac4c00024e81330d6f38ff66f78c2126a21b27fb1ee8eeba965b659edac"
+    },
+    {
       "path": "utils/pipelines/pipeline-bootstrap-workspace.md",
       "encoding": "utf-8",
-      "size": 7860,
-      "sha256": "7d72452fba0438f056567f93d0e989f65924f46cb56bde2661410b6353a37fc2"
+      "size": 8304,
+      "sha256": "1c6576c3642b600cd903d35d70fc6b72a1ba44be8eb99bdb0d2c60c768401e94"
     },
     {
       "path": "utils/pipelines/pipeline-capture-intent.md",
@@ -931,8 +955,8 @@
     {
       "path": "utils/pipelines/pipeline-design-spec.md",
       "encoding": "utf-8",
-      "size": 12936,
-      "sha256": "779ad638c8a709a491b8a2834eca81e93ecde9a9f0bc581d8b40f6d85ae5ede2"
+      "size": 13742,
+      "sha256": "e735dfc00882850b1aae1016a45634e284767461954db60f42b17d37ff950af0"
     },
     {
       "path": "utils/pipelines/pipeline-execute-mission.md",
@@ -1052,7 +1076,7 @@
       "path": "utils/rules/rule-framework-provenance.md",
       "encoding": "utf-8",
       "size": 9107,
-      "sha256": "248ff7865cd7b3c508bc77f96dd86cac56dd874f7a0d60397b810fb3cfa9f552"
+      "sha256": "b6437ad01192a1ccd8787bf45020c8f425877d1ee373a19dc403de6dbe2aab8b"
     },
     {
       "path": "utils/rules/rule-frontmatter-title-only.md",
@@ -1129,8 +1153,8 @@
     {
       "path": "utils/rules/rule-starter-kit-integrity.md",
       "encoding": "utf-8",
-      "size": 2452,
-      "sha256": "7c9644cec9cd00e24462a08d2dd1bc044e62875707bb358ef0db5430f35e31e9"
+      "size": 2451,
+      "sha256": "3f13b41bc04d72dabab231f352160470f53f7adec490533255f6980ee6c960f6"
     },
     {
       "path": "utils/rules/rule-validate-fragment-types.md",
@@ -1195,8 +1219,8 @@
     {
       "path": "utils/scripts/assemble-pipeline-skills.test.cjs",
       "encoding": "utf-8",
-      "size": 3500,
-      "sha256": "7310f2a358205d0833c386e00b8b0907ac6b51a5bd88094a8ed875da82f6611f"
+      "size": 3535,
+      "sha256": "79aac93a79171d64f08a2f531a750e928d788e27b5c1debda317d9094f7184cb"
     },
     {
       "path": "utils/scripts/assemble-rule-skills.cjs",
@@ -1231,8 +1255,26 @@
     {
       "path": "utils/scripts/fixtures/evals/bootstrap-fresh-workspace.json",
       "encoding": "utf-8",
-      "size": 9415,
-      "sha256": "be09a0cd73408520e9c7a7e527933aade119e22284e8710754f1fbf3f7b9bf72"
+      "size": 9535,
+      "sha256": "43ddec999138c3526c4bb9439de7ae3aa6cd0b2ba04d292e239dc73ddd6f5da6"
+    },
+    {
+      "path": "utils/scripts/fixtures/evals/bootstrap-greenfield-empty-repository.json",
+      "encoding": "utf-8",
+      "size": 7668,
+      "sha256": "18aff8c16cb8343670974c71510c5ce143935f110b55e144922196e711964e4c"
+    },
+    {
+      "path": "utils/scripts/fixtures/evals/bootstrap-greenfield-refuses-codebase.json",
+      "encoding": "utf-8",
+      "size": 1705,
+      "sha256": "0b5c621ca199f6949f428dc18d2d48f34b4299340bc83030ef8e0417460d484e"
+    },
+    {
+      "path": "utils/scripts/fixtures/evals/bootstrap-workspace-offers-greenfield.json",
+      "encoding": "utf-8",
+      "size": 1717,
+      "sha256": "f106831fa4b1c3606ea9574733a6372e3fb4f05b01aaf65b4ff0e6a9e0986e57"
     },
     {
       "path": "utils/scripts/fixtures/evals/entrypoints-change-through-canonical-source.json",
@@ -1283,6 +1325,12 @@
       "sha256": "3d712eddbd535478e74630d038b18783e4f6f1c79e79e3f3809a7a9fd3287825"
     },
     {
+      "path": "utils/scripts/fixtures/evals/spec-on-fresh-install-keeps-evidence-path.json",
+      "encoding": "utf-8",
+      "size": 2504,
+      "sha256": "20cef65a77ad578c592ba99b4a10a15e2c11295e7db193b18525fb563d0164df"
+    },
+    {
       "path": "utils/scripts/fixtures/evals/spec-refuses-draft-intent.json",
       "encoding": "utf-8",
       "size": 1499,
@@ -1328,7 +1376,7 @@
       "path": "utils/scripts/generate-catalog.test.cjs",
       "encoding": "utf-8",
       "size": 3484,
-      "sha256": "c7f8db09a74dc28c5f609461adad232704051d942bcad7d1464d50e1c5dc9593"
+      "sha256": "94c318f8e4ba46da84f083be8a22bf478a353d1587e8fe68d740fc98db146941"
     },
     {
       "path": "utils/scripts/generate-framework-provenance.cjs",
@@ -1441,8 +1489,8 @@
     {
       "path": "utils/scripts/starter-capabilities.test.cjs",
       "encoding": "utf-8",
-      "size": 64596,
-      "sha256": "e4bc0ed7b60d5728a4519381677d7ea3f52f716915ad9ba0f1cdd4d0ca4daeb3"
+      "size": 64974,
+      "sha256": "83e19a606f78014ff2b217ca94d478f46fbf9a99f974b42475d1caca189bf2b9"
     },
     {
       "path": "utils/scripts/starter-layer.cjs",

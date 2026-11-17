@@ -1,12 +1,12 @@
 {
   "forkControlSchemaVersion": 1,
   "framework": "pipes",
-  "frameworkVersion": "2.3.0",
-  "baselineDigest": "a88e8add9b4ccdfd0abc0c07f4dfca293b75ec087277315d0661b7d2b6668fa2",
+  "frameworkVersion": "2.4.0",
+  "baselineDigest": "3d4ac5337c7d71f006f05389177d08655052a68dafeb3ca48c9ed5a71ac02e72",
   "baselineRelation": "origin",
-  "forkDigest": "0e2b3d93ad58bba492fd2f5785a3644b56dc49cb5bee75ada02f3e30d955422b",
+  "forkDigest": "180ca881be947147a3946733c499278c0dec953bee0ad8d08aaa2bd762e61c38",
   "summary": {
-    "unchanged": 239,
+    "unchanged": 247,
     "created": 0,
     "modified": 0,
     "deleted": 0
